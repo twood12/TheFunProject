@@ -12,17 +12,17 @@
 
 
 <body>
-    <form id="form1" runat="server">
+    <header>
+        <img src="http://www.wblinc.org/wp-content/uploads/2015/05/logo-transparent-04-30-15.png" alt="Words Beats & Life Inc. | Teaching Convening Presenting Hip-Hop Since 2002" />
+    </header>
         <div id="topContent"> 
-                <asp:HyperLink ID="lnkHome" runat="server" 
-                NavigateUrl="~/NestedMasterPages/Default.aspx"
-                Text="Nested Master Pages Tutorial (Simple)" /> 
+ 
         </div>
         
         <div id="mainContent"> 
             <asp:ContentPlaceHolder id="MainContent" runat="server"> 
             </asp:ContentPlaceHolder>
         </div>
-    </form>
+    
 </body>
 </html>
