@@ -55,7 +55,7 @@ public partial class LoginPage : BasePage
             Session["MemberID"] = reader["MemberID"].ToString();
             
         }
-        bool verify = Hash.verifyHash(password, pwHash);
+        bool verify = SimpleHash.verifyHash(password, pwHash);
         e.Authenticated = verify;
 
         Session["loggedIn"] = e.Authenticated.ToString();
