@@ -14,6 +14,11 @@ public partial class WebPages_Student_WebPages_WBLStudent2TeacherEvaluation1 : B
 
     protected void Next_Click(object sender, EventArgs e)
     {
+
+        Session["stuHearAboutClass"] = rdoHearAboutClass.SelectedValue;
+        Session["stuSafety"] = rdoSafety.SelectedValue;
+        Session["stuSafetyDesc"] = txtSafetyAnswers.Text;
+        Session["stuSkills"] = txtSkills.Text;
         Response.Redirect("~/WebPages/Student_WebPages/WBLStudent2TeacherEvaluation2.aspx");
     }
 }
