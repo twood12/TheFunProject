@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class grafftiBlog : System.Web.UI.Page
+public partial class grafftiBlog : BasePage
 {
     protected void Page_PreInit(Object sender, EventArgs e)
     {

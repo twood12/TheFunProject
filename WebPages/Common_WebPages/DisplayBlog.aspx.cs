@@ -8,7 +8,7 @@ using System.Data;
 using System.Configuration;
 using System.Data.SqlClient;
 
-public partial class DisplayBlog : System.Web.UI.Page
+public partial class DisplayBlog : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
