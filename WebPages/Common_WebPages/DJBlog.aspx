@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DJBlog.aspx.cs" Inherits="DJBlog" validateRequest ="false"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DJBlog.aspx.cs" Inherits="DJBlog" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" validateRequest ="false"%>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style type="text/css">
     html {background-color: black}
         #form1 {
@@ -17,14 +17,16 @@
 
         .auto-style2 {
             width: 200px;
-        }         </style>
+        }
+         </style>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<head>
   
     <title>DJBlog</title>
 </head>
-      
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
     <a href="Topics.aspx">Back To Topics</a>
     <form id="form1" runat="server">
@@ -37,14 +39,14 @@
         <asp:Repeater ID="rptPages" runat="server" DataSourceID="SqlDataSource1">
     <ItemTemplate>
         <%# Container.ItemIndex + 1 %>
-        <asp:HyperLink ID="HyperLink" NavigateUrl='<%# string.Format("~/blog/{0}/{1}.aspx", Eval("PostID"), Eval("Subject")) %>'
+        <asp:HyperLink ID="HyperLink" NavigateUrl='<%# string.Format("~/WebPages/Common_WebPages/{0}/{1}.aspx", Eval("PostID"), Eval("Subject")) %>'
             Text='<%# Eval("Subject") %>' runat="server" validateRequest ="false" />
     </ItemTemplate>
     <SeparatorTemplate>
         <br />
     </SeparatorTemplate>
 </asp:Repeater>
-             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:WBLConnectionString %>" SelectCommand="SELECT [PostID], [BlogPostDate], [Subject], [PostContent] FROM [BlogPost] WHERE ([DisciplineType] = @DisciplineType2)">
+             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT [PostID], [BlogPostDate], [Subject], [PostContent] FROM [BlogPost] WHERE ([DisciplineType] = @DisciplineType2)">
                  <SelectParameters>
                      <asp:SessionParameter Name="DisciplineType2" SessionField="DisciplineType" Type="String" />
                  </SelectParameters>
@@ -70,4 +72,4 @@
    
     
 </body>
-</html>
+</asp:Content>

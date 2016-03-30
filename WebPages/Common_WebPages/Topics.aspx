@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Topics.aspx.cs" Inherits="Topics" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" CodeFile="Topics.aspx.cs" Inherits="Topics" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style type="text/css">
     html {background-color: black}
         #form1 {
@@ -13,12 +13,14 @@
         }
          </style>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<head>
    
     <title>Topics</title>
 
 </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
      <a href="CommunityBlogHomePage.aspx">Back To Community</a>
     <form id="form1" runat="server">
@@ -40,7 +42,7 @@
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/DQ7szXlJoe0" onloadstart="True" ></iframe>
 </body>
-
+</asp:Content>
 
     
-</html>
+

@@ -130,6 +130,6 @@ public partial class DisplayBlog : System.Web.UI.Page
     }
     protected void Return_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Blog/CommunityBlogHomePage.aspx");
+        Response.Redirect("~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx");
     }
 }

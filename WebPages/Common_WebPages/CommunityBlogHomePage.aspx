@@ -1,6 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CommunityBlogHomePage.aspx.cs" Inherits="CommunityBlogHomePage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CommunityBlogHomePage.aspx.cs" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" Inherits="CommunityBlogHomePage" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<head>
+    <title>CommunityBlogHome</title>
+</head>
+
 <style type="text/css">
     html {background-color: black}
         #form1 {
@@ -20,10 +24,8 @@
         }
          </style>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>CommunityBlogHome</title>
-</head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
    
 <body>
      <header> <img src="http://thyblackman.com/wp-content/uploads/2015/08/hiphop-2015.jpg" alt="Words Beats & Life Inc. | Teaching Convening Presenting Hip-Hop Since 2002" />
@@ -86,4 +88,5 @@
         <p>
     </form>
 </body>
-</html>
+
+</asp:Content>

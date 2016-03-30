@@ -7,6 +7,21 @@ using System.Web.UI.WebControls;
 
 public partial class Topics : System.Web.UI.Page
 {
+
+    protected void Page_PreInit(Object sender, EventArgs e)
+    {
+        if ((string)Session["MemberType"] == "Student")
+        {
+            this.MasterPageFile = "~/NestedMasterPages/WBLStudentMasterPage.master";
+        }
+
+        else if ((string)Session["MemberType"] == "Teacher")
+        {
+            this.MasterPageFile = "~/NestedMasterPages/WBLTeacherMasterPage.master";
+        }
+
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -28,7 +43,7 @@ public partial class Topics : System.Web.UI.Page
     }
     protected void Graffti_Click(object sender, EventArgs e)
     {
-        Response.Redirect("GrafftiBlog.aspx");
+        Response.Redirect("graffitiBlog.aspx");
     }
     protected void Breaking_Click(object sender, EventArgs e)
     {

@@ -1,11 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BlogPost.aspx.cs" Inherits="BlogPost" ValidateRequest = "false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" CodeFile="BlogPost.aspx.cs" Inherits="BlogPost" ValidateRequest = "false" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<head>
     <title></title>
 </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
     <form id="form1" runat="server">
     <div>
@@ -28,4 +30,4 @@
     </form>
     
 </body>
-</html>
+</asp:Content>

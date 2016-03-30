@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="breakingBlog.aspx.cs" Inherits="breakingBlog" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="breakingBlog.aspx.cs" Inherits="breakingBlog" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style type="text/css">
     html {background-color: black}
         #form1 {
@@ -17,12 +17,15 @@
 
         .auto-style2 {
             width: 200px;
-        }         </style>
+        }
+         </style>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<head>
     <title>Breaking Blogs</title>
 </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
     <a href="Topics.aspx">Back To Topics</a>
     <form id="form1" runat="server">
@@ -35,7 +38,7 @@
             
     <ItemTemplate>
         <%# Container.ItemIndex + 1 %>
-        <asp:HyperLink ID="HyperLink"  NavigateUrl='<%# string.Format("~/blog/{0}/{1}.aspx", Eval("PostID"), Eval("Subject")) %>'
+        <asp:HyperLink ID="HyperLink"  NavigateUrl='<%# string.Format("~/WebPages/Common_WebPages/{0}/{1}.aspx", Eval("PostID"), Eval("Subject")) %>'
             Text='<%# Eval("Subject") %>' runat="server" validateRequest ="false" />
     </ItemTemplate>
     <SeparatorTemplate>
@@ -44,7 +47,7 @@
 </asp:Repeater>
             </div>
     
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:WBLConnectionString2 %>" SelectCommand="SELECT [PostID], [BlogPostDate], [PostContent], [Subject] FROM [BlogPost] WHERE ([DisciplineType] = @DisciplineType)">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT [PostID], [BlogPostDate], [PostContent], [Subject] FROM [BlogPost] WHERE ([DisciplineType] = @DisciplineType)">
             <SelectParameters>
                 <asp:SessionParameter Name="DisciplineType" SessionField="DisciplineType" Type="String" />
             </SelectParameters>
@@ -63,4 +66,4 @@
       <div style="margin-left: 1000px"><script src="https://www.reddit.com/r/hiphop/top/.embed?limit=10&t=week" type="text/javascript"></script></div>
         </form>
 </body>
-</html>
+</asp:Content>

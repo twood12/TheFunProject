@@ -73,7 +73,7 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
-            <asp:SqlDataSource ID="sqlQuery" runat="server" ConnectionString="<%$ ConnectionStrings:DBCSS %>" DeleteCommand="DELETE FROM [Member] WHERE [MemberID] = @MemberID" InsertCommand="INSERT INTO [Member] ([FirstName], [LastName], [Email], [CellNo], [HomePhoneNo], [MemberType], [AddressLine1], [AddressLine2], [City], [State], [Zip]) VALUES (@FirstName, @LastName, @Email, @CellNo, @HomePhoneNo, @MemberType, @AddressLine1, @AddressLine2, @City, @State, @Zip)" SelectCommand="SELECT * FROM [Member] WHERE (([FirstName] = @FirstName) AND ([LastName] = @LastName))" UpdateCommand="UPDATE [Member] SET [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [CellNo] = @CellNo, [HomePhoneNo] = @HomePhoneNo, [MemberType] = @MemberType, [AddressLine1] = @AddressLine1, [AddressLine2] = @AddressLine2, [City] = @City, [State] = @State, [Zip] = @Zip WHERE [MemberID] = @MemberID">
+            <asp:SqlDataSource ID="sqlQuery" runat="server" ConnectionString="<%$ ConnectionStrings:DBXYS %>" DeleteCommand="DELETE FROM [Member] WHERE [MemberID] = @MemberID" InsertCommand="INSERT INTO [Member] ([FirstName], [LastName], [Email], [CellNo], [HomePhoneNo], [MemberType], [AddressLine1], [AddressLine2], [City], [State], [Zip]) VALUES (@FirstName, @LastName, @Email, @CellNo, @HomePhoneNo, @MemberType, @AddressLine1, @AddressLine2, @City, @State, @Zip)" SelectCommand="SELECT * FROM [Member] WHERE (([FirstName] = @FirstName) AND ([LastName] = @LastName))" UpdateCommand="UPDATE [Member] SET [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [CellNo] = @CellNo, [HomePhoneNo] = @HomePhoneNo, [MemberType] = @MemberType, [AddressLine1] = @AddressLine1, [AddressLine2] = @AddressLine2, [City] = @City, [State] = @State, [Zip] = @Zip WHERE [MemberID] = @MemberID">
                 <DeleteParameters>
                     <asp:Parameter Name="MemberID" Type="Int32" />
                 </DeleteParameters>
@@ -135,7 +135,7 @@
               <SortedDescendingCellStyle BackColor="#CAC9C9" />
               <SortedDescendingHeaderStyle BackColor="#383838" />
           </asp:GridView>
-          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBCSS %>" SelectCommand="SELECT [FirstName], [LastName], [Email], [CellNo], [MemberType], [HomePhoneNo], [AddressLine1], [AddressLine2], [City], [State], [Zip] FROM [Member]"></asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXYS %>" SelectCommand="SELECT [FirstName], [LastName], [Email], [CellNo], [MemberType], [HomePhoneNo], [AddressLine1], [AddressLine2], [City], [State], [Zip] FROM [Member]"></asp:SqlDataSource>
       </form>
     </body>
 </html>

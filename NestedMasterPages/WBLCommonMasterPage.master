@@ -12,6 +12,13 @@
 
 
 <body>
+        <header>
+            <div id="navContent"> 
+             <asp:HyperLink ID="lnkCommunity" runat="server" 
+             NavigateUrl="~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx" 
+             Text="Community" />
+        </div>
+        </header>
     
         <div id="topContent"> 
 
