@@ -1,0 +1,68 @@
+-- =============================================
+-- Author:		Kyle Prestel
+-- Description:	Update event table from changes in the calendar
+-- =============================================
+CREATE PROCEDURE updateEvent( 
+	@EventID int,
+	@EventName varchar(50),
+	@EventDate datetime,
+	@EventTopic varchar(20),
+	@EventEndDate datetime
+	)
+AS
+BEGIN
+	update Event
+	set EventName = @EventName,
+		EventDate = convert(varchar(30),cast(@EventDate as datetime),120),
+		EventEndDate = convert(varchar(30),cast(@EventEndDate as datetime),120),
+		EventTopic = @EventTopic
+	where 
+		EventID = @EventID
+END
+GO
+
+CREATE PROCEDURE getEvent(
+	@EventID int
+)
+as
+BEGIN
+	select * from Event where EventID = @EventID
+end
+GO
+
+create procedure getAllEvents(
+)
+as
+BEGIN
+select * from Event
+end
+GO
+
+CREATE PROCEDURE insertEvent( 
+	@EventName varchar(50),
+	@EventDate datetime,
+	@EventTopic varchar(20) = null,
+	@EventEndDate datetime
+	)
+AS
+BEGIN
+	insert into Event(EventName,EventDate,EventEndDate,EventTopic)
+		values(
+	    @EventName,
+		convert(varchar(30),cast(@EventDate as datetime),120),
+		convert(varchar(30),cast(@EventEndDate as datetime),120),
+		@EventTopic
+		)
+END
+GO
+
+CREATE PROCEDURE deleteEvent( 
+	@EventID int
+	)
+AS
+BEGIN
+	delete from Event where EventID = @EventID
+END
+GO
+
+

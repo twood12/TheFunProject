@@ -1,0 +1,446 @@
+/*
+WBL DDL
+The BluePrint
+31 Tables
+*/
+
+/*1. Member Table - Supertype*/
+create table Member(
+MemberID int identity(1,1) primary key,
+FirstName varchar(30),
+LastName varchar(35),
+Email varchar(40),
+CellNo varchar(13),
+HomePhoneNo varchar(13),
+MemberType varchar(20),
+AddressLine1 varchar(50),
+AddressLine2 varchar(15),
+City varchar(25),
+State varchar(25),
+PasswordHash varchar(128),
+PassWordSalt varchar(10),
+Zip varchar(15));
+
+/*2. Cipher Table - Subtype of Member and Cipher Donation Table*/
+create table Cipher(
+CipherID int primary key,
+PriorityLevel int,
+MembershipType varchar(20),
+foreign key (CipherID) references Member(MemberID));
+
+/*3a-b. Cipher Account and Donation Table*/
+create table CipherAccount(
+AccountNumber int identity(100000,1) primary key,
+CipherID int,
+foreign key (CipherID) references Cipher(CipherID));
+ 
+create table CipherDonation(
+TransactionID int identity(1,1) primary key,
+AccountNumber int,
+DonationAmt money,
+DonationDate datetime,
+foreign key (AccountNumber) references CipherAccount(AccountNumber));
+
+/*4a-b. Staff Type Table - WBL Subject*/
+create table Subject(
+SubjectID int identity(1,1) primary key,
+SubjectName varchar(20));
+
+create table StaffType(
+StaffTypeID int identity(1,1) primary key,
+StaffKey char(1),
+StaffTypeName varchar(15));
+
+/*5. Staff Table - Subtype of Member - added unary relationship for supervisor*/
+create table Staff(
+StaffID int primary key,
+PermissionLevel int,
+StaffTypeID int,
+SubjectID int,
+Salary money,
+Hourly money,
+SupervisorID int,
+foreign key (SupervisorID) references Staff(StaffID),
+foreign key (StaffID) references Member(MemberID),
+foreign key (StaffTypeID) references StaffType(StaffTypeID),
+foreign key (SubjectID) references Subject(SubjectID));
+
+/*6. Parent Tables, referenced in Student*/
+create table Parent(
+ParentID int identity(1,1) primary key,
+FirstName varchar(30),
+LastName varchar(35),
+Email varchar(40),
+PhoneNumber varchar(13));
+
+/*
+7. Student Table - Subtype of Member
+Added IsStudentMember Field as a 3 Character String, That field is Yes or No
+
+*/
+create table Student(
+StudentID int primary key,
+GradeLevel varchar(10),
+Gender char(6),
+Ethnicity varchar(20),
+Apprentice char(3),
+E_ContactName varchar(30),
+E_ContactLName varchar(35),
+E_ContactEmail varchar(40),
+E_ContactRelationship varchar(15),
+WardOfResidenceName varchar(75),
+DcOneCard char(3),
+DcOneCardNo int,
+PrimaryPhysicianName varchar(70),
+InsuranceCoName varchar(50),
+InsuranceGroupNo varchar(35),
+StudentStatus varchar(15),
+SchoolName varchar(50),
+ExpectedGradYr int,
+CollegeVocational char(3),
+CollegeMajor varchar(40),
+CollegeVocSchoolChoice varchar(50),
+LastSchoolAttended varchar(50),
+GraduationYear char(3),
+Discipline varchar(35),
+FurtherEducation char(3),
+Employed char(3),
+JobName varchar(25),
+JobTitle varchar(20),
+HourlyWage money,
+CareerGoal varchar(50),
+DesiredHourlyPay money,
+Resume char(3),
+ArtisticResume char(3),
+BioParagraph varchar(350),
+tShirtSize char(4),
+SubjectID int,
+ParentID int,
+StageName varchar(50),
+IsStudentMember char(3),
+foreign key (StudentID) references member(MemberID),
+foreign key (SubjectID) references Subject(SubjectID),
+foreign key (ParentID) references Parent(ParentID));
+
+
+/*8a-b. Student: Diet Restriction and Student Association to it*/
+create table DietRestriction(
+RestrictionID int identity(1,1) primary key,
+RestrictionName varchar(30));
+
+create table StuDietRestriction(
+StudentID int not null,
+RestrictionID int not null,
+primary key (StudentID, RestrictionID),
+foreign key (StudentID) references Student(StudentID),
+foreign key (RestrictionID) references DietRestriction(RestrictionID));
+
+/*9. Student Work Table (WorkContent would be a link -> display in logic*/
+create table StudentWork(
+WorkID int identity(1,1) primary key,
+StudentID int,
+WorkTitle varchar(100),
+WorkType varchar(50),
+WorkContent varchar(200),
+foreign key (StudentID) references Student(StudentID));
+
+/*10a-c. Student Skills Tables, From Application, Includes associative entity*/
+create table SkillLevel(
+SkillLevelID int identity(1,1) primary key,
+SkillLevelDesc varchar(20));
+
+create table Skill(
+SkillID int identity(1,1) primary key,
+SkillName varchar(30));
+
+create table StudentSkill(
+SkillLevelID int not null,
+SkillID int not null,
+StudentID int not null,
+primary key (SkillLevelID,SkillID, StudentID),
+foreign key (SkillLevelID) references SkillLevel(SkillLevelID),
+foreign key (SkillID) references Skill(SkillID),
+foreign key (StudentID) references Student(StudentID));
+
+/*11a-c Student Account Table and Transaction Table*/
+create table BuckAccount(
+AccountNumber int identity(100000,1) primary key,
+StudentID int,
+foreign key (StudentID) references Student(StudentID));
+
+create table BuckStore(
+ItemID int identity(100,1) primary key,
+ItemName varchar(50),
+ItemPrice money);
+
+create table BuckTansaction(
+TransactionID int identity(1,1) primary key,
+ItemID int,
+AccountNumber int,
+PurchaseDate datetime,
+PurchaseQty int,
+TransactionAmt money,
+foreign key (AccountNumber) references BuckAccount(AccountNumber),
+foreign key (ItemID) references Buckstore(ItemID));
+
+/*12a-b. Student Workshop Tables*/
+create table WorkShop(
+WorkShopID int identity(1,1) primary key,
+WorkShopName varchar(100));
+
+/*This table has Registered Field -> Either: Registered or Not Registered*/
+create table StudentWorkShop(
+WorkShopID int not null,
+StudentID int not null,
+RegistrationStatus char(14),
+primary key (WorkShopID, StudentID),
+foreign key (WorkShopID) references WorkShop(WorkShopID),
+foreign key (StudentID) references Student(StudentID));
+
+/*13a-b Events and Event Attendance Tables*/
+create table Event(
+EventID int identity(1,1) primary key,
+EventName varchar(50),
+EventDate datetime,
+EventTopic varchar(20));
+
+create table EventAttendance(
+EventID int not null,
+MemberID int not null,
+ActuallyAttended char(3),
+primary key (EventID,MemberID),
+foreign key (EventID) references Event(EventID),
+foreign key (MemberID) references Member(MemberID));
+
+/*14a-c Blog Post Tables and Message Table*/
+create table BlogPost(
+PostID int identity(1,1) primary key,
+MemberID int,
+BlogPostDate datetime,
+PostContent varchar(1000),
+Subject varchar(100),
+foreign key (MemberID) references Member(MemberID));
+
+create table BlogPostComment(
+CommentID int identity(1,1) primary key,
+MemberID int,
+CommentDate datetime,
+PostComment varchar(500), 
+foreign key (MemberID) references Member(MemberID));
+
+create table FullPost(
+CommentID int not null,
+PostID int not null,
+primary key (CommentID,PostID),
+foreign key (CommentID) references BlogPostComment(CommentID),
+foreign key (PostID) references BlogPost(PostID));
+
+/* 15.
+The way the message table is setup is with two relationships from
+the member table, one for the sender and one for the receiver
+*/
+create table Message(
+MessageID int identity(1,1) primary key,
+SenderID int,
+MessageBody varchar(1000),
+Title varchar(50),
+RecipientID int,
+foreign key (SenderID) references Member(MemberID),
+foreign key (RecipientID) references Member(MemberID));
+
+/*16. Academy Location Table*/
+create table AcademyLocation(
+LocationID int identity(1,1) primary key,
+Street varchar(50),
+City varchar(30),
+State varchar(25),
+Zip varchar(15));
+
+/*17. Course Table*/
+create table Course (
+CourseID int identity(1,1) primary key,
+SubjectID int,
+CourseName varchar(100),
+TeacherID int,
+LocationID int,
+foreign key (TeacherID) references Staff(StaffID),
+foreign key (SubjectID) references Subject(SubjectID),
+foreign key (LocationID) references AcademyLocation(LocationID));
+
+/*18. Course Evaluation Table*/
+create table CourseEvaluation(
+EvaluationID int identity(1,1) primary key,
+TypeOfEvaluation char(1),
+CourseID int,
+StaffID int,
+StudentID int,
+Attendance int,
+Puctuality int,
+Contribution int,
+AcceptCriticism int,
+Attitude int,
+Motivation int,
+ProduceProject int,
+WBLActivities int,
+Strength varchar(200),
+AreaNeedImrprovement varchar(100),
+GradeComment varchar(250),
+Recognition int,
+Technology int,
+Mixing int,
+Scratching int,
+Professionalism int,
+Presentation int,
+foreign key (CourseID) references Course(CourseID),
+foreign key (StaffID) references Staff(StaffID),
+foreign key (StudentID) references Student(StudentID));
+
+/*19. Course Plan Table*/
+create table CoursePlan(
+CoursePlanID int identity(1,1) primary key,
+CourseID int,
+StartDate datetime,
+EndDate datetime,
+CourseOutcome varchar(200),
+foreign key (CourseID) references Course(CourseID));
+
+/*20. Course Schedule Table*/
+create table ClassSchedule(
+StudentID int not null,
+CourseID int not null,
+MeetingDays varchar(10),
+MeetingTime time,
+RoomNumber varchar(10),
+primary key (StudentID,CourseID),
+foreign key (StudentID) references Student(StudentID),
+foreign key (CourseID) references Course(CourseID));
+
+/*Board Member Tables*/
+create table BoardRole(
+BoardRoalID int identity(1,1) primary key,
+BoardRole char(20),
+BoardRoalNickname char(5));
+
+create table BoardMember(
+BoardRoalID int not null,
+CipherID int not null,
+Primary Key(BoardRoalID,CipherID),
+Foreign Key (BoardRoalID) references BoardRole(BoardRoalID),
+Foreign Key(CipherID) references Cipher(CipherID))
+
+
+-----------------------------------------------------------------------------------------------------------
+--member dummy data
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Mazi', 'Mutafa', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('David', 'Curry-Johnson', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Marcus', 'Moody', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '');
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Ron', 'Brown', 'rbi@gmail.com', '7576854995', '','Teacher', '', '','','','');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Mana', '', 'mana@gmail.com', '7035760093', '5713481211','Teacher', '321 Windows Rd', '','Washington','DC','22802');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Pages', 'Matam', 'pages.matam@gmail.com', '7032477781', '7036081111','Teacher', '1738 Macintosh Dr', '','Washington','DC','22803');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Herberth', 'Romero', 'herberth.romero@gmail.com', '2029773456', '2028984323','Teacher', '540 Apple Ln', '','Washington','DC','22802');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kate', 'DeCiccio', 'kate.deciccio@yahoo.com', '2029898855', '2029092020','Teacher', '2387 Silver Rd', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Zachariah', 'McGant', 'zachariah.mcgant@yahoo.com', '2029898855', '2029092020','Teacher', '5422 Gold Rd', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Brandy', 'Robertson', 'brandy.robertson@yahoo.com', '2026547890', '2022346549','Teacher', '2134 Silver Rd', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Max', 'Gibbons', 'max.gibbons@gmail.com', '2023442322', '2027409423','Teacher', '1234 North Ln', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Asad', 'Walker', 'asad.walker@gmail.com', '2025990323', '2023013009','Teacher', '8323 Happy Dr', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Raquel', 'Ra Brown', 'raquel.brown@yahoo.com', '2027564343', '2029553423','Teacher', '4325 Trailblazer Ln', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Rosina', 'Memelo', 'rosina.memelo@gmail.com', '2025453345', '2029033090','Teacher', '3432 Bridgeview Way', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('DJ Two Tone', 'Jones', 'DJjones@gmail.com', '2026562220', '2029890111','Teacher', '1121 Amazon Dr', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Nicktha1da', '', 'Nicktha1da@gmail.com', '2029912209', '2028779323','Teacher', '2753 Orange Ln', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Black', 'Picasso', 'blackpicasso@gmail.com', '20239435854', '2029090431','Teacher', '696 Horseshoe Dr', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Flex', 'Matthews', 'flex.matthews@yahoo.com', '20293930909', '2024903234','Teacher', '1001 Dalmation Dr', '','Washington','DC','22804');
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Dale', 'Cook', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Beatrice', 'Greenberg', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Takia', 'Mitchell', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('John', 'Ortiz', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Andrew', 'Ramadan', 'ramadaah@dukes.jmu.edu', '7033099039', '5712052294','Student', '123 House Rd', '','Harrisonburg','VA','22801');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Alex', 'Ovechkin', 'greateight@gmail.com', '7032328898', '7039979234','Student', '549 Big House Rd', '','Washington','DC','20001');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kirk', 'Cousins', 'kirk.cousins@yahoo.com', '7038320573', '7035442343','Student', '777 Touchdown Ln', 'Apt. 12','Silver Spring','MD','20901');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Tom', 'Wood', 'woodts@dukes.jmu.edu', '7035552343', '5714112294','Student', '1000 Genius Dr', '','Chantilly','VA','22151');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kyle', 'Prestel', 'prestekr@dukes.jmu.edu', '7035436569', '7039094321','Student', '358 Michael Bay Rd', 'Apt. B','Washington','DC','20001');
+insert into Student(StudentID) values(23)
+insert into Student(StudentID) values(24)
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Shawn', 'Carter', 'CEOofTheROC@gmail.com', '2022069870', '2023039202','Cipher', '1511 Rockafella Ln', '','Washington','DC','22001');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kanye', 'West', 'BestOfAllTime@gmail.com', '2025443300', '2027312101','Cipher', '3019 Graduation Dr', '','Washington','DC','22003');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Nasir', 'Jones', 'stillmatic@yahoo.com', '2026107744', '2022118338','Cipher', '200 Memory Ln', '','Washington','DC','22001');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Lonnie', 'Lynn', 'therealcommon@gmail.com', '2023089012', '2023290025','Cipher', '1211 International Underground Dr', '','Washington','DC','22005');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('L.A.', 'Reid', 'lareid@yahoo.com', '2024747730', '2029218809','Cipher', '3235 Outkas
+
+--subject dummy data
+insert into subject values ('DJing')
+insert into subject values ('MCing')
+insert into subject values ('Beat Production')
+insert into subject values ('Spoken Word')
+insert into subject values ('Breaking')
+insert into subject values ('Hip-Hop Dance')
+insert into subject values ('Theater of Hip-Hop')
+insert into subject values ('Graffiti')
+insert into subject values ('Street Art')
+insert into subject values ('Fine Art')
+insert into subject values ('Videography')
+insert into subject values ('Photography')
+
+
+--Staff Type dummy data
+insert into stafftype values('A', 'Admin Staff')
+insert into stafftype values('T', 'Teacher')
+insert into stafftype values('I', 'Intern')
+
+--Staff dummy data inherited from member
+insert into staff(StaffID, PermissionLevel, StaffTypeID, SubjectID, Salary) values(4, 2, 2, 1, $12.00)
+insert into staff(StaffID, StaffTypeID, SubjectID, Hourly) values(5, 2, 2, $12.00)
+
+--Academy Location dummy data
+insert into AcademyLocation values ('1525 Newton St NE', 'Washington', 'DC', '20017')
+insert into AcademyLocation values ('5200 Foote St NE', 'Washington', 'DC', '20019')
+insert into AcademyLocation values ('5001 Central Ave SE', 'Washington', 'DC', '20019')
+insert into AcademyLocation values ('901 G St NW', 'Washington', 'DC', '20001')
+insert into AcademyLocation values ('1630 7th St NW', 'Washington', 'DC', '20001')
+insert into AcademyLocation values ('160 16th St NW', 'Washington', 'DC', '20010')
+
+--Course dummy data
+insert into course values (1, 'Intro to DJing', 4, 1)
+insert into course values (2, 'Intro to MCing', 5, 1)
+insert into course values (4, 'Poetry Writing', 4, 2)
+insert into course values (9, 'Street Art 101', 5, 3)
+
+--Class Schedule dummy data
+insert into ClassSchedule values (23, 1, 'MWF', '1:00', 101)
+insert into ClassSchedule values (23, 2, 'MWF', '3:00', 101)
+insert into ClassSchedule values (24, 1, 'MWF', '1:00', 101)
+insert into ClassSchedule values (24, 3, 'TuTh', '2:00', 202)
+
+--StoredProcedures
+USE [WBL]
+GO
+
+/****** Object:  StoredProcedure [dbo].[EnrollClass]    Script Date: 3/27/2016 4:13:20 PM ******/
+DROP PROCEDURE [dbo].[EnrollClass]
+GO
+
+/****** Object:  StoredProcedure [dbo].[EnrollClass]    Script Date: 3/27/2016 4:13:20 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+--Exec EnrollClass 1, 1
+
+Create PROCEDURE [dbo].[EnrollClass] (@StudentID int, @CourseID int)
+
+AS
+
+BEGIN
+
+Insert into ClassSchedule(StudentID, CourseID) Values (@StudentID, @CourseID)
+END
+
+
+
+GO
