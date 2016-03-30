@@ -110,14 +110,10 @@ function displayCalendar() {
                     var y2 = ofs.top + trash.outerHeight(true);
 
                     if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 && jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
-                        //alert("FAFASDFSD");
-                        //$('#calendar').fullCalendar('removeEvents', event.id);
                         deleteEvent(event);
                     }
-                    //dragged = [ui.helper[0], event];
                 },
                 dragRevertDuration: 0,
-
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     debugger;
                 }
@@ -131,7 +127,7 @@ function updateEvent(event) {
     eventToSave.eventID = event.id;
     eventToSave.eventTitle = event.title;
     eventToSave.eventStartDate = event.start.format('YYYY-MM-DD h:mm:ss');
-    eventToSave.eventEndDate = event.end.format('YYYY-MM-DD h:mm:ss');
+    eventToSave.eventEndDate = event.start.add(1,'h').format('YYYY-MM-DD h:mm:ss');
     eventToSave.eventTopic = event.description;
 
     $.ajax({
@@ -167,23 +163,6 @@ function intDroppables() {
         };
         $(this).data('eventObject', event_object);
     });
-    //var $trash = $('#trashCan');
-    //$trash.droppable({
-    //    tolerance: 'pointer',
-    //    //accept: ".fc-event.fc-draggable",
-    //    activeClass: "ui-state-highlight",
-    //    drop: function (event, ui) {
-    //        if (dragged && ui.helper && ui.helper === dragged[0]) {
-    //            var event = dragged[1];
-    //            var answer = confirm("Delete Event?")
-    //            if(answer){
-    //                $('#calendar').fullCalendar('removeEvents', event.id);
-    //            }
-    //        }
-
-    //        //deleteEvent(ui.instance);
-    //    }
-    //});
 }
 function deleteEvent(event) {
     eventToDelete = new Object();
@@ -218,8 +197,6 @@ function eventDropped(date, externalEvent) {
     copiedEventObject.id = getNewID();
     copiedEventObject.title = $(externalEvent).data('title');
     copiedEventObject.description = null;
-
-    //$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
 }
 
 function showEventClickedPopUp(event) {
@@ -257,14 +234,13 @@ function showEventClickedPopUp(event) {
     $("#eventForm").dialog('open');
 }
 
-function showDroppedEventPopUp(event) {
+function showDroppedEventPopUp(event) { // currently not used 3/30
     $("#eventForm").dialog({
         autoOpen: false,
         height: 300,
         width: 350,
         modal: true,
     });
-
     $("#txtEventTitle").val(event.title);
     $("txtEventStartDate").val(event.start);
     $("txtEventEndDate").val(event.end);
