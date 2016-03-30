@@ -105,6 +105,23 @@ public class CalendarService : System.Web.Services.WebService
         return true;
     }
 
+    [WebMethod]
+    public bool deleteEvent(Event eventData)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        SqlConnection sc = new SqlConnection(cs);
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = sc;
+        cmd.CommandText = "deleteEvent";
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@EventID", eventData.eventID);
+        sc.Open();
+        cmd.ExecuteNonQuery();
+        sc.Close();
+
+        return true;
+    }
+
     public static bool dateFormatCheck(string date)
     {
         /*

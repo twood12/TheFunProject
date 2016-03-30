@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     intDroppables();
-    displayCalendar()
+    displayCalendar();
+    //$('#calendar').children('.fc-content').children().append('<div id="trashCan"></div>');
 });
 
 function displayCalendar() {
@@ -99,6 +100,23 @@ function displayCalendar() {
                 eventClick: function (event) {
                     showEventClickedPopUp(event);
                 },
+                eventDestroy(event, element, view) { },
+                eventDragStop: function (event, jsEvent) {
+                    var trash = jQuery('#trashCan');
+                    var ofs = trash.offset();
+                    var x1 = ofs.left;
+                    var x2 = ofs.left + trash.outerWidth(true);
+                    var y1 = ofs.top;
+                    var y2 = ofs.top + trash.outerHeight(true);
+
+                    if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 && jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
+                        //alert("FAFASDFSD");
+                        //$('#calendar').fullCalendar('removeEvents', event.id);
+                        deleteEvent(event);
+                    }
+                    //dragged = [ui.helper[0], event];
+                },
+                dragRevertDuration: 0,
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     debugger;
@@ -140,7 +158,8 @@ function intDroppables() {
         });
         $(this).draggable({
             zIndex: 999,
-            revert: true,
+            revert: "invalid",
+            help: "clone",
             revertDuration: 0
         });
         var event_object = {
@@ -148,14 +167,49 @@ function intDroppables() {
         };
         $(this).data('eventObject', event_object);
     });
+    //var $trash = $('#trashCan');
+    //$trash.droppable({
+    //    tolerance: 'pointer',
+    //    //accept: ".fc-event.fc-draggable",
+    //    activeClass: "ui-state-highlight",
+    //    drop: function (event, ui) {
+    //        if (dragged && ui.helper && ui.helper === dragged[0]) {
+    //            var event = dragged[1];
+    //            var answer = confirm("Delete Event?")
+    //            if(answer){
+    //                $('#calendar').fullCalendar('removeEvents', event.id);
+    //            }
+    //        }
+
+    //        //deleteEvent(ui.instance);
+    //    }
+    //});
+}
+function deleteEvent(event) {
+    eventToDelete = new Object();
+    eventToDelete.eventID = event.id;
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: "{eventData:" + JSON.stringify(eventToDelete) + "}",
+        url: "CalendarService.asmx/deleteEvent",
+        dataType: "json",
+        success: function(){
+            $('#calendar').fullCalendar('removeEvents', event.id);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            debugger;
+        }
+    });
+
 }
 
 function eventDropped(date, externalEvent) {
     var event_object;
     var copiedEventObject;
     var duration = 60;
-    var endDate = new Date();
-    endDate = date.add(1, 'h');
+    var endDate = date.clone().add(1, 'h');
+    //endDate = date.add(1, 'hours');
     event_object = $(externalEvent).data('eventObject');
     copiedEventObject = $.extend({}, event_object);
     copiedEventObject.start = date;
@@ -163,9 +217,9 @@ function eventDropped(date, externalEvent) {
     copiedEventObject.allDay = false;
     copiedEventObject.id = getNewID();
     copiedEventObject.title = $(externalEvent).data('title');
-    copiedEventObject.description = "teste";
+    copiedEventObject.description = null;
 
-    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+    //$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
 }
 
 function showEventClickedPopUp(event) {
@@ -175,7 +229,7 @@ function showEventClickedPopUp(event) {
         width: 350,
         modal: true,
         buttons: {
-            "Add Event": function () {
+            "Update Event": function () {
                 var copiedEvent = new Object();
                 copiedEvent.id = event.id;
                 copiedEvent.title = $("#eventForm #txtEventTitle").val();
@@ -186,7 +240,7 @@ function showEventClickedPopUp(event) {
                 $('#calendar').fullCalendar('removeEvents', event.id);
                 $('#calendar').fullCalendar('refetchEvents');
                 $('#calendar').fullCalendar('renderEvent', copiedEvent, true);
-                $('#eventForm').dialog('close');
+                clearTextBoxes();
             }
         }
     });
@@ -225,6 +279,7 @@ function showPopUp(start, end) {
         buttons: {
             "Add Event": function () {
                 addEventFromDialog();
+                clearTextBoxes();
             }
         }
     });
@@ -236,6 +291,13 @@ function showPopUp(start, end) {
     $("#eventForm #txtEventStartDate").val(start.format('MM-DD-YYYY h:mm'));
     $("#eventForm #txtEventEndDate").val(start.add(1, 'h').format('MM-DD-YYYY h:mm'));
     $("#eventForm").dialog('open');
+}
+function clearTextBoxes() {
+    $("#eventForm #txtEventDescription").val("");
+    $("#eventForm #txtEventTitle").val("");
+    $("#eventForm #txtEventStartDate").val("");
+    $("#eventForm #txtEventEndDate").val("");
+    $("#eventForm").dialog('close');
 }
 function getNewID() {
     return new Date().getTime() + Math.floor(Math.random());
@@ -266,7 +328,6 @@ function addEventFromDialog() {
         }
     });
 }
-
 function updateEventSource(data) { // delete?
     var events = new Array();
     $.map(data.d, function (item, i) {
