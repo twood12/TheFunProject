@@ -26,14 +26,14 @@
 
 
     </form>
-<asp:SqlDataSource id="courseListCommand" ConnectionString="<%$ ConnectionStrings:connectionTom %>" SelectCommand="Select CONVERT(varchar(10),C.CourseID)+ '-' + C.CourseName as Name From Course C JOIN ClassSchedule CS on C.CourseID = CS.CourseID AND Cs.StudentID = @StudentID" runat="server" >
+<asp:SqlDataSource id="courseListCommand" ConnectionString="<%$ ConnectionStrings:DBCS %>" SelectCommand="Select CONVERT(varchar(10),C.CourseID)+ '-' + C.CourseName as Name From Course C JOIN ClassSchedule CS on C.CourseID = CS.CourseID AND Cs.StudentID = @StudentID" runat="server" >
         <SelectParameters>
             <asp:Parameter DefaultValue="23" Name="StudentID" Type="Int32" />
         </SelectParameters>
 
     </asp:SqlDataSource>
 
-        <asp:SqlDataSource id="teacherEvalCommand" ConnectionString="<%$ ConnectionStrings:connectionTom %>" SelectCommand="Select distinct CONVERT(varchar(10),M.MemberID) + '-' + M.FirstName + ' ' + M.LastName as Name From Member M JOIN ClassSchedule CS on CS.TeacherID = M.MemberID AND CS.CourseID = @CourseID" runat="server" >
+        <asp:SqlDataSource id="teacherEvalCommand" ConnectionString="<%$ ConnectionStrings:DBCS %>" SelectCommand="Select distinct CONVERT(varchar(10),M.MemberID) + '-' + M.FirstName + ' ' + M.LastName as Name From Member M JOIN ClassSchedule CS on CS.TeacherID = M.MemberID AND CS.CourseID = @CourseID" runat="server" >
         <SelectParameters>
             <asp:SessionParameter Name="CourseID" SessionField="stuEvaluationCourseID" Type="Int32" />
         </SelectParameters>
