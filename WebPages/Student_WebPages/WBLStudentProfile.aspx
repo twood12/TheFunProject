@@ -4,5 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
        <p>This is the student profile page!</p>
+       <p>Coca-Cola</p>
 </asp:Content>
 
