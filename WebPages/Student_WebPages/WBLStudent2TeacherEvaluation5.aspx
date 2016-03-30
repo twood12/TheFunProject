@@ -15,7 +15,7 @@
         <tr><td>Is there anything else you would like to comment on?</td></tr>
         <tr><td><asp:TextBox ID="txtComments" runat="server" name="txtComments"></asp:TextBox></td></tr>
         <tr><td>Is the class taught by additional teacher?</td></tr>
-        <tr><td><asp:RadioButtonList ID="rdoGraffiti" runat="server">
+        <tr><td><asp:RadioButtonList ID="rdoAdditionalTeacher" runat="server">
                         <asp:ListItem Text="Yes" Value="Yes" Selected="False" name="rdoNoExperience" />
                         <asp:ListItem Text="No" Value="No" Selected="False" name="rdoBeginner"/>
                         
