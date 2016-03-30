@@ -1,0 +1,76 @@
+--KYLE W. CREATE STATEMENT EXAMPLE how to create a course and others--
+insert into member values('kyle', 'walker', 'walkerkc@dukes.jmu.edu', '7576854995', '','Teacher', '', '','','','')
+insert into subject values ('DJing')
+insert into stafftype values('T', 'Teacher')
+insert into staff(StaffID, PermissionLevel, StaffTypeID, SubjectID, Salary) values(3, 1, 1, 1, $5.00)
+insert into AcademyLocation values('123 way', 'Arlington', 'VA', '22801')
+insert into ClassSchedule values(3, 2, 'MWF', '12:00', '101')
+insert into course values (1, 'DJing', 3, 1)
+
+--member dummy data
+insert into member values('Mazi', 'Mutafa', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '')
+insert into member values('David', 'Curry-Johnson', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '')
+insert into member values('Marcus', 'Moody', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '')
+
+
+/*Inserts using the password hash in the table*/
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Mazi', 'Mutafa', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('David', 'Curry-Johnson', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Marcus', 'Moody', 'info@wblinc.org', '2026671192', '', 'Admin Staff', '', '', '', '', '');
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Ron', 'Brown', 'rbi@gmail.com', '7576854995', '','Teacher', '', '','','','');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Mana', '', 'mana@gmail.com', '7035760093', '5713481211','Teacher', '321 Windows Rd', '','Washington','DC','22802');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Pages', 'Matam', 'pages.matam@gmail.com', '7032477781', '7036081111','Teacher', '1738 Macintosh Dr', '','Washington','DC','22803');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Herberth', 'Romero', 'herberth.romero@gmail.com', '2029773456', '2028984323','Teacher', '540 Apple Ln', '','Washington','DC','22802');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kate', 'DeCiccio', 'kate.deciccio@yahoo.com', '2029898855', '2029092020','Teacher', '2387 Silver Rd', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Zachariah', 'McGant', 'zachariah.mcgant@yahoo.com', '2029898855', '2029092020','Teacher', '5422 Gold Rd', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Brandy', 'Robertson', 'brandy.robertson@yahoo.com', '2026547890', '2022346549','Teacher', '2134 Silver Rd', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Max', 'Gibbons', 'max.gibbons@gmail.com', '2023442322', '2027409423','Teacher', '1234 North Ln', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Asad', 'Walker', 'asad.walker@gmail.com', '2025990323', '2023013009','Teacher', '8323 Happy Dr', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Raquel', 'Ra Brown', 'raquel.brown@yahoo.com', '2027564343', '2029553423','Teacher', '4325 Trailblazer Ln', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Rosina', 'Memelo', 'rosina.memelo@gmail.com', '2025453345', '2029033090','Teacher', '3432 Bridgeview Way', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('DJ Two Tone', 'Jones', 'DJjones@gmail.com', '2026562220', '2029890111','Teacher', '1121 Amazon Dr', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Nicktha1da', '', 'Nicktha1da@gmail.com', '2029912209', '2028779323','Teacher', '2753 Orange Ln', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Black', 'Picasso', 'blackpicasso@gmail.com', '20239435854', '2029090431','Teacher', '696 Horseshoe Dr', '','Washington','DC','22804');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Flex', 'Matthews', 'flex.matthews@yahoo.com', '20293930909', '2024903234','Teacher', '1001 Dalmation Dr', '','Washington','DC','22804');
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Dale', 'Cook', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Beatrice', 'Greenberg', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Takia', 'Mitchell', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('John', 'Ortiz', 'info@wblinc.org', '2026671192', '', 'Intern', '', '', '', '', '');
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Andrew', 'Ramadan', 'ramadaah@dukes.jmu.edu', '7033099039', '5712052294','Student', '123 House Rd', '','Harrisonburg','VA','22801');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Alex', 'Ovechkin', 'greateight@gmail.com', '7032328898', '7039979234','Student', '549 Big House Rd', '','Washington','DC','20001');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kirk', 'Cousins', 'kirk.cousins@yahoo.com', '7038320573', '7035442343','Student', '777 Touchdown Ln', 'Apt. 12','Silver Spring','MD','20901');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Tom', 'Wood', 'woodts@dukes.jmu.edu', '7035552343', '5714112294','Student', '1000 Genius Dr', '','Chantilly','VA','22151');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kyle', 'Prestel', 'prestekr@dukes.jmu.edu', '7035436569', '7039094321','Student', '358 Michael Bay Rd', 'Apt. B','Washington','DC','20001');
+
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Shawn', 'Carter', 'CEOofTheROC@gmail.com', '2022069870', '2023039202','Cipher', '1511 Rockafella Ln', '','Washington','DC','22001');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Kanye', 'West', 'BestOfAllTime@gmail.com', '2025443300', '2027312101','Cipher', '3019 Graduation Dr', '','Washington','DC','22003');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Nasir', 'Jones', 'stillmatic@yahoo.com', '2026107744', '2022118338','Cipher', '200 Memory Ln', '','Washington','DC','22001');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('Lonnie', 'Lynn', 'therealcommon@gmail.com', '2023089012', '2023290025','Cipher', '1211 International Underground Dr', '','Washington','DC','22005');
+insert into member(FirstName,LastName,Email,CellNo,HomePhoneNo,MemberType,AddressLine1,AddressLine2,City,State,zip) values('L.A.', 'Reid', 'lareid@yahoo.com', '2024747730', '2029218809','Cipher', '3235 Outkas
+
+
+
+--subject dummy data
+insert into subject values ('DJing');
+insert into subject values ('MCing')
+insert into subject values ('Beat Production');
+insert into subject values ('Spoken Word');
+insert into subject values ('Breaking');
+insert into subject values ('Hip-Hop Dance');
+insert into subject values ('Theater of Hip-Hop');
+insert into subject values ('Graffiti');
+insert into subject values ('Street Art');
+insert into subject values ('Fine Art');
+insert into subject values ('Videography');
+insert into subject values ('Photography');
+insert into subject values ('Chess')
+
+
+--Staff Type dummy data
+insert into stafftype values('I', 'Intern')
+insert into stafftype values('T', 'Teacher')
+insert into stafftype values('A', 'Admin Staff')

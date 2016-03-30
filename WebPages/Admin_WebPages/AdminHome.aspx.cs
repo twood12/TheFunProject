@@ -38,10 +38,10 @@ public partial class AdminHome : System.Web.UI.Page
     }
     protected void ManageReports_Click(object sender, EventArgs e)
     {
-        Response.Redirect("ManageReports");
+        Response.Redirect("ManageReports.aspx");
     }
     protected void ManagePortfolios_Click(object sender, EventArgs e)
     {
-        Response.Redirect("ManagePorfolio");
+        Response.Redirect("ManagePorfolio.aspx");
     }
 }

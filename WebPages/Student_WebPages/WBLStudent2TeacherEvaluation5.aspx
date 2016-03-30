@@ -15,7 +15,7 @@
         <tr><td>Is there anything else you would like to comment on?</td></tr>
         <tr><td><asp:TextBox ID="txtComments" runat="server" name="txtComments"></asp:TextBox></td></tr>
         <tr><td>Is the class taught by additional teacher?</td></tr>
-        <tr><td><asp:RadioButtonList ID="rdoGraffiti" runat="server">
+        <tr><td><asp:RadioButtonList ID="rdoAdditionalTeacher" runat="server">
                         <asp:ListItem Text="Yes" Value="Yes" Selected="False" name="rdoNoExperience" />
                         <asp:ListItem Text="No" Value="No" Selected="False" name="rdoBeginner"/>
                         
@@ -26,9 +26,9 @@
         <tr><th>Self Evaluation</th></tr>
         <tr><td>How would you descibe your participation in class?</td></tr>
         <tr><td><asp:RadioButtonList ID="rdoParticipationInClass" runat="server">
-                    <asp:ListItem>I always participate to my fullest</asp:ListItem>
-                    <asp:ListItem>I sometimes wait for others to participate and then I'll join in</asp:ListItem>
-                    <asp:ListItem>I like just being in the class but don't always speak or participate</asp:ListItem>
+                    <asp:ListItem Value="Always">I always participate to my fullest</asp:ListItem>
+                    <asp:ListItem Value="Sometimes">I sometimes wait for others to participate and then I'll join in</asp:ListItem>
+                    <asp:ListItem Value="Rarely">I like just being in the class but don't always speak or participate</asp:ListItem>
                 </asp:RadioButtonList></td></tr>
         <tr><td>Did you finish a final piece of work for All City?</td></tr>
         <tr><td><asp:RadioButtonList ID="rdoAllCity" runat="server">
