@@ -1,11 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DisplayBlog.aspx.cs" Inherits="DisplayBlog" ValidateRequest = "false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DisplayBlog.aspx.cs" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" Inherits="DisplayBlog" ValidateRequest = "false" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<head>
     <title></title>
 </head>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
     
     <form id="form1" runat="server">
@@ -21,7 +24,7 @@
          
         
         
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=localhost;Initial Catalog=WBL;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="select b.PostComment from BlogPost c join FullPost d on d.PostID = c.PostID Join BlogPostComment b on b.CommentID = d.CommentID  where c.PostID = @PostID; ">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" ProviderName="System.Data.SqlClient" SelectCommand="select b.PostComment from BlogPost c join FullPost d on d.PostID = c.PostID Join BlogPostComment b on b.CommentID = d.CommentID  where c.PostID = @PostID; ">
             <SelectParameters>
                 <asp:RouteParameter Name="PostID" RouteKey="PostID" />
             </SelectParameters>
@@ -53,4 +56,4 @@
         </p>
     </form>
 </body>
-</html>
+</asp:Content>

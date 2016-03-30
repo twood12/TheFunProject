@@ -150,7 +150,7 @@
                         DataValueField="MemberID"
                         Visible="false" Width="338px" AutoPostBack="True" OnSelectedIndexChanged="lstStudentSearch_SelectedIndexChanged"></asp:ListBox>
                     <asp:SqlDataSource ID="sqlSearchStudent" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:DBCSS %>" 
+                        ConnectionString="<%$ ConnectionStrings:DBXYS %>" 
                         SelectCommand="SELECT CONVERT(varchar(25),[MemberID]) +' '+[FirstName]+' '+[LastName]+' '+[Email]+' '+[CellNo]+' '+ [MemberType] as 'MemberID' FROM [Member] WHERE (([FirstName] = @FirstName) AND ([LastName] = @LastName) AND ([MemberType] = @MemberType))">
                         <SelectParameters>
                             <asp:ControlParameter ControlID="txtSearchArea" Name="FirstName" PropertyName="Text" Type="String" />
@@ -246,7 +246,7 @@
                         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                     </asp:DetailsView>
-                    <asp:SqlDataSource ID="sqlStudentDetails1" runat="server" ConnectionString="<%$ ConnectionStrings:DBCSS %>" DeleteCommand="DELETE FROM [Student] WHERE [StudentID] = @StudentID" InsertCommand="INSERT INTO [Student] ([StudentID], [GradeLevel], [Gender], [Ethnicity], [Apprentice], [SchoolName], [StudentStatus], [ExpectedGradYr], [Resume], [ArtisticResume]) VALUES (@StudentID, @GradeLevel, @Gender, @Ethnicity, @Apprentice, @SchoolName, @StudentStatus, @ExpectedGradYr, @Resume, @ArtisticResume)" SelectCommand="SELECT [StudentID], [GradeLevel], [Gender], [Ethnicity], [Apprentice], [SchoolName], [StudentStatus], [ExpectedGradYr], [Resume], [ArtisticResume] FROM [Student] WHERE ([StudentID] = @StudentID2)" UpdateCommand="UPDATE [Student] SET [GradeLevel] = @GradeLevel, [Gender] = @Gender, [Ethnicity] = @Ethnicity, [Apprentice] = @Apprentice, [SchoolName] = @SchoolName, [StudentStatus] = @StudentStatus, [ExpectedGradYr] = @ExpectedGradYr, [Resume] = @Resume, [ArtisticResume] = @ArtisticResume WHERE [StudentID] = @StudentID">
+                    <asp:SqlDataSource ID="sqlStudentDetails1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXYS %>" DeleteCommand="DELETE FROM [Student] WHERE [StudentID] = @StudentID" InsertCommand="INSERT INTO [Student] ([StudentID], [GradeLevel], [Gender], [Ethnicity], [Apprentice], [SchoolName], [StudentStatus], [ExpectedGradYr], [Resume], [ArtisticResume]) VALUES (@StudentID, @GradeLevel, @Gender, @Ethnicity, @Apprentice, @SchoolName, @StudentStatus, @ExpectedGradYr, @Resume, @ArtisticResume)" SelectCommand="SELECT [StudentID], [GradeLevel], [Gender], [Ethnicity], [Apprentice], [SchoolName], [StudentStatus], [ExpectedGradYr], [Resume], [ArtisticResume] FROM [Student] WHERE ([StudentID] = @StudentID2)" UpdateCommand="UPDATE [Student] SET [GradeLevel] = @GradeLevel, [Gender] = @Gender, [Ethnicity] = @Ethnicity, [Apprentice] = @Apprentice, [SchoolName] = @SchoolName, [StudentStatus] = @StudentStatus, [ExpectedGradYr] = @ExpectedGradYr, [Resume] = @Resume, [ArtisticResume] = @ArtisticResume WHERE [StudentID] = @StudentID">
                         <DeleteParameters>
                             <asp:Parameter Name="StudentID" Type="Int32" />
                         </DeleteParameters>
@@ -312,7 +312,7 @@
                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
-                <asp:SqlDataSource ID="sqlAllEvents" runat="server" ConnectionString="<%$ ConnectionStrings:DBCSS %>" DeleteCommand="DELETE FROM [Event] WHERE [EventID] = @EventID" InsertCommand="INSERT INTO [Event] ([EventName], [EventDate], [EventTopic]) VALUES (@EventName, @EventDate, @EventTopic)" SelectCommand="SELECT * FROM [Event]" UpdateCommand="UPDATE [Event] SET [EventName] = @EventName, [EventDate] = @EventDate, [EventTopic] = @EventTopic WHERE [EventID] = @EventID">
+                <asp:SqlDataSource ID="sqlAllEvents" runat="server" ConnectionString="<%$ ConnectionStrings:DBXYS %>" DeleteCommand="DELETE FROM [Event] WHERE [EventID] = @EventID" InsertCommand="INSERT INTO [Event] ([EventName], [EventDate], [EventTopic]) VALUES (@EventName, @EventDate, @EventTopic)" SelectCommand="SELECT * FROM [Event]" UpdateCommand="UPDATE [Event] SET [EventName] = @EventName, [EventDate] = @EventDate, [EventTopic] = @EventTopic WHERE [EventID] = @EventID">
                     <DeleteParameters>
                         <asp:Parameter Name="EventID" Type="Int32" />
                     </DeleteParameters>
@@ -371,7 +371,7 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
-                    <asp:SqlDataSource ID="sqlStudentClassSchedul" runat="server" ConnectionString="<%$ ConnectionStrings:DBCSS %>" DeleteCommand="DELETE FROM [ClassSchedule] WHERE [StudentID] = @StudentID AND [CourseID] = @CourseID" InsertCommand="INSERT INTO [ClassSchedule] ([StudentID], [CourseID], [MeetingDays], [MeetingTime], [RoomNumber]) VALUES (@StudentID, @CourseID, @MeetingDays, @MeetingTime, @RoomNumber)" SelectCommand="SELECT * FROM [ClassSchedule] WHERE ([StudentID] = @StudentID)" UpdateCommand="UPDATE [ClassSchedule] SET [MeetingDays] = @MeetingDays, [MeetingTime] = @MeetingTime, [RoomNumber] = @RoomNumber WHERE [StudentID] = @StudentID AND [CourseID] = @CourseID">
+                    <asp:SqlDataSource ID="sqlStudentClassSchedul" runat="server" ConnectionString="<%$ ConnectionStrings:DBXYS %>" DeleteCommand="DELETE FROM [ClassSchedule] WHERE [StudentID] = @StudentID AND [CourseID] = @CourseID" InsertCommand="INSERT INTO [ClassSchedule] ([StudentID], [CourseID], [MeetingDays], [MeetingTime], [RoomNumber]) VALUES (@StudentID, @CourseID, @MeetingDays, @MeetingTime, @RoomNumber)" SelectCommand="SELECT * FROM [ClassSchedule] WHERE ([StudentID] = @StudentID)" UpdateCommand="UPDATE [ClassSchedule] SET [MeetingDays] = @MeetingDays, [MeetingTime] = @MeetingTime, [RoomNumber] = @RoomNumber WHERE [StudentID] = @StudentID AND [CourseID] = @CourseID">
                         <DeleteParameters>
                             <asp:Parameter Name="StudentID" Type="Int32" />
                             <asp:Parameter Name="CourseID" Type="Int32" />
@@ -398,7 +398,7 @@
             </tr>
             <tr>
             <td class="auto-style4">
-            <asp:SqlDataSource ID="sqlSearchEvent" runat="server" ConnectionString="<%$ ConnectionStrings:DBCSS %>" SelectCommand="SELECT * FROM [Event] WHERE ([EventName] LIKE '%' + @EventName + '%')" DeleteCommand="DELETE FROM [Event] WHERE [EventID] = @EventID" InsertCommand="INSERT INTO [Event] ([EventName], [EventDate], [EventTopic]) VALUES (@EventName, @EventDate, @EventTopic)" UpdateCommand="UPDATE [Event] SET [EventName] = @EventName, [EventDate] = @EventDate, [EventTopic] = @EventTopic WHERE [EventID] = @EventID">
+            <asp:SqlDataSource ID="sqlSearchEvent" runat="server" ConnectionString="<%$ ConnectionStrings:DBXYS %>" SelectCommand="SELECT * FROM [Event] WHERE ([EventName] LIKE '%' + @EventName + '%')" DeleteCommand="DELETE FROM [Event] WHERE [EventID] = @EventID" InsertCommand="INSERT INTO [Event] ([EventName], [EventDate], [EventTopic]) VALUES (@EventName, @EventDate, @EventTopic)" UpdateCommand="UPDATE [Event] SET [EventName] = @EventName, [EventDate] = @EventDate, [EventTopic] = @EventTopic WHERE [EventID] = @EventID">
                 <DeleteParameters>
                     <asp:Parameter Name="EventID" Type="Int32" />
                 </DeleteParameters>
@@ -431,7 +431,7 @@
                         </Columns>
                     </asp:GridView>
                     <asp:SqlDataSource ID="sqlDietRestriction" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:DBCSS %>" 
+                        ConnectionString="<%$ ConnectionStrings:DBXYS %>" 
                         DeleteCommand="DELETE FROM [StuDietRestriction] WHERE [StudentID] = @StudentID AND [RestrictionID] = @RestrictionID" 
                         InsertCommand="INSERT INTO [StuDietRestriction] ([StudentID], [RestrictionID]) VALUES (@StudentID, @RestrictionID)" 
                         SelectCommand="SELECT Student.StudentID, Member.FirstName, Member.LastName, DietRestriction.RestrictionID, DietRestriction.RestrictionName DietRestriction INNER JOIN StuDietRestriction ON DietRestriction.RestrictionID = StuDietRestriction.RestrictionID INNER JOIN Student ON StuDietRestriction.StudentID = Student.StudentID INNER JOIN Member ON Student.StudentID = Member.MemberID WHERE ([StudentID] = @StudentID)">
