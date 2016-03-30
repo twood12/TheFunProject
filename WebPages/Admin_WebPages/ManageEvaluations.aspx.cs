@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 
-public partial class ManageEvaluations : System.Web.UI.Page
+public partial class ManageEvaluations : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

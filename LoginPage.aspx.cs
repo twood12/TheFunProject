@@ -10,7 +10,7 @@ using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Configuration;
 
-public partial class LoginPage : System.Web.UI.Page
+public partial class LoginPage : BasePage
 {
     #region PageLoad
     protected void Page_Load(object sender, EventArgs e)

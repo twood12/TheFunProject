@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 
-public partial class ManageBucks : System.Web.UI.Page
+public partial class ManageBucks : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
