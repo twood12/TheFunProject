@@ -30,25 +30,64 @@
             margin-right: auto;
         }
 
-        #external-events {
+        .ui-dialog {
+            overflow: visible;
+        }
+
+        #external-events-wrapper {
             float: left;
-            width: 150px;
+            width: 200px;
             padding: 0 10px;
             border: 1px solid #ccc;
             background: #eee;
             text-align: left;
         }
 
-            #external-events h4 {
-                font-size: 16px;
-                margin-top: 0;
-                padding-top: 1em;
-            }
+        #external-events h3 {
+            font-size: 16px;
+            margin-top: 0;
+            padding-top: 1em;
+        }
 
-            #external-events .fc-event {
-                margin: 10px 0;
-                cursor: pointer;
-            }
+        #external-events .fc-event {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        #B-Boy .B-Boy, .fc-event{
+            background-color: purple;
+        }
+
+        #MC .fc-event, .MC{
+            background-color: magenta;
+        }
+
+        #DJ .fc-event, .DJ{
+            background-color: limegreen;
+        }
+
+        #General .fc-event, .General{
+            background-color: dodgerblue;
+        }
+
+        #Graffiti .fc-event, .Graffiti{
+            background-color: gold;
+        }
+
+        #CommunityService .fc-event, .Community-Service{
+            background-color: lightslategrey;
+        }
+
+        #external-event-text {
+            float: left;
+            width: 100px;
+        }
+
+        #external-event-text {
+            margin: auto;
+            float: left;
+            width: inherit;
+        }
 
         fieldset {
             padding: 0;
@@ -94,13 +133,19 @@
 </head>
 <body>
     <div id="wrap">
-        <div id="external-events-wrapper" >
+        <div id="external-events-wrapper">
             <div id="external-events">
                 <h3>Create Events</h3>
-                <div class="fc-event">MC</div>
-                <div class="fc-event">B-Boy</div>
-                <div class="fc-event">DJ</div>
-                <div class="fc-event">Graffiti</div>
+                <div id="MC" class="fc-event MC">MC</div>
+                <div id="B-Boy" class="fc-event B-Boy">B-Boy</div>
+                <div id="DJ" class="fc-event DJ">DJ</div>
+                <div id="Graffiti" class="fc-event Graffiti">Graffiti</div>
+                <div id="CommunityService" class="fc-event Community-Service">Community Service</div>
+                <div id="General" class="fc-event General">General</div>
+            </div>
+            <div class="external-event-text">
+                <label for="txtExternalEventTitle"><strong>Event Title</strong></label><input type="text" id="txtExternalEventTitle" />
+                <label for="txtExternalEventDescription"><strong>Event Description</strong></label><input type="text" id="txtExternalEventDescription" />
             </div>
         </div>
 
@@ -124,14 +169,20 @@
     <div id="eventForm" title="Add New Event" style="display:none">
         <form>
             <fieldset>
-                <label for="txtEventTitle">Event Title</label>
-                <input type="text" id="txtEventTitle" class="text-center ui-widget-content ui-corner-all" />
-                <label for="txtEventStartDate">Event Start Date</label>
-                <input type="text" id="txtEventStartDate" class="text-center ui-widget-content ui-corner-all" />
-                <label for="txtEventEndDate">Event End Date</label>
-                <input type="text" id="txtEventEndDate" class="text-center ui-widget-content ui-corner-all" />
-                <label for="txtEventDescription">Event Description</label>
-                <input type="text" id="txtEventDescription" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventTitle">Event Title:</label><input type="text" id="txtEventTitle" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventStartDate">Event Start Date:</label><input type="text" id="txtEventStartDate" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventEndDate">Event End Date:</label><input type="text" id="txtEventEndDate" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventDescription">Event Description:</label><input type="text" id="txtEventDescription" class="text-center ui-widget-content ui-corner-all" />
+                <label for="ddlEventTopic">Event Topic:</label>
+                <select id="ddlEventTopic" class="ui-selectmenu">
+                    <option value="MC">MC</option>
+                    <option value="DJ">DJ</option>
+                    <option value="B-Boy">B-Boy</option>
+                    <option value="Graffiti">Graffiti</option>
+                    <option value="Community Service">Community Service</option>
+                    <option value="General">General</option>
+                </select>
+
                 <input type="submit" id="btnAddEvent" tabindex="-1" style="position:absolute; top:-10000px" />
             </fieldset>
         </form>

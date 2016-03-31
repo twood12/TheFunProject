@@ -8,7 +8,8 @@ using System.Web;
 /// </summary>
 public class Event
 {
-    public String eventTitle { get; set; } 
+    public String eventTitle { get; set; } //eventName in db and such
+    public String eventDescription { get; set; }
     public String eventStartDate { get; set; }
     public String eventEndDate { get; set; }
     public int eventID { get; set; }
