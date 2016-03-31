@@ -11,4 +11,9 @@ public partial class WebPages_Student_WebPages_WBLStudentCourses : BasePage
     {
 
     }
+
+    protected void btnAvailableCourses_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/WebPages/Student_WebPages/WBLAvailableCourses.aspx");
+    }
 }

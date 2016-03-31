@@ -30,6 +30,13 @@ public partial class WebPages_Student_WebPages_WBLStudentEvaluations : BasePage
             int courseID = Convert.ToInt32(courseIDString);
 
             Session["stuEvaluationCourseID"] = courseID;
+
+            String selectedValueTeacher = ddTeacherEvaluations.SelectedValue;
+            int idPositionTeacher = ddTeacherEvaluations.SelectedValue.IndexOf('-');
+            String teacherIDString = ddTeacherEvaluations.SelectedValue.Substring(0, idPositionTeacher);
+            int teacherID = Convert.ToInt32(teacherIDString);
+
+            Session["stuEvaluationTeacherID"] = teacherID;
         }
         catch(Exception ex)
         {
