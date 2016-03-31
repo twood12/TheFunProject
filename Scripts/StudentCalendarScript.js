@@ -28,18 +28,20 @@ function displayCalendar() {
                 lazyFetching: false,
                 defaultTimedEventDuration: '01:00:00',
                 forceEventDuration: true,
-                eventTextColor: 'Yellow',
-                eventBackgroundColor: 'Purple',
+                eventTextColor: 'White',
+                //eventBackgroundColor: 'Purple',
                 events:
                 $.map(data.d, function (item, i) {
                     console.log(item);
+                   console.log(item);
                     var eventEndDate = new Object();
                     var event = new Object();
                     event.id = item.eventID,
                     event.start = new Date(item.eventStartDate),
                     event.end = new Date(item.eventEndDate),
                     event.title = item.eventTitle,
-                    event.description = item.eventTopic,
+                    event.description = item.eventDescription,
+                    event.topic = item.eventTopic,
                     event.allDay = false;
                     console.log(event);
                     return event;
@@ -60,6 +62,32 @@ function displayCalendar() {
                             tip: true
                         }
                     });
+
+                    switch (event.topic) {
+                        case 'MC':
+                            //element.children('.fc-event-inner').css({ 'background-color': 'magenta' });
+                            element.addClass('MC');
+                            //event.className = 'MC';
+                            break;
+                        case 'B-Boy':
+                            element.addClass('B-Boy');
+                            break;
+                        case 'DJ':
+                            element.addClass('DJ');
+                            break;
+                        case 'Graffiti':
+                            element.addClass('Graffiti');
+                            break;
+                        case 'General':
+                            element.addClass('General');
+                            break;
+                        case 'Community Service':
+                            element.addClass('Community-Service');
+                            break;
+                        default:
+                            element.addClass('General');
+                            break;
+                    }
                 },
                 eventAfterRender: function (event, element, view) {
                     if ($(this).data("qtip")) $(this).qtip('destroy');
@@ -100,23 +128,48 @@ function displayCalendar() {
                     showEventClickedPopUp(event);
                 },
                 eventDestroy(event, element, view) { },
-                eventDragStop: function (event, jsEvent) {
-                    var trash = jQuery('#trashCan');
-                    var ofs = trash.offset();
-                    var x1 = ofs.left;
-                    var x2 = ofs.left + trash.outerWidth(true);
-                    var y1 = ofs.top;
-                    var y2 = ofs.top + trash.outerHeight(true);
+                //eventDragStop: function (event, jsEvent) {
+                //    var trash = jQuery('#trashCan');
+                //    var ofs = trash.offset();
+                //    var x1 = ofs.left;
+                //    var x2 = ofs.left + trash.outerWidth(true);
+                //    var y1 = ofs.top;
+                //    var y2 = ofs.top + trash.outerHeight(true);
 
-                    if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 && jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
-                        deleteEvent(event);
-                    }
-                },
-                dragRevertDuration: 0,
+                //    if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 && jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
+                //        deleteEvent(event);
+                //    }
+                //},
+                //dragRevertDuration: 0,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     debugger;
                 }
             });
         }
     });
+}
+
+function showEventClickedPopUp(event) {
+    $("#eventInfoDialog").dialog({
+        autoOpen: false,
+        height: 400,
+        width: 400,
+        show: {
+            effect: "blind",
+            duration: 1000,
+        },
+        hide: {
+            effect: "explode",
+            duration: 1000
+        },
+    });
+
+    document.getElementById('eventTitle').innerHTML = "<p>Event Title: " + event.title + "</ br></p>";
+    document.getElementById('eventTopic').innerHTML = "<p>Event Topic: " + event.topic + "</ br></p>";
+    document.getElementById('eventStartDate').innerHTML = "<p>Start Time: " + event.start + "</ br></p>";
+    document.getElementById('eventEndDate').innerHTML = "<p>End Time: " + event.end + "</ br></p>";
+    document.getElementById('eventDescription').innerHTML = "<p>Event Description: " + event.description + "</ br></p>";
+
+    $('#eventInfoDialog').dialog('open');
+
 }

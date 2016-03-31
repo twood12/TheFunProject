@@ -251,8 +251,8 @@ function eventDropped(date, externalEvent) {
 function showEventClickedPopUp(event) {
     $("#eventForm").dialog({
         autoOpen: false,
-        height: 300,
-        width: 350,
+        height: 400,
+        width: 550,
         modal: true,
         buttons: {
             "Update Event": function () {

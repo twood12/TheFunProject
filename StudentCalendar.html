@@ -5,15 +5,17 @@
     <link rel="stylesheet" href="Content/themes/base/button.css" />
     <link rel="stylesheet" href="Content/themes/base/dialog.css" />
     <link rel="stylesheet" href="Content/themes/base/draggable.css" />
+    <link rel="stylesheet" href="Content/CalendarStyleSheet.css" />
     <link rel="stylesheet" href="Content/themes/base/all.css" />
     <link rel="stylesheet" href="Scripts/qTip/jquery.qtip.css" />
     <title>Student Calendar</title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <style>
         #calendar {
             float: left;
             width: 900px;
         }
+
         body {
             margin-top: 40px;
             text-align: center;
@@ -24,8 +26,28 @@
 </head>
 <body>
 
-    <div id="calendar"></div>
+    <div id="wrap">
+        <div id="external-events-wrapper">
+            <div id="external-events">
+                <h3>Event Legend</h3>
+                <div id="MC" class="fc-event MC">MC</div>
+                <div id="B-Boy" class="fc-event B-Boy">B-Boy</div>
+                <div id="DJ" class="fc-event DJ">DJ</div>
+                <div id="Graffiti" class="fc-event Graffiti">Graffiti</div>
+                <div id="CommunityService" class="fc-event Community-Service">Community Service</div>
+                <div id="General" class="fc-event General">General</div>
+            </div>
+        </div>
+        <div id="calendar"></div>
+    </div>
 
+    <div id="eventInfoDialog" title="Event Info">
+        <div id="eventTitle"></div>
+        <div id="eventTopic"></div>
+        <div id="eventStartDate"></div>
+        <div id="eventEndDate"></div>
+        <div id="eventDescription"></div>
+    </div>
     <script src="Scripts/jquery-2.2.1.js" type="text/javascript"></script>
     <script src="Scripts/moment.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery-ui-1.11.4.js" type="text/javascript"></script>
