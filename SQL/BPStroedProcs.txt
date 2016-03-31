@@ -69,4 +69,42 @@ BEGIN
 END
 GO
 
+--EnrollClassStoredProcedure
+
+USE [WBL]
+GO
+
+/****** Object:  StoredProcedure [dbo].[EnrollClass]    Script Date: 3/27/2016 9:59:23 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+--Exec EnrollClass 1, 1, 4, 23, 1
+
+Create Procedure EnrollClass (@CourseID int, @SectionID int, @TeacherID int, @StudentID int, @LocationID int)
+
+AS
+
+BEGIN
+
+insert into ClassSchedule(CourseID, SectionID, TeacherID, StudentID, LocationID) Values(@CourseID, @SectionID, @TeacherID, @StudentID, @LocationID)
+END
+
+
+
+GO
+
+--Exec UpdateAttendance 1, 1, 4, 23, 1, '03/28/2016'
+Create PROCEDURE [dbo].[UpdateAttendance] (@CourseID int, @SectionID int, @TeacherID int, @StudentID int, @Attended bit, @Date datetime)
+
+AS
+
+BEGIN
+
+Insert into ClassAttendance(CourseID, SectionID, TeacherID, StudentID, Attended, DateAttended) Values (@CourseID, @SectionID, @TeacherID, @StudentID, @Attended, @Date)
+END
+
 
