@@ -17,7 +17,7 @@
 
         <br />
         <asp:Label runat="server" Text="Choose a Teacher:" ></asp:Label>
-        <asp:DropDownList ID="ddTeacherEvaluations" runat="server" DataTextField="Name" DataSourceID="teacherEvalCommand" AutoPostBack="true" Visible="true">
+        <asp:DropDownList ID="ddTeacherEvaluations" runat="server" DataTextField="Name" DataSourceID="teacherEvalCommand" AutoPostBack="true" Visible="true" OnSelectedIndexChanged="ddTeacherEvaluations_SelectedIndexChanged">
         </asp:DropDownList>
         <br />
         <asp:Button runat="server" Text="Evaluate Teacher" ID="btnEvaluateTeacher" Visible="true" OnClick="btnEvaluateTeacher_Click" />

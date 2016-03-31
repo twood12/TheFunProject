@@ -31,12 +31,7 @@ public partial class WebPages_Student_WebPages_WBLStudentEvaluations : BasePage
 
             Session["stuEvaluationCourseID"] = courseID;
 
-            String selectedValueTeacher = ddTeacherEvaluations.SelectedValue;
-            int idPositionTeacher = ddTeacherEvaluations.SelectedValue.IndexOf('-');
-            String teacherIDString = ddTeacherEvaluations.SelectedValue.Substring(0, idPositionTeacher);
-            int teacherID = Convert.ToInt32(teacherIDString);
-
-            Session["stuEvaluationTeacherID"] = teacherID;
+            
         }
         catch(Exception ex)
         {
@@ -50,5 +45,23 @@ public partial class WebPages_Student_WebPages_WBLStudentEvaluations : BasePage
     protected void btnEvaluateTeacher_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/WebPages/Student_WebPages/WBLStudent2TeacherEvaluation1.aspx");
+    }
+
+    protected void ddTeacherEvaluations_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+
+            String selectedValueTeacher = ddTeacherEvaluations.SelectedValue;
+            int idPositionTeacher = ddTeacherEvaluations.SelectedValue.IndexOf('-');
+            String teacherIDString = ddTeacherEvaluations.SelectedValue.Substring(0, idPositionTeacher);
+            int teacherID = Convert.ToInt32(teacherIDString);
+
+            Session["stuEvaluationTeacherID"] = teacherID;
+        }
+        catch(Exception ex)
+        {
+
+        }
     }
 }
