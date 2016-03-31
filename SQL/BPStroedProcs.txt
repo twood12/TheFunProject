@@ -5,16 +5,18 @@
 CREATE PROCEDURE updateEvent( 
 	@EventID int,
 	@EventName varchar(50),
-	@EventDate datetime,
+	@EventStartDate datetime,
 	@EventTopic varchar(20),
+	@EventDescription varchar(300),
 	@EventEndDate datetime
 	)
 AS
 BEGIN
 	update Event
 	set EventName = @EventName,
-		EventDate = convert(varchar(30),cast(@EventDate as datetime),120),
+		EventStartDate = convert(varchar(30),cast(@EventStartDate as datetime),120),
 		EventEndDate = convert(varchar(30),cast(@EventEndDate as datetime),120),
+		EventDescription = @EventDescription,
 		EventTopic = @EventTopic
 	where 
 		EventID = @EventID
@@ -30,8 +32,8 @@ BEGIN
 end
 GO
 
-create procedure getAllEvents(
-)
+create procedure getAllEvents
+
 as
 BEGIN
 select * from Event
@@ -39,19 +41,21 @@ end
 GO
 
 CREATE PROCEDURE insertEvent( 
-	@EventName varchar(50),
-	@EventDate datetime,
-	@EventTopic varchar(20) = null,
+	@EventName varchar(50) = null,
+	@EventStartDate datetime,
+	@EventTopic varchar(20),
+	@EventDescription varchar(300) = null,
 	@EventEndDate datetime
 	)
 AS
 BEGIN
-	insert into Event(EventName,EventDate,EventEndDate,EventTopic)
+	insert into Event(EventName,EventStartDate,EventEndDate,EventTopic,EventDescription)
 		values(
 	    @EventName,
-		convert(varchar(30),cast(@EventDate as datetime),120),
+		convert(varchar(30),cast(@EventStartDate as datetime),120),
 		convert(varchar(30),cast(@EventEndDate as datetime),120),
-		@EventTopic
+		@EventTopic,
+		@EventDescription
 		)
 END
 GO

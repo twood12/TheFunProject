@@ -205,7 +205,9 @@ foreign key (StudentID) references Student(StudentID));
 create table Event(
 EventID int identity(1,1) primary key,
 EventName varchar(50),
-EventDate datetime,
+EventStartDate datetime,
+EventEndDate datetime,
+EventDescription varchar(300),
 EventTopic varchar(20));
 
 create table EventAttendance(
