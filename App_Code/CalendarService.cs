@@ -45,7 +45,8 @@ public class CalendarService : System.Web.Services.WebService
                     eventEndDate = reader["EventEndDate"].ToString(),
                     eventDescription = reader["EventDescription"].ToString(),
                     eventID = Int32.Parse(reader["EventID"].ToString()),
-                    eventTopic = reader["EventTopic"].ToString()
+                    eventTopic = reader["EventTopic"].ToString(),
+                    eventPlaceID = reader["EventPlaceID"].ToString()
                 });
             }
         }
@@ -94,6 +95,7 @@ public class CalendarService : System.Web.Services.WebService
             cmdInsert.Parameters.AddWithValue("@EventTopic", eventData.eventTopic);
             cmdInsert.Parameters.AddWithValue("@EventEndDate", eventData.eventEndDate);
             cmdInsert.Parameters.AddWithValue("@EventDescription", eventData.eventDescription);
+            cmdInsert.Parameters.AddWithValue("@EventPlaceID", eventData.eventPlaceID);
             sc.Open();
             cmdInsert.ExecuteNonQuery();
             sc.Close();
@@ -117,6 +119,7 @@ public class CalendarService : System.Web.Services.WebService
 
         return true;
     }
+
 
     [WebMethod]
     public int getMaxEventID()

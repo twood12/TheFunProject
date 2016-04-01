@@ -4,6 +4,7 @@
 });
 
 var maxEventID;
+var placeSearch, autoComplete, place;
 
 function displayCalendar() {
     $.ajax({
@@ -31,7 +32,6 @@ function displayCalendar() {
                 defaultTimedEventDuration: '01:00:00',
                 forceEventDuration: true,
                 eventTextColor: 'White',
-                //eventBackgroundColor: 'Purple',
                 events:
                 $.map(data.d, function (item, i) {
                     console.log(item);
@@ -42,15 +42,16 @@ function displayCalendar() {
                     event.end = new Date(item.eventEndDate),
                     event.title = item.eventTitle,
                     event.description = item.eventDescription,
+                    event.placeID = item.eventPlaceID,
                     event.topic = item.eventTopic,
                     event.allDay = false;
                     console.log(event);
                     return event;
                 }),
                 eventRender: function (event, element) {
-                    //element.attr("Topic", event.description),
                     element.qtip({
-                        content: event.title + "<br>" + event.start.format('MM-DD h:mm') + " - " + event.end.format('MM-DD h:mm'),
+                        content: event.title + "<br>" + event.start.format('MM-DD h:mm') + " - " +
+                            event.end.format('MM-DD h:mm'),
                         position: { corner: { tootltip: 'bottomLeft', target: 'topRight' } },
                         style: {
                             border: {
@@ -66,9 +67,7 @@ function displayCalendar() {
 
                     switch (event.topic) {
                         case 'MC':
-                            //element.children('.fc-event-inner').css({ 'background-color': 'magenta' });
                             element.addClass('MC');
-                            //event.className = 'magenta';
                             break;
                         case 'B-Boy':
                             element.addClass('B-Boy');
@@ -95,7 +94,6 @@ function displayCalendar() {
                 },
                 eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
                     if ($(this).data("qtip")) $(this).qtip('destroy');
-                    //alert(event.title + " end time is now " + event.end.format('YYYY-MM-DD h:mm:ss'));
                     if (!confirm("Are you sure you want to change " + event.title + "'s time to "
                         + event.end.format('YYYY-MM-DD h:mm:ss'))) {
                         revertFunc();
@@ -122,9 +120,6 @@ function displayCalendar() {
                 drop: function (date) {
                     eventDropped(date, this);
                 },
-                //eventReceive: function (event) {
-                //    updateEvent(event);
-                //},
                 eventClick: function (event) {
                     showEventClickedPopUp(event);
                 },
@@ -157,6 +152,7 @@ function updateEvent(event) {
     eventToSave.eventStartDate = event.start.format('YYYY-MM-DD h:mm:ss');
     eventToSave.eventEndDate = event.start.add(1, 'h').format('YYYY-MM-DD h:mm:ss');
     eventToSave.eventTopic = event.topic,
+    eventToSave.eventPlaceID = event.placeID;
     eventToSave.eventDescription = event.description;
 
     $.ajax({
@@ -183,7 +179,7 @@ function intDroppables() {
         $(this).data('event', {
             topic: $(this).text(),
             title: $(this).text(),
-            stick: false 
+            stick: false
         });
         $(this).draggable({
             zIndex: 999,
@@ -191,11 +187,6 @@ function intDroppables() {
             help: "clone",
             revertDuration: 0
         });
-        //var eventObject = {
-        //    topic: $(this).text(),
-        //    //stick: true
-        //};
-        //$(this).data('eventObject', eventObject);
     });
 }
 function intExternalEvents() {
@@ -236,16 +227,13 @@ function eventDropped(date, externalEvent) {
     copiedEventObject.start = date;
     copiedEventObject.end = endDate;
     copiedEventObject.allDay = false;
+    copiedEventObject.placeID = place.place_id;
     copiedEventObject.title = event_object.title;
     copiedEventObject.description = event_object.description;
     updateEvent(copiedEventObject);
     $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
     $('#calendar').fullCalendar('rerenderEvents');
-
-    //copiedEventObject.title = $(externalEvent).data('title');
-    //copiedEventObject.description = $(externalEvent).data('description');
-    //copiedEventObject.title = $('#txtExternalEventTitle').val();
-    //copiedEventObject.description = $('#txtExternalEventDescription').val();
+    place = "";
 }
 
 function showEventClickedPopUp(event) {
@@ -338,23 +326,8 @@ function addEventFromDialog() {
     var topic;
     var e = document.getElementById("ddlEventTopic");
     topic = e.options[e.selectedIndex].value;
-    //$("#ddlEventTopic").change(function (event) {
-    //    topic = $("ddlEventTopic option:selected").text();
-    //})
-    //$('#eventForm #ddlEventTopic').selectmenu({
-    //    select: function (event, ui) {
-    //        eventToSave.eventTopic = event.topic = $('#eventForm #ddlEventTopic').val();
-    //    },
-    //    change: function (event, ui) {
-    //        eventToSave.eventTopic = event.topic = $('#eventForm #ddlEventTopic').val();
-    //    }
-    //    });
-    //eventToSave.eventID = event.id = getNewID();
-
     eventToSave.eventTitle = event.title = $('#txtEventTitle').val();
-    //event.start = $('#txtEventStartDate').val();
     eventToSave.eventStartDate = event.start = moment(new Date($("#eventForm #txtEventStartDate").val()));
-    //event.end = $('#txtEventEndDate').val();
     eventToSave.eventEndDate = event.end = moment(new Date($("#eventForm #txtEventEndDate").val()));
     eventToSave.eventDescription = event.description = $('#txtEventDescription').val();
     eventToSave.eventTopic = event.topic = topic;
@@ -368,10 +341,6 @@ function addEventFromDialog() {
         url: "CalendarService.asmx/updateEvent",
         dataType: "json",
         success: function () {
-            //$('#calendar').fullCalendar('refetchEvents');
-            //$('#calendar').fullCalendar('renderEvent', eventToSave, true);
-            //$('#calendar').fullCalendar('renderEvent', eventToSave, true);
-            //$('#calendar').fullCalendar('refetchEvents');
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             debugger;
@@ -398,6 +367,31 @@ function updateEventSource(data) { // delete?
     });
     $('#calendar').fullCalendar('addEventSource', events);
     $('#eventForm').dialog('close');
+}
+
+function initAutoComplete() {
+    autoComplete = new google.maps.places.Autocomplete((document.getElementById('txtLocation')), { types: ['geocode'] });
+    autoComplete.addListener('place_changed', savePlaceID);
+}
+
+function savePlaceID() {
+    place = autoComplete.getPlace();
+}
+
+function geoLocate() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var geoLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+                center: geoLocation,
+                radius: position.coords.accuracy
+            });
+            autoComplete.setBounds(circle.getBounds());
+        });
+    }
 }
 
 function onSuccess(response) {
