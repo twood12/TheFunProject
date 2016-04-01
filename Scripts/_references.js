@@ -3,6 +3,7 @@
 /// <reference path="CalendarScript.js" />
 /// <reference path="fullcalendar.js" />
 /// <reference path="gcal.js" />
+/// <reference path="geolocation.js" />
 /// <reference path="GoogleMaps.js" />
 /// <reference path="jquery-1.11.3.js" />
 /// <reference path="jquery-2.2.1.js" />

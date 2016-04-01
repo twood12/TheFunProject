@@ -15,6 +15,7 @@ public class Event
     public int eventID { get; set; }
     //private bool allDay { get; set; }
     public String eventTopic { get; set; } 
+    public string eventPlaceID { get; set; }
 
     public Event()
     {
