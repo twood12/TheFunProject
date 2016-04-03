@@ -81,6 +81,7 @@ public class CalendarService : System.Web.Services.WebService
             cmdUpdate.Parameters.AddWithValue("@EventTopic", eventData.eventTopic);
             cmdUpdate.Parameters.AddWithValue("@EventEndDate", eventData.eventEndDate);
             cmdUpdate.Parameters.AddWithValue("@EventDescription", eventData.eventDescription);
+            cmdUpdate.Parameters.AddWithValue("@EventPlaceID", eventData.eventPlaceID);
             sc.Open();
             cmdUpdate.ExecuteNonQuery();
             sc.Close();
