@@ -11,4 +11,9 @@ public partial class WebPages_Teacher_WebPages_WBLTeacherReports : BasePage
     {
 
     }
+
+    protected void btnAttedanceReport_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/WebPages/Teacher_WebPages/WBLTeacherAttendanceReport.aspx");
+    }
 }

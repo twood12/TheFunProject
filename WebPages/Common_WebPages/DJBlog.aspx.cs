@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 
 
-public partial class DJBlog : System.Web.UI.Page
+public partial class DJBlog : BasePage
 {
     protected void Page_PreInit(Object sender, EventArgs e)
     {

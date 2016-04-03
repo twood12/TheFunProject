@@ -10,5 +10,12 @@
              Text="Individual Course" />
 
     </div>
+
+    <form id="frmCourse" runat="server">
+        <asp:Button ID="btnAvailableCourses" Text="Enroll" runat="server" OnClick="btnAvailableCourses_Click"  />
+
+
+
+    </form>
 </asp:Content>
 

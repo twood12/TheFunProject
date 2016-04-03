@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class breakingBlog : System.Web.UI.Page
+public partial class breakingBlog : BasePage
 {
     protected void Page_PreInit(Object sender, EventArgs e)
     {

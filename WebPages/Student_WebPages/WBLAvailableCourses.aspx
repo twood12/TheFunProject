@@ -1,23 +1,31 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLStudentMasterPage.master" AutoEventWireup="true" CodeFile="WBLIndividualCourse.aspx.cs" Inherits="WebPages_Student_WebPages_WBLIndividualCourse" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLStudentMasterPage.master" AutoEventWireup="true" CodeFile="WBLAvailableCourses.aspx.cs" Inherits="WebPages_Student_WebPages_WBLAvailableCourses" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-        
     <body>
     <form id="form1" runat="server">
     <div>
-        <p>This is the individual course page. Here the student can access materials related to a specific course.</p>
         <table>
       
-       <tr><td><h3>Course Home Page</h3></td></tr>
+            
+            
+       <tr><td><h3>Student Class Enrollment</h3></td></tr>
        <tr><td>Course: </td><td><asp:DropDownList ID="ddCourse" runat="server" DataTextField="CourseName" ></asp:DropDownList></td></tr>
+       <tr><td>Teacher: </td><td><asp:DropDownList ID="ddTeacher" runat="server" DataTextField="Teacher" ></asp:DropDownList></td></tr>
+       <tr><td>Difficulty Level:</td><td><asp:DropDownList ID="ddDifficultyLevel" runat="server" DataTextField="Difficulty" ></asp:DropDownList></td></tr>
+       <tr><td>
+           <asp:Button ID="Button1" runat="server" OnClick="Reset_Click" Text="Reset" />
+           <asp:Button ID="btnEnter" runat="server" Text="Enter" OnClick="btnEnter_Click"/></td></tr> 
+       
      </table>
        
+    
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" 
-                    AllowPaging="true" DataKeyNames="CourseID" PageSize="5" PagerSettings-Mode="Numeric" 
-                    EmptyDataText="No Courses Available">
-             <Columns> 
+  AllowPaging="true" DataKeyNames="CourseID" OnPageIndexChanging="PaginateTheData" 
+  PageSize="5" PagerSettings-Mode="Numeric" 
+  OnRowDataBound="ReSelectSelectedRecords" EmptyDataText="No Courses Available">
+    <Columns> 
                 <asp:TemplateField HeaderText="Select"> 
                     <ItemTemplate> 
                         <asp:CheckBox ID="chkSelect" runat="server" /> 
@@ -43,11 +51,13 @@
             </Columns>  
         </asp:GridView> 
 
-   
-           </div>
+    <asp:Button ID="btnGetSelected" runat="server" 
+   Text="Enroll" OnClick="Enroll_Click" />
+  
+      
+    </div>
     </form>
   
 </body>
-  
 </asp:Content>
 
