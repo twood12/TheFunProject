@@ -69,7 +69,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
         using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
         {
             // write the sql statement to execute 
-            string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cp.StartDate, cp.EndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassSchduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID JOIN CoursePlan cp on cp.CourseID = c.courseID";
+            string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID";
             // instantiate the command object to fire 
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
