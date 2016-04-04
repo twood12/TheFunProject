@@ -1,15 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLStudentMasterPage.master" AutoEventWireup="true" CodeFile="WBLStudentProfile.aspx.cs" Inherits="NestedMasterPages_WBLStudentProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link runat="server" rel="stylesheet" href="~/Content/fullcalendar.css" />
+<%--    <link runat="server" rel="stylesheet" href="~/Content/fullcalendar.css" />
     <link runat="server" rel="stylesheet" href="~/Content/themes/base/button.css" />
     <link runat="server" rel="stylesheet" href="~/Content/themes/base/dialog.css" />
     <link runat="server" rel="stylesheet" href="~/Content/themes/base/draggable.css" />
     <link runat="server" rel="stylesheet" href="~/Content/CalendarStyleSheet.css" />
     <link runat="server" rel="stylesheet" href="~/Content/themes/base/all.css" />
-    <link runat="server" rel="stylesheet" href="~/Scripts/qTip/jquery.qtip.css" />
+    <link runat="server" rel="stylesheet" href="~/Scripts/qTip/jquery.qtip.css" />--%>
 
-    <%: System.Web.Optimization.Styles.Render("~/Content/themes/base/css") %>
+    <%: System.Web.Optimization.Styles.Render("~/Content/css") %>
 
     <style>
         #map {

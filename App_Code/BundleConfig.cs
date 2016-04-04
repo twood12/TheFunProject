@@ -27,21 +27,32 @@ public class BundleConfig
             "~/Scripts/qTip/jquery.qtip.js",
             "~/Scripts/StudentCalendarScript.js",
             "~/Scripts/geolocation.js"
-
-
             ));
 
-        bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+        bundles.Add(new ScriptBundle("~/bundles/adminCalendar").Include(
+           "~/Scripts/jquery-2.2.1.js",
+           "~/Scripts/moment.js",
+           "~/Scripts/jquery-ui-1.11.4.js",
+           "~/Scripts/fullcalendar.js",
+           "~/Scripts/qTip/jquery.qtip.js",
+           "~/Scripts/CalendarScript.js",
+           "~/Scripts/geolocation.js"
+           ));
+
+
+        bundles.Add(new StyleBundle("~/Content/css").Include(
             "~/Content/fullcalendar.css",
             "~/Content/themes/base/button.css",
             "~/Content/themes/base/dialog.css",
             "~/Content/themes/base/draggable.css",
             "~/Content/CalendarStyleSheet.css",
+            "~/Content/themes/base/theme.css",
+            "~/Content/themes/base/base.css",
             "~/Content/themes/base/all.css",
             "~/Scripts/qTip/jquery.qtip.css"
             ));
 
-        BundleTable.EnableOptimizations = true;
+        BundleTable.EnableOptimizations = false;
 
         // Order is very important for these files to work, they have explicit dependencies
         bundles.Add(new ScriptBundle("~/bundles/MsAjaxJs").Include(
