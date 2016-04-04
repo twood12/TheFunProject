@@ -11,7 +11,7 @@ function displayCalendar() {
         type: "POST",
         contentType: 'application/json; charset=utf-8',
         data: "{}",
-        url: "CalendarService.asmx/getEventList",
+        url: "/CalendarService.asmx/getEventList",
         dataType: "json",
         success: function (data) {
             $('#calendar').fullCalendar({
@@ -123,7 +123,7 @@ function displayCalendar() {
                 eventClick: function (event) {
                     showEventClickedPopUp(event);
                 },
-                eventDestroy(event, element, view) { },
+                eventDestroy: function (event, element, view) { },
                 eventDragStop: function (event, jsEvent) {
                     var trash = jQuery('#trashCan');
                     var ofs = trash.offset();
@@ -159,7 +159,7 @@ function updateEvent(event) {
         type: "POST",
         contentType: "application/json",
         data: "{eventData:" + JSON.stringify(eventToSave) + "}",
-        url: "CalendarService.asmx/updateEvent",
+        url: "/CalendarService.asmx/updateEvent",
         dataType: "json",
         success: function () {
             $('#calendar').fullCalendar('refetchEvents');
@@ -203,7 +203,7 @@ function deleteEvent(event) {
         type: "POST",
         contentType: "application/json",
         data: "{eventData:" + JSON.stringify(eventToDelete) + "}",
-        url: "CalendarService.asmx/deleteEvent",
+        url: "/CalendarService.asmx/deleteEvent",
         dataType: "json",
         success: function () {
             $('#calendar').fullCalendar('removeEvents', event.id);
@@ -286,8 +286,8 @@ function showDroppedEventPopUp(event) { // currently not used 3/30
 function showPopUp(start, end) {
     $("#eventForm").dialog({
         autoOpen: false,
-        height: 300,
-        width: 350,
+        height: 400,
+        width: 450,
         modal: true,
         buttons: {
             "Add Event": function () {
@@ -314,7 +314,7 @@ function clearTextBoxes() {
     $("#eventForm").dialog('close');
 }
 function getNewID() {
-    $.get("CalendarService.asmx/getMaxEventID", function (data) {
+    $.get("/CalendarService.asmx/getMaxEventID", function (data) {
         maxEventID = data;
     });
     return maxEventID;
@@ -338,7 +338,7 @@ function addEventFromDialog() {
         type: "POST",
         contentType: "application/json",
         data: "{eventData:" + JSON.stringify(eventToSave) + "}",
-        url: "CalendarService.asmx/updateEvent",
+        url: "/CalendarService.asmx/updateEvent",
         dataType: "json",
         success: function () {
         },
