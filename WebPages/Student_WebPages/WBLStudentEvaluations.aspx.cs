@@ -13,8 +13,13 @@ public partial class WebPages_Student_WebPages_WBLStudentEvaluations : BasePage
         {
             //ddTeacherEvaluations.DataBind();
             ddStudentCourseList.DataBind();
-            ddStudentCourseList.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+            ddStudentCourseList.Items.Insert(0, " ");
             ddStudentCourseList.SelectedIndex = 0;
+
+            ddTeacherEvaluations.DataBind();
+            ddTeacherEvaluations.Items.Insert(0, " ");
+            ddTeacherEvaluations.SelectedIndex = 0;
+
         }
             
     }
@@ -57,7 +62,11 @@ public partial class WebPages_Student_WebPages_WBLStudentEvaluations : BasePage
             String teacherIDString = ddTeacherEvaluations.SelectedValue.Substring(0, idPositionTeacher);
             int teacherID = Convert.ToInt32(teacherIDString);
 
+            String teacherName = ddTeacherEvaluations.SelectedValue.Substring((idPositionTeacher + 1));
+
+
             Session["stuEvaluationTeacherID"] = teacherID;
+            Session["stuTeachName"] = teacherName;
         }
         catch(Exception ex)
         {
