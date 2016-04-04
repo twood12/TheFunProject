@@ -40,7 +40,7 @@ public partial class LoginPage : BasePage
         String pwHash = "";
         e.Authenticated = false;
 
-        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;

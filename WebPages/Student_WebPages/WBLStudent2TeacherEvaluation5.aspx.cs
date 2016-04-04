@@ -23,6 +23,7 @@ public partial class WebPages_Student_WebPages_WBLStudent2TeacherEvaluation5 : B
         String sqlQuery = "";
         String sqlQuery1 = "";
         String sqlQuery2 = "";
+        String sqlQuery3 = "";
         int maxEvaluationID = -1;
 
         String stuTeacherStrength = txtTeachersStrengths.Text;
@@ -50,13 +51,26 @@ public partial class WebPages_Student_WebPages_WBLStudent2TeacherEvaluation5 : B
             maxEvaluationID = getEvaluationIDValue();
             Response.Write(maxEvaluationID);
 
-            sqlQuery1 = "EXEC [dbo].[InsertCourseEvaluation] " + maxEvaluationID + ", " + Session["stuEvaluationTeacherID"] + ", " + Session["MemberID"] + ", " + Session["stuHearAboutClass"] + ", " + Session["stuSafety"] + ", " + Session["stuSafetyDesc"] + ", " + Session["stuSkills"] + ", " + Session["stuNewThings"]
+
+            sqlQuery1 = "EXEC [dbo].[InsertCourseEvaluation] " + maxEvaluationID + ", " + Session["stuEvaluationTeacherID"] + ", " + Session["MemberID"] + ", '" + Session["stuHearAboutClass"] + "', '" + Session["stuSafety"] + "', '" + Session["stuSafetyDesc"] + "', '" + Session["stuSkills"] + "', " + Session["stuNewThings"]
                 + ", " + Session["stuLearn"] + ", " + Session["stuMediums"] + ", " + Session["stuMakeFriends"] + ", " + Session["stuMotivationNew"] + ", " + Session["stuHappy"] + ", " + Session["stuFuture"] + ", " + Session["stuWorkArtists"] + ", " + Session["stuStress"] + ", " + Session["stuRespect"]
                 + ", " + Session["stuNegativity"] + ", " + Session["stuCreative"] + ", " + Session["stuCareers"] + ", " + Session["stuCareerGoals"] + ", " + Session["stuCommunity"] + ", " + Session["stuGrowth"] + ", " + Session["stuFinishSchool"] + ", " + Session["stuFindJob"];
             
             Response.Write(sqlQuery1);
 
             sendDBCommand(sqlQuery1);
+
+            sqlQuery2 = "EXEC [dbo].[InsertTeacherEvaluation] " + maxEvaluationID + ", " + Session["stuEvaluationTeacherID"] + ", " + Session["MemberID"] + ", " + Session["stuTeacherAttendance"] + ", " + Session["stuTeacherConsistent"] + ", " + Session["stuTeacherManage"] + ", " + Session["stuTeacherOrganized"] + ", " + Session["stuTeacherFeedback"]
+                + ", " + Session["stuTeacherFostered"] + ", " + Session["stuTeacherChallenge"] + ", " + Session["stuTeacherActivities"] + ", " + Session["stuTeacherJob"] + ", " + Session["stuTeacherSupport"] + ", '" + stuTeacherStrength + "', '" + stuTeacherImprovements + "', '" + studentGradeComment + "', '" + stuTeacherAdditional + "'";
+
+            Response.Write(sqlQuery2);
+            sendDBCommand(sqlQuery2);
+
+            sqlQuery3 = "EXEC [dbo].[InsertStudentSelfEvaluation] " + maxEvaluationID + ", " + Session["stuEvaluationTeacherID"] + ", " + Session["MemberID"] + ", '" + stuClassParticipation + "', '" + stuClassCity + "', " + stuClassRecognition + ", " + stuClassTech + ", " + stuClassMixing + ", " + stuClassScratching + ", " + stuClassProfessional + ", " + stuClassPresentation;
+
+            Response.Write(sqlQuery3);
+
+            sendDBCommand(sqlQuery3);
 
         }
         catch (Exception ex)

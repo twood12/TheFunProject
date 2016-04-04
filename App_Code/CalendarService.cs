@@ -25,7 +25,7 @@ public class CalendarService : System.Web.Services.WebService
     {
         SqlDataReader reader;
         List<Event> eventList = new List<Event>();
-        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
@@ -45,7 +45,8 @@ public class CalendarService : System.Web.Services.WebService
                     eventEndDate = reader["EventEndDate"].ToString(),
                     eventDescription = reader["EventDescription"].ToString(),
                     eventID = Int32.Parse(reader["EventID"].ToString()),
-                    eventTopic = reader["EventTopic"].ToString()
+                    eventTopic = reader["EventTopic"].ToString(),
+                    eventPlaceID = reader["EventPlaceID"].ToString()
                 });
             }
         }
@@ -60,7 +61,7 @@ public class CalendarService : System.Web.Services.WebService
     {
         List<Event> eventList = new List<Event>();
         SqlDataReader reader;
-        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
@@ -80,6 +81,7 @@ public class CalendarService : System.Web.Services.WebService
             cmdUpdate.Parameters.AddWithValue("@EventTopic", eventData.eventTopic);
             cmdUpdate.Parameters.AddWithValue("@EventEndDate", eventData.eventEndDate);
             cmdUpdate.Parameters.AddWithValue("@EventDescription", eventData.eventDescription);
+            cmdUpdate.Parameters.AddWithValue("@EventPlaceID", eventData.eventPlaceID);
             sc.Open();
             cmdUpdate.ExecuteNonQuery();
             sc.Close();
@@ -94,6 +96,7 @@ public class CalendarService : System.Web.Services.WebService
             cmdInsert.Parameters.AddWithValue("@EventTopic", eventData.eventTopic);
             cmdInsert.Parameters.AddWithValue("@EventEndDate", eventData.eventEndDate);
             cmdInsert.Parameters.AddWithValue("@EventDescription", eventData.eventDescription);
+            cmdInsert.Parameters.AddWithValue("@EventPlaceID", eventData.eventPlaceID);
             sc.Open();
             cmdInsert.ExecuteNonQuery();
             sc.Close();
@@ -104,7 +107,7 @@ public class CalendarService : System.Web.Services.WebService
     [WebMethod]
     public bool deleteEvent(Event eventData)
     {
-        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
@@ -117,6 +120,7 @@ public class CalendarService : System.Web.Services.WebService
 
         return true;
     }
+
 
     [WebMethod]
     public int getMaxEventID()
