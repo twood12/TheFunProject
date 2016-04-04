@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Common Master Page</title>
-    
+    <%: System.Web.Optimization.Styles.Render("~/Content/Master/css") %>
     <asp:ContentPlaceHolder id="head" runat="server">
         <meta name="description" content="Welcome to the Words, Beats, and Life System." />
         

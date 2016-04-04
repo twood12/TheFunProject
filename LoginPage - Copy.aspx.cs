@@ -82,7 +82,7 @@ public partial class LoginPage : BasePage
 
         else if ((string)Session["MemberType"] == "Admin")
         {
-            Login.DestinationPageUrl = "~/WebPages/Admin_WebPages/AdminHome.aspx";
+            Login.DestinationPageUrl = "~/WebPages/Admin_WebPages/SearchEngine.aspx";
         }
     }
 }

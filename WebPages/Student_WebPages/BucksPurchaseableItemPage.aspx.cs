@@ -16,8 +16,52 @@ public partial class WebPages_Student_WebPages_BucksPurchaseableItemPage : Syste
     protected void PurchaseItem_Click(object sender, EventArgs e)
     {
 
+        int balance = Convert.ToInt32(FormView5.SelectedValue);
+        int price = Convert.ToInt32(FormView2.SelectedValue);
+
+        if (price < balance)
+        {
+
+            string sql = "Exec UpdateBuckAccount " + FormView5.SelectedValue + ", " + FormView2.SelectedValue + ", " + FormView1.SelectedValue;
+            sendDBCommand(sql);
+            System.Windows.Forms.MessageBox.Show("You're teacher has been notify about your purchase. Your bucks have been removed and you will recieve your item soon", "Important Message");
+        }
+        else
+        {
+            System.Windows.Forms.MessageBox.Show("You don't have enough Bucks to purchase this");
+        }
 
 
-        System.Windows.Forms.MessageBox.Show("You're teacher has been notify about your purchase. Your bucks have been removed and you will recieve your item soon", "Important Message");
+
+    }
+
+    private void GetData()
+    {
+
+    }
+
+    private decimal calcBalance(decimal ab, decimal ip)
+    {
+        ab -= ip;
+        return ab;
+    }
+
+    public void sendDBCommand(String sqlQuery)
+    {
+        try
+        {
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = @"Server=LocalHost;Database=WBL;Trusted_Connection=Yes;";
+
+            sc.Open();
+            System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+            insert.Connection = sc;
+            insert.CommandText = sqlQuery;
+            insert.ExecuteNonQuery();
+        }
+        catch (Exception)
+        {
+        }
+
     }
 }
