@@ -19,10 +19,10 @@ public partial class NestedMasterPages_WBLTeacherProfile : BasePage
     {
         DataTable table = new DataTable();
         // get the connection 
-        using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
+        using (SqlConnection conn = new SqlConnection(@"Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
         {
             // write the sql statement to execute 
-            string sql = "select cs.TeacherID, m.FirstName, m.LastName, c.CourseID, c.CourseName, sec.SectionID, sec.MeetingDays, sec.MeetingTime,sec.RoomNumber from ClassSchedule cs JOIN Course c on c.courseID = cs.CourseID JOIN Section sec on sec.SectionID = cs.SectionID JOIN staff st on st.StaffID = cs.TeacherID JOIN member m on m.memberID = cs.TeacherID";
+            string sql = "select distinct cs.TeacherID, m.FirstName, m.LastName, c.CourseID, c.CourseName, sec.SectionID, sec.MeetingDays, sec.MeetingTime,sec.RoomNumber from ClassSchedule cs JOIN Course c on c.courseID = cs.CourseID JOIN Section sec on sec.SectionID = cs.SectionID JOIN staff st on st.StaffID = cs.TeacherID JOIN member m on m.memberID = cs.TeacherID AND M.MemberID = " + Session["MemberID"];
             //Response.Write(sql);
             // instantiate the command object to fire 
             using (SqlCommand cmd = new SqlCommand(sql, conn))

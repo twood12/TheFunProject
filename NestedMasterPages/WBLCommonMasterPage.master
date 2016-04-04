@@ -5,8 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Common Master Page</title>
+    
     <asp:ContentPlaceHolder id="head" runat="server">
         <meta name="description" content="Welcome to the Words, Beats, and Life System." />
+        
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
+        <link rel="stylesheet" href="GlobalStyleSheet.css" type="text/css" />
     </asp:ContentPlaceHolder>
 </head>
 
@@ -17,6 +22,10 @@
              <asp:HyperLink ID="lnkCommunity" runat="server" 
              NavigateUrl="~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx" 
              Text="Community" />
+
+            <asp:HyperLink ID="lnkEmail" runat="server" 
+             NavigateUrl="~/WebPages/Common_WebPages/inbox.aspx" 
+             Text="Inbox" />
         </div>
         </header>
     

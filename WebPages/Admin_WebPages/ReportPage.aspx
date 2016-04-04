@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" AutoEventWireup="true" CodeFile="ReportPage.aspx.cs" Inherits="WebPages_Admin_WebPages_ReportPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" AutoEventWireup="true" CodeFile="ReportPage.aspx.cs" Inherits="WebPages_Admin_WebPages_ReportPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
