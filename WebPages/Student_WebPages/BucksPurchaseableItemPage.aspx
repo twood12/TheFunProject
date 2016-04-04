@@ -22,16 +22,41 @@ html {background-color: black}
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <body>
-    <a href="WBLStudentBucks.aspx">Bucks Home Page</a>
+    <a href="BucksHomePage.aspx" style="color: white">Bucks Home Page</a>
      <h2>Bucks Item Description</h2>
     <form id="form1" runat="server">
-        Student Balance
+        Student Account Number
     <div>
     <asp:FormView ID="FormView1" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" DataKeyNames="AccountNumber" DataSourceID="SqlDataSource1">
             <EditItemTemplate>
                 AccountNumber:
                 <asp:Label ID="AccountNumberLabel1" runat="server" Text='<%# Eval("AccountNumber") %>' />
                 <br />
+                <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+                &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+            </EditItemTemplate>
+            <EditRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
+            <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+            <InsertItemTemplate>
+                <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+            </InsertItemTemplate>
+            <ItemTemplate>
+                AccountNumber:
+                <asp:Label ID="AccountNumberLabel" runat="server" Text='<%# Eval("AccountNumber") %>' />
+                <br />
+
+            </ItemTemplate>
+            <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
+        </asp:FormView>
+        <div style="margin-left: 601px">
+        <asp:Label ID="Description" runat="server" Text="Description" ></asp:Label>
+            </div>
+        Student Account Balance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:FormView ID="FormView5" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" DataKeyNames="AccountBalance" DataSourceID="SqlDataSource5">
+            <EditItemTemplate>
                 AccountBalance:
                 <asp:TextBox ID="AccountBalanceTextBox" runat="server" Text='<%# Bind("AccountBalance") %>' />
                 <br />
@@ -49,9 +74,6 @@ html {background-color: black}
                 &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
             </InsertItemTemplate>
             <ItemTemplate>
-                AccountNumber:
-                <asp:Label ID="AccountNumberLabel" runat="server" Text='<%# Eval("AccountNumber") %>' />
-                <br />
                 AccountBalance:
                 <asp:Label ID="AccountBalanceLabel" runat="server" Text='<%# Bind("AccountBalance") %>' />
                 <br />
@@ -60,17 +82,13 @@ html {background-color: black}
             <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
             <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
         </asp:FormView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT [AccountNumber], [AccountBalance] FROM [BuckAccount] WHERE ([StudentID] = @StudentID)">
-            <SelectParameters>
-                <asp:SessionParameter Name="StudentID" SessionField="MemberID" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
-        <div style="margin-left: 601px">
-        <asp:Label ID="Description" runat="server" Text="Description" ></asp:Label>
-            </div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
         <div style="margin-left: 601px">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT [AccountNumber] FROM [BuckAccount] WHERE ([StudentID] = @MemberID)">
+            <SelectParameters>
+                    <asp:SessionParameter  Name="MemberID" SessionField="MemberID" Type="Int32" />
+                </SelectParameters>
+        </asp:SqlDataSource>
         <asp:FormView ID="FormView4" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataSourceID="SqlDataSource4" ForeColor="Black" GridLines="Both">
             <EditItemTemplate>
                 Description:
@@ -145,7 +163,7 @@ html {background-color: black}
         <br />
         <br />
         Price<br />
-        <asp:FormView ID="FormView2" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" DataSourceID="SqlDataSource2">
+        <asp:FormView ID="FormView2" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" DataKeyNames="ItemPrice" DataSourceID="SqlDataSource2">
             <EditItemTemplate>
                 ItemPrice:
                 <asp:TextBox ID="ItemPriceTextBox" runat="server" Text='<%# Bind("ItemPrice") %>' />
@@ -182,6 +200,11 @@ html {background-color: black}
         <p>
             &nbsp;</p>
         <p>
+            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT [AccountBalance] FROM [BuckAccount] WHERE ([StudentID] = @MemberID)">
+                <SelectParameters>
+                    <asp:SessionParameter  Name="MemberID" SessionField="MemberID" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
         <asp:button id="PurchaseItem" runat="server" text="Purchase Item" style="margin-left: 1198px" OnClick="PurchaseItem_Click" />
         </p>
     </form>

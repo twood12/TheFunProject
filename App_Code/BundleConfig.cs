@@ -39,6 +39,10 @@ public class BundleConfig
            "~/Scripts/geolocation.js"
            ));
 
+        bundles.Add(new ScriptBundle("~/Content/Master/css").Include(
+            "~/Content/GlobalStyleSheet.css"
+            ));
+
 
         bundles.Add(new StyleBundle("~/Content/css").Include(
             "~/Content/fullcalendar.css",
