@@ -72,6 +72,9 @@ public partial class WebPages_Student_WebPages_WBLStudent2TeacherEvaluation5 : B
 
             sendDBCommand(sqlQuery3);
 
+
+            Response.Redirect("~/WebPages/Student_WebPages/WBLStudentEvalConfirmation.aspx");
+
         }
         catch (Exception ex)
         {

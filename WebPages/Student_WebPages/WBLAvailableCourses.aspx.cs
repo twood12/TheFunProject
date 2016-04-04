@@ -69,7 +69,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
         using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
         {
             // write the sql statement to execute 
-            string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID";
+            string sql = "select c.CourseID, c.CourseName, cs.Semester, cs.Year, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID";
             // instantiate the command object to fire 
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
@@ -126,14 +126,18 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
             {
                 //string studentID = Session variable here
                 string courseID = row.Cells[1].Text;
-                string sectionID = row.Cells[7].Text;
-                string teacherID = row.Cells[4].Text;
-                string locationID = row.Cells[13].Text;
+                string sectionID = row.Cells[9].Text;
+                string teacherID = row.Cells[6].Text;
+                string locationID = row.Cells[15].Text;
+                string semester = row.Cells[3].Text;
+                string year = row.Cells[4].Text;
+                string classStartDate = row.Cells[13].Text;
+                string classEndDate = row.Cells[14].Text;
                 string mySQL = "";
-                mySQL += "Exec EnrollClass " + courseID + ", " + sectionID + ", " + teacherID + ", " + Session["MemberID"] + ", " + locationID;
+                mySQL += "Exec EnrollClass " + courseID + ", " + sectionID + ", " + teacherID + ", " + Session["MemberID"] + ", " + locationID + ", " + semester + ", " + year + ", '" + classStartDate + "', '" + classEndDate + "'";
 
                     sendDBCommand(mySQL);
-                    //Response.Write(mySQL);
+                    Response.Write(mySQL);
                     Response.Write("<h3>Success</h3> <p>You are enrolled in the classes listed below. If you wish to change your classes please contanct a staff member</p>");
                 }
             
@@ -177,7 +181,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
             using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
             {
                 // write the sql statement to execute 
-                string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cp.StartDate, cp.EndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassSchduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID JOIN CoursePlan cp on cp.CourseID = c.courseID where c.CourseName = '" + course + "'";
+                string sql = "select c.CourseID, c.CourseName, cs.Semester, cs.Year, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID where c.CourseName = '" + course + "'";
                 //Response.Write(sql);
                 // instantiate the command object to fire 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -208,7 +212,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
             using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
             {
                 // write the sql statement to execute 
-                string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cp.StartDate, cp.EndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassSchduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID JOIN CoursePlan cp on cp.CourseID = c.courseID where m.LastName = '" + teacher + "'";
+                string sql = "select c.CourseID, c.CourseName, cs.Semester, cs.Year, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID where m.LastName = '" + teacher + "'";
               //  Response.Write(sql);
                 // instantiate the command object to fire 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -239,7 +243,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
             using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
             {
                 // write the sql statement to execute 
-                string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cp.StartDate, cp.EndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassSchduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID JOIN CoursePlan cp on cp.CourseID = c.courseID where c.Difficulty = '" + difficulty + "'";
+                string sql = "select c.CourseID, c.CourseName, cs.Semester, cs.Year, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID where c.Difficulty = '" + difficulty + "'";
                // Response.Write(sql);
                 // instantiate the command object to fire 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -270,7 +274,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
             using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
             {
                 // write the sql statement to execute 
-                string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cp.StartDate, cp.EndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassSchduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID JOIN CoursePlan cp on cp.CourseID = c.courseID where c.CourseName = '" + course + "' and m.LastName = '" + teacher + "'";
+                string sql = "select c.CourseID, c.CourseName, cs.Semester, cs.Year, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID where c.CourseName = '" + course + "' and m.LastName = '" + teacher + "'";
               //  Response.Write(sql);
                 // instantiate the command object to fire 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -302,7 +306,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
                 using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
                 {
                     // write the sql statement to execute 
-                    string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cp.StartDate, cp.EndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassSchduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID JOIN CoursePlan cp on cp.CourseID = c.courseID where c.CourseName = '" + course + "' and c.Difficulty = '" + difficulty + "'";
+                    string sql = "select c.CourseID, c.CourseName, cs.Semester, cs.Year, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID where c.CourseName = '" + course + "' and c.Difficulty = '" + difficulty + "'";
                    // Response.Write(sql);
                     // instantiate the command object to fire 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -334,7 +338,7 @@ public partial class WebPages_Student_WebPages_WBLAvailableCourses : System.Web.
             using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
             {
                 // write the sql statement to execute 
-                string sql = "select c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cp.StartDate, cp.EndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassSchduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID JOIN CoursePlan cp on cp.CourseID = c.courseID where m.LastName = '" + teacher + "' and c.Difficulty = '" + difficulty + "'";
+                string sql = "select c.CourseID, c.CourseName, cs.Semester, cs.Year, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.ClassScheduleID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID where m.LastName = '" + teacher + "' and c.Difficulty = '" + difficulty + "'";
              //   Response.Write(sql);
                 // instantiate the command object to fire 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
