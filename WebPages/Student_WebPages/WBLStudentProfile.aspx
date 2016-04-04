@@ -1,16 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLStudentMasterPage.master" AutoEventWireup="true" CodeFile="WBLStudentProfile.aspx.cs" Inherits="NestedMasterPages_WBLStudentProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-<%--    <link runat="server" rel="stylesheet" href="~/Content/fullcalendar.css" />
-    <link runat="server" rel="stylesheet" href="~/Content/themes/base/button.css" />
-    <link runat="server" rel="stylesheet" href="~/Content/themes/base/dialog.css" />
-    <link runat="server" rel="stylesheet" href="~/Content/themes/base/draggable.css" />
-    <link runat="server" rel="stylesheet" href="~/Content/CalendarStyleSheet.css" />
-    <link runat="server" rel="stylesheet" href="~/Content/themes/base/all.css" />
-    <link runat="server" rel="stylesheet" href="~/Scripts/qTip/jquery.qtip.css" />--%>
-
     <%: System.Web.Optimization.Styles.Render("~/Content/css") %>
-
     <style>
         #map {
             height: 350px;
@@ -18,9 +9,6 @@
             -ms-align-content: center;
             -webkit-align-content: center;
             align-content: center;
-        }
-        h3{
-            color: black;
         }
     </style>
 </asp:Content>
@@ -200,14 +188,5 @@
             <div id="eventDescription"></div>
             <div id="map"></div>
         </div>
-
-        <%--        <script runat="server" src="~/Scripts/jquery-2.2.1.js" type="text/javascript"></script>
-        <script runat="server" src="~/Scripts/moment.min.js" type="text/javascript"></script>
-        <script runat="server" src="~/Scripts/jquery-ui-1.11.4.js" type="text/javascript"></script>
-        <script runat="server" src="~/Scripts/fullcalendar.js" type="text/javascript"></script>
-        <script runat="server" src="~/Scripts/qTip/jquery.qtip.js" type="text/javascript"></script>
-        <script runat="server" src="~/Scripts/StudentCalendarScript.js" type="text/javascript"></script>
-        <script runat="server" type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK7q44pdNrG5IN3XFw9_rR-b8n_XTI4D4&libraries=places&v=3"></script>
-        <script runat="server" src="~/Scripts/geolocation.js" type="text/javascript"></script>--%>
     </div>
 </asp:Content>
