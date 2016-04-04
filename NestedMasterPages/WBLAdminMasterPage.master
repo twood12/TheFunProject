@@ -1,0 +1,22 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/NestedMasterPages/WBLCommonMasterPage.master" AutoEventWireup="true" CodeFile="WBLAdminMasterPage.master.cs" Inherits="NestedMasterPages_WBLAdminMasterPage" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+     </asp:ContentPlaceHolder> 
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <div id="navContent"> 
+
+            <asp:HyperLink ID="lnkSearchEngine" runat="server" 
+             NavigateUrl="~/WebPages/Admin_WebPages/SearchEngine.aspx" 
+             Text="Search Engine" />
+             <asp:HyperLink ID="lnkAdminReports" runat="server" 
+             NavigateUrl="~/WebPages/Admin_WebPages/ReportPage.aspx" 
+             Text="Reports" />
+        </div>
+    
+    
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+     </asp:ContentPlaceHolder> 
+</asp:Content>
+

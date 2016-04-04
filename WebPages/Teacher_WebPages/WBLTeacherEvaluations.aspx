@@ -25,25 +25,17 @@
              NavigateUrl="~/WebPages/Teacher_WebPages/WBLTeacherIndividualEvaluation1.aspx" 
              Text="Individual Evaluation" />
 
-    <asp:SqlDataSource id="studentEvalCommand" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="Select CONVERT(varchar(10),M.MemberID) + '-' + M.FirstName + ' ' + M.LastName + ',' + M.Email as [Name] From Member M JOIN Student S on M.MemberID = S.StudentID JOIN ClassSchedule CS ON CS.StudentID = S.StudentID JOIN Course C on C.CourseID = CS.CourseID JOIN Staff ST ON C.TeacherID = ST.StaffID Where ST.StaffID = 4 AND C.CourseID = @CourseID" runat="server" >
+    <asp:SqlDataSource id="studentEvalCommand" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="Select distinct CONVERT(varchar(10),M.MemberID) + '-' + M.FirstName + ' ' + M.LastName + ',' + M.Email as [Name] From Member M JOIN Student S on M.MemberID = S.StudentID JOIN ClassSchedule CS ON CS.StudentID = S.StudentID JOIN Course C on C.CourseID = CS.CourseID WHERE cs.TeacherID = @MemberID AND C.CourseID = @CourseID" runat="server" >
         <SelectParameters>
-            <asp:SessionParameter Name="CourseID" SessionField="MemberID" Type="Int32" />
+            <asp:SessionParameter Name="CourseID" SessionField="EvaluationCourseID" Type="Int32" />
+            <asp:SessionParameter Name="MemberID" SessionField="MemberID" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource id="courseListCommand" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT CONVERT(varchar(10),[CourseID]) + '-' + [CourseName] as [CourseTitle] FROM [Course] WHERE ([TeacherID] = @TeacherID)" runat="server" DeleteCommand="DELETE FROM [Course] WHERE [CourseID] = @CourseID" InsertCommand="INSERT INTO [Course] ([CourseName]) VALUES (@CourseName)" UpdateCommand="UPDATE [Course] SET [CourseName] = @CourseName WHERE [CourseID] = @CourseID" >
-        <DeleteParameters>
-            <asp:Parameter Name="CourseID" Type="Int32" />
-        </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="CourseName" Type="String" />
-        </InsertParameters>
+    <asp:SqlDataSource id="courseListCommand" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT distinct CONVERT(varchar(10),C.CourseID) + '-' + C.CourseName as CourseTitle FROM Course C JOIN ClassSchedule CS on C.CourseID = Cs.CourseID WHERE (CS.TeacherID = @TeacherID)" runat="server">
         <SelectParameters>
-            <asp:Parameter DefaultValue="4" Name="TeacherID" Type="Int32" />
+            <asp:SessionParameter Name="TeacherID" SessionField="MemberID" Type="Int32" />
         </SelectParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="CourseName" Type="String" />
-            <asp:Parameter Name="CourseID" Type="Int32" />
-        </UpdateParameters>
+        
     </asp:SqlDataSource>
 </asp:Content>
 

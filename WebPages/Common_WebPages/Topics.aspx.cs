@@ -20,6 +20,12 @@ public partial class Topics : BasePage
             this.MasterPageFile = "~/NestedMasterPages/WBLTeacherMasterPage.master";
         }
 
+        else if ((string)Session["MemberType"] == "Admin")
+        {
+            this.MasterPageFile = "~/NestedMasterPages/WBLAdminMasterPage.master";
+        }
+
+
     }
 
     protected void Page_Load(object sender, EventArgs e)
