@@ -17,7 +17,6 @@
 
 
 <body>
-        <header>
             <div id="navContent"> 
              <asp:HyperLink ID="lnkCommunity" runat="server" 
              NavigateUrl="~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx" 
@@ -27,7 +26,6 @@
              NavigateUrl="~/WebPages/Common_WebPages/inbox.aspx" 
              Text="Inbox" />
         </div>
-        </header>
     
         <div id="topContent"> 
 

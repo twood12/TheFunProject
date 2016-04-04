@@ -25,7 +25,7 @@ public class CalendarService : System.Web.Services.WebService
     {
         SqlDataReader reader;
         List<Event> eventList = new List<Event>();
-        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
@@ -61,7 +61,7 @@ public class CalendarService : System.Web.Services.WebService
     {
         List<Event> eventList = new List<Event>();
         SqlDataReader reader;
-        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
@@ -107,7 +107,7 @@ public class CalendarService : System.Web.Services.WebService
     [WebMethod]
     public bool deleteEvent(Event eventData)
     {
-        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
@@ -125,7 +125,7 @@ public class CalendarService : System.Web.Services.WebService
     [WebMethod]
     public int getMaxEventID()
     {
-        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;

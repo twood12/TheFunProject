@@ -7,7 +7,7 @@ function displayCalendar() {
         type: "POST",
         contentType: 'application/json; charset=utf-8',
         data: "{}",
-        url: "CalendarService.asmx/getEventList",
+        url: "/CalendarService.asmx/getEventList",
         dataType: "json",
         success: function (data) {
             $('#calendar').fullCalendar({
@@ -125,7 +125,7 @@ function displayCalendar() {
                 eventClick: function (event) {
                     showEventClickedPopUp(event);
                 },
-                eventDestroy(event, element, view) { },
+                eventDestroy: function (event, element, view) { },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     debugger;
                 }
