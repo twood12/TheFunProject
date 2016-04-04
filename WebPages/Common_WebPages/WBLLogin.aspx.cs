@@ -40,7 +40,7 @@ public partial class LoginPage : BasePage
         String pwHash = "";
         e.Authenticated = false;
 
-        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
@@ -60,7 +60,7 @@ public partial class LoginPage : BasePage
 
         Session["loggedIn"] = e.Authenticated.ToString();
 
-        if(e.Authenticated)
+        if(verify)
         {
             setDestinationPage();
         }
@@ -68,7 +68,7 @@ public partial class LoginPage : BasePage
     }
     #endregion
 
-    private void setDestinationPage()
+    protected void setDestinationPage()
     {
         if ((string)Session["MemberType"] == "Student")
         {

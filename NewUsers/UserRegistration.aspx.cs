@@ -18,7 +18,7 @@ public partial class UserRegistration : BasePage
     protected void CreateUser_Click(object sender, EventArgs e)
     {
         String passwordHash = SimpleHash.genreateSHA256Hash(txtPassword.Text, null);
-        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;

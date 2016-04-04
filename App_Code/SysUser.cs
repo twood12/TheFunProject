@@ -131,7 +131,7 @@ public class SysUser
     public void setUserID()
     {
         int newUserID = 0; // if something goes wrong then the ID will be 0
-        string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["DBXY"].ConnectionString;
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
