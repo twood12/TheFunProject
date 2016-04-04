@@ -70,7 +70,7 @@ public partial class WebPages_Teacher_WebPages_WBLTeacherAttendanceReport : Syst
         using (SqlConnection conn = new SqlConnection("Server = LOCALHOST; Database = WBL; Trusted_Connection = Yes;"))
         {
             // write the sql statement to execute 
-            string sql = "select c.CourseID, c.CourseName, m.MemberID, m.FirstName,m.LastName, se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber FROM ClassSchedule cs JOIN member m on m.memberID = cs.StudentID JOIN Course c on c.CourseID = cs.CourseID JOIN section se on se.SectionID = cs.SectionID";
+            string sql = "select distinct c.CourseID, c.CourseName, m.MemberID, m.FirstName,m.LastName, se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber FROM ClassSchedule cs JOIN member m on m.memberID = cs.StudentID JOIN Course c on c.CourseID = cs.CourseID JOIN section se on se.SectionID = cs.SectionID";
             //Response.Write(sql);
             // instantiate the command object to fire 
             using (SqlCommand cmd = new SqlCommand(sql, conn))

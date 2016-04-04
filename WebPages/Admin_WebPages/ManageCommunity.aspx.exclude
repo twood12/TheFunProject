@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageCommunity.aspx.cs" Inherits="ManageCommunity" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageCommunity.aspx.cs" Inherits="ManageCommunity" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
  <style type="text/css">
         html {background: url(https://s-media-cache-ak0.pinimg.com/736x/51/cb/a9/51cba92ff221e6a8bfc2a0ebe6323f40.jpg);}
         #form1 {
@@ -12,12 +12,11 @@
             
         }
          </style>
-<html xmlns="http://www.w3.org/1999/xhtml">
-   
-
-<head runat="server">
+<head>
     <title>Manage Community</title>
 </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
     <a href ="AdminHome.aspx" style="color: black">Back to Admin Dashboard </a>
     <form id="form1" runat="server">
@@ -62,7 +61,7 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:cs %>" DeleteCommand="DELETE FROM [BlogPost] WHERE [PostID] = @original_PostID AND (([Subject] = @original_Subject) OR ([Subject] IS NULL AND @original_Subject IS NULL)) AND (([PostContent] = @original_PostContent) OR ([PostContent] IS NULL AND @original_PostContent IS NULL)) AND (([BlogPostDate] = @original_BlogPostDate) OR ([BlogPostDate] IS NULL AND @original_BlogPostDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))" InsertCommand="INSERT INTO [BlogPost] ([Subject], [PostContent], [BlogPostDate], [MemberID]) VALUES (@Subject, @PostContent, @BlogPostDate, @MemberID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [Subject], [PostContent], [BlogPostDate], [MemberID], [PostID] FROM [BlogPost]" UpdateCommand="UPDATE [BlogPost] SET [Subject] = @Subject, [PostContent] = @PostContent, [BlogPostDate] = @BlogPostDate, [MemberID] = @MemberID WHERE [PostID] = @original_PostID AND (([Subject] = @original_Subject) OR ([Subject] IS NULL AND @original_Subject IS NULL)) AND (([PostContent] = @original_PostContent) OR ([PostContent] IS NULL AND @original_PostContent IS NULL)) AND (([BlogPostDate] = @original_BlogPostDate) OR ([BlogPostDate] IS NULL AND @original_BlogPostDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:DBXY %>" DeleteCommand="DELETE FROM [BlogPost] WHERE [PostID] = @original_PostID AND (([Subject] = @original_Subject) OR ([Subject] IS NULL AND @original_Subject IS NULL)) AND (([PostContent] = @original_PostContent) OR ([PostContent] IS NULL AND @original_PostContent IS NULL)) AND (([BlogPostDate] = @original_BlogPostDate) OR ([BlogPostDate] IS NULL AND @original_BlogPostDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))" InsertCommand="INSERT INTO [BlogPost] ([Subject], [PostContent], [BlogPostDate], [MemberID]) VALUES (@Subject, @PostContent, @BlogPostDate, @MemberID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [Subject], [PostContent], [BlogPostDate], [MemberID], [PostID] FROM [BlogPost]" UpdateCommand="UPDATE [BlogPost] SET [Subject] = @Subject, [PostContent] = @PostContent, [BlogPostDate] = @BlogPostDate, [MemberID] = @MemberID WHERE [PostID] = @original_PostID AND (([Subject] = @original_Subject) OR ([Subject] IS NULL AND @original_Subject IS NULL)) AND (([PostContent] = @original_PostContent) OR ([PostContent] IS NULL AND @original_PostContent IS NULL)) AND (([BlogPostDate] = @original_BlogPostDate) OR ([BlogPostDate] IS NULL AND @original_BlogPostDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_PostID" Type="Int32" />
                 <asp:Parameter Name="original_Subject" Type="String" />
@@ -106,7 +105,7 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:cs %>" DeleteCommand="DELETE FROM [BlogPostComment] WHERE [CommentID] = @original_CommentID AND (([PostComment] = @original_PostComment) OR ([PostComment] IS NULL AND @original_PostComment IS NULL)) AND (([CommentDate] = @original_CommentDate) OR ([CommentDate] IS NULL AND @original_CommentDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))" InsertCommand="INSERT INTO [BlogPostComment] ([PostComment], [CommentDate], [MemberID]) VALUES (@PostComment, @CommentDate, @MemberID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [PostComment], [CommentDate], [MemberID], [CommentID] FROM [BlogPostComment]" UpdateCommand="UPDATE [BlogPostComment] SET [PostComment] = @PostComment, [CommentDate] = @CommentDate, [MemberID] = @MemberID WHERE [CommentID] = @original_CommentID AND (([PostComment] = @original_PostComment) OR ([PostComment] IS NULL AND @original_PostComment IS NULL)) AND (([CommentDate] = @original_CommentDate) OR ([CommentDate] IS NULL AND @original_CommentDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:DBXY %>" DeleteCommand="DELETE FROM [BlogPostComment] WHERE [CommentID] = @original_CommentID AND (([PostComment] = @original_PostComment) OR ([PostComment] IS NULL AND @original_PostComment IS NULL)) AND (([CommentDate] = @original_CommentDate) OR ([CommentDate] IS NULL AND @original_CommentDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))" InsertCommand="INSERT INTO [BlogPostComment] ([PostComment], [CommentDate], [MemberID]) VALUES (@PostComment, @CommentDate, @MemberID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [PostComment], [CommentDate], [MemberID], [CommentID] FROM [BlogPostComment]" UpdateCommand="UPDATE [BlogPostComment] SET [PostComment] = @PostComment, [CommentDate] = @CommentDate, [MemberID] = @MemberID WHERE [CommentID] = @original_CommentID AND (([PostComment] = @original_PostComment) OR ([PostComment] IS NULL AND @original_PostComment IS NULL)) AND (([CommentDate] = @original_CommentDate) OR ([CommentDate] IS NULL AND @original_CommentDate IS NULL)) AND (([MemberID] = @original_MemberID) OR ([MemberID] IS NULL AND @original_MemberID IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_CommentID" Type="Int32" />
                 <asp:Parameter Name="original_PostComment" Type="String" />
@@ -146,7 +145,7 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" SelectCommand="SELECT * FROM [BlogPost]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT * FROM [BlogPost]"></asp:SqlDataSource>
     </form>
 </body>
-</html>
+</asp:Content>

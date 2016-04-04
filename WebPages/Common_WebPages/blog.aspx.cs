@@ -41,5 +41,25 @@ public partial class blog : BasePage
       
         
     }
-   
+
+    protected void Page_PreInit(Object sender, EventArgs e)
+    {
+        if ((string)Session["MemberType"] == "Student")
+        {
+            this.MasterPageFile = "~/NestedMasterPages/WBLStudentMasterPage.master";
+        }
+
+        else if ((string)Session["MemberType"] == "Teacher")
+        {
+            this.MasterPageFile = "~/NestedMasterPages/WBLTeacherMasterPage.master";
+        }
+
+        else if ((string)Session["MemberType"] == "Admin")
+        {
+            this.MasterPageFile = "~/NestedMasterPages/WBLAdminMasterPage.master";
+        }
+
+
+    }
+
 }

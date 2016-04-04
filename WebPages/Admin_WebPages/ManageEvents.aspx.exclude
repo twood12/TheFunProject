@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageEvents.aspx.cs" Inherits="ManageEvents" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageEvents.aspx.cs" Inherits="ManageEvents" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style>
       #form1 {
           
@@ -11,10 +11,12 @@
             
         }
          </style>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head id="Head1" runat="server">
     <title>Manage Evaluations</title>
 </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
     <a href ="AdminHome.aspx" style="color: black">Back to Admin Dashboard </a>
     <form id="form1" runat="server">
@@ -45,7 +47,9 @@
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="EventID" HeaderText="EventID" InsertVisible="False" ReadOnly="True" SortExpression="EventID" />
                 <asp:BoundField DataField="EventName" HeaderText="EventName" SortExpression="EventName" />
-                <asp:BoundField DataField="EventDate" HeaderText="EventDate" SortExpression="EventDate" />
+                <asp:BoundField DataField="EventStartDate" HeaderText="EventStartDate" SortExpression="EventStartDate" />
+                <asp:BoundField DataField="EventEndDate" HeaderText="EventEndDate" SortExpression="EventEndDate" />
+                <asp:BoundField DataField="EventDescription" HeaderText="EventDescription" SortExpression="EventDescription" />
                 <asp:BoundField DataField="EventTopic" HeaderText="EventTopic" SortExpression="EventTopic" />
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
@@ -58,7 +62,18 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:cs %>" DeleteCommand="DELETE FROM [Event] WHERE [EventID] = @original_EventID AND (([EventName] = @original_EventName) OR ([EventName] IS NULL AND @original_EventName IS NULL)) AND (([EventDate] = @original_EventDate) OR ([EventDate] IS NULL AND @original_EventDate IS NULL)) AND (([EventTopic] = @original_EventTopic) OR ([EventTopic] IS NULL AND @original_EventTopic IS NULL))" InsertCommand="INSERT INTO [Event] ([EventName], [EventDate], [EventTopic]) VALUES (@EventName, @EventDate, @EventTopic)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Event]" UpdateCommand="UPDATE [Event] SET [EventName] = @EventName, [EventDate] = @EventDate, [EventTopic] = @EventTopic WHERE [EventID] = @original_EventID AND (([EventName] = @original_EventName) OR ([EventName] IS NULL AND @original_EventName IS NULL)) AND (([EventDate] = @original_EventDate) OR ([EventDate] IS NULL AND @original_EventDate IS NULL)) AND (([EventTopic] = @original_EventTopic) OR ([EventTopic] IS NULL AND @original_EventTopic IS NULL))">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:cs %>" DeleteCommand="DELETE FROM [Event] WHERE [EventID] = @original_EventID AND (([EventName] = @original_EventName) OR ([EventName] IS NULL AND @original_EventName IS NULL)) AND (([EventDate] = @original_EventDate) OR ([EventDate] IS NULL AND @original_EventDate IS NULL)) AND (([EventTopic] = @original_EventTopic) OR ([EventTopic] IS NULL AND @original_EventTopic IS NULL))" InsertCommand="INSERT INTO [Event] ([EventName], [EventStartDate], [EventEndDate], [EventDescription], [EventTopic]) VALUES (@EventName, @EventStartDate, @EventEndDate, @EventDescription, @EventTopic)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT EventID, EventName, EventStartDate, EventEndDate, EventDescription, EventTopic FROM [Event]" UpdateCommand="UPDATE [Event] 
+SET [EventName] = @EventName, 
+[EventStartDate] = @EventStartDate, 
+[EventEndDate] = @EventEndDate, 
+[EventDescription] = @EventDescription, 
+[EventTopic] = @EventTopic 
+WHERE [EventID] = @original_EventID 
+AND (([EventName] = @original_EventName) OR ([EventName] IS NULL AND @original_EventName IS NULL))
+AND (([EventStartDate] = @original_EventStartDate) OR ([EventStartDate] IS NULL AND @original_EventStartDate IS NULL))
+AND (([EventEndDate] = @original_EventEndDate) OR ([EventEndDate] IS NULL AND @original_EventEndDate IS NULL))
+AND (([EventDescription] = @original_EventDescription) OR ([EventDescription] IS NULL AND @original_EventDescription IS NULL))
+ AND (([EventTopic] = @original_EventTopic) OR ([EventTopic] IS NULL AND @original_EventTopic IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_EventID" Type="Int32" />
                 <asp:Parameter Name="original_EventName" Type="String" />
@@ -67,12 +82,15 @@
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="EventName" Type="String" />
-                <asp:Parameter Name="EventDate" Type="DateTime" />
+                <asp:Parameter Name="EventStartDate" Type="DateTime" />
+                <asp:Parameter Name="EventEndDate" Type="DateTime" />
+                <asp:Parameter Name="EventDescription" Type="String" />
                 <asp:Parameter Name="EventTopic" Type="String" />
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="EventName" Type="String" />
-                <asp:Parameter Name="EventDate" Type="DateTime" />
+                <asp:Parameter Name="EventStartDate" Type="DateTime" />
+                <asp:Parameter Name="EventEndDate" Type="DateTime" />
                 <asp:Parameter Name="EventTopic" Type="String" />
                 <asp:Parameter Name="original_EventID" Type="Int32" />
                 <asp:Parameter Name="original_EventName" Type="String" />
@@ -99,4 +117,4 @@
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" SelectCommand="SELECT * FROM [EventAttendance]"></asp:SqlDataSource>
     </form>
 </body>
-</html>
+</asp:Content>

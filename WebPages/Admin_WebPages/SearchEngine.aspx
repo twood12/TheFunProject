@@ -1,9 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SearchEngine.aspx.cs" Inherits="WebPages_Admin_WebPages_SearchEngine" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SearchEngine.aspx.cs" Inherits="WebPages_Admin_WebPages_SearchEngine" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<head>
     <title></title>
     <style type="text/css">
         .auto-style1 {
@@ -21,6 +19,8 @@
         }
     </style>
 </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
     <form id="frmSearchEngine" runat="server">
         <table>
@@ -1078,4 +1078,4 @@ WHERE			(Course.SubjectID = @SubjectID);">
         </div>
     </form>
 </body>
-</html>
+</asp:Content>
