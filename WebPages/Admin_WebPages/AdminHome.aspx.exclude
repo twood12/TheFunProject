@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminHome.aspx.cs" Inherits="AdminHome" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminHome.aspx.cs" Inherits="AdminHome" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" %>
 
-<!DOCTYPE html>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style type="text/css">
         html {background: url(https://upload.wikimedia.org/wikipedia/en/c/c9/Jay-z-the-blueprint.jpg);}
         #form1 {
@@ -14,8 +14,8 @@
         }
          </style>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<head>
     <title></title>
     <style type="text/css">
         #forecast_embed {
@@ -23,43 +23,13 @@
         }
     </style>
 </head>
-   
+ </asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <body>
 
     <form id="form1" runat="server">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Admin Dashboard
-    <div>
-        <asp:Button ID="ManageUsers" runat="server" Text="Manage Users" style="margin-left: 1px" Width="101px" OnClick="ManageUsers_Click" />
-        <asp:Button ID="ManageCourses" runat="server" style="margin-left: 188px" Text="Manage Courses" Width="115px" OnClick="ManageCourses_Click" />
-    </div>
-        <p>
-            &nbsp;</p>
-        <p>
-            <asp:Button ID="ManageEvents" runat="server" style="margin-left: 1px" Text="Manage Events" Width="112px" OnClick="ManageEvents_Click" />
-            <asp:Button ID="ManageBucks" runat="server" style="margin-left: 174px" Text="Manage Bucks" Width="113px" OnClick="ManageBucks_Click" />
-        </p>
-        <p>
-            &nbsp;</p>
-        <p>
-            <asp:Button ID="ManageCommunity" runat="server" style="margin-left: 0px" Text="Manage Community" Width="131px" OnClick="ManageCommunity_Click" />
-            <asp:Button ID="ManageReports" runat="server" style="margin-left: 156px" Text="Manage Reports" Width="114px" OnClick="ManageReports_Click" />
-        </p>
-        
-        
-        
-        
-        
-        <p>
-            &nbsp;</p>
-        <p>
-            <asp:Button ID="ManagePortfolios" runat="server" style="margin-left: 0px" Text="Manage Porfolios" Width="121px" OnClick="ManagePortfolios_Click" />
-            <asp:Button ID="ManageEvaluations" runat="server" style="margin-left: 164px" Text="Manage Evaluations" Width="136px" OnClick="ManageEvalutions_Click" />
-        </p>
-        
-        
-        
-        
-        
+    
     </form>
     <asp:Panel ID="Weather" runat="server" BackColor="#ffffff" >
             <iframe id="forecast_embed" height="246" src="http://forecast.io/embed/#lat=38.8899310&lon=-77.009003&name=Madison Dr NW, Washington, DC"></iframe>
@@ -114,4 +84,4 @@
 
     
 </body>
-</html>
+</asp:Content>

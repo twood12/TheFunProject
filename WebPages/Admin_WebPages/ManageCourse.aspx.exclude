@@ -1,9 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageCourse.aspx.cs" Inherits="ManageCourse" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageCourse.aspx.cs" Inherits="ManageCourse" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" %>
 
-<!DOCTYPE html>
-
-<html>
-    
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">   
     <body>
         <a href ="AdminHome.aspx">Back to Admin Dashboard</a>
       <form id="Form1" name="UpdateRecords" method="post" runat="server">  
@@ -35,8 +34,10 @@
                     <asp:CommandField ShowDeleteButton="True" />
                     <asp:BoundField DataField="CourseID" HeaderText="CourseID" InsertVisible="False" ReadOnly="True" SortExpression="CourseID" />
                     <asp:BoundField DataField="CourseName" HeaderText="CourseName" SortExpression="CourseName" />
-                    <asp:BoundField DataField="MeetingDays" HeaderText="MeetingDays" SortExpression="MeetingDays" />
-                    <asp:BoundField DataField="StaffID" HeaderText="StaffID" SortExpression="StaffID" />
+                    <asp:BoundField DataField="Semester" HeaderText="Semester" SortExpression="Semester" />
+                    <asp:BoundField DataField="Year" HeaderText="Year" SortExpression="Year" />
+                    <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
+                    <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -47,18 +48,18 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
-            <asp:SqlDataSource ID="sqlQuery" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" InsertCommand="Insert c.CourseID, c.CourseName, cs.MeetingDays, s.StaffID
+            <asp:SqlDataSource ID="sqlQuery" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" InsertCommand="Insert c.CourseID, c.CourseName, cs.Semester, cs.Year, M.FirstName, M.LastName
 FROM course c
-join staff s
-on c.teacherid = s.staffid
 Join classschedule cs
 on c.courseID = cs.courseID
-" SelectCommand="SELECT c.CourseID, c.CourseName, cs.MeetingDays, s.StaffID
+Join Member m
+on m.MemberID = cs.TeacherID
+" SelectCommand="SELECT c.CourseID, c.CourseName, cs.Semester, cs.Year, M.FirstName, M.LastName
 FROM course c
-join staff s
-on c.teacherid = s.staffid
 Join classschedule cs
 on c.courseID = cs.courseID
+Join Member m
+on m.MemberID = cs.TeacherID
 ">
             </asp:SqlDataSource>
             
@@ -79,7 +80,7 @@ on c.courseID = cs.courseID
               <SortedDescendingCellStyle BackColor="#CAC9C9" />
               <SortedDescendingHeaderStyle BackColor="#383838" />
           </asp:GridView>
-          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:cs %>" DeleteCommand="DELETE FROM [Course] WHERE [CourseID] = @original_CourseID AND (([CourseName] = @original_CourseName) OR ([CourseName] IS NULL AND @original_CourseName IS NULL))" InsertCommand="INSERT INTO [Course] ([CourseName]) VALUES (@CourseName)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [CourseID], [CourseName] FROM [Course]" UpdateCommand="UPDATE [Course] SET [CourseName] = @CourseName WHERE [CourseID] = @original_CourseID AND (([CourseName] = @original_CourseName) OR ([CourseName] IS NULL AND @original_CourseName IS NULL))">
+          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:DBXY %>" DeleteCommand="DELETE FROM [Course] WHERE [CourseID] = @original_CourseID AND (([CourseName] = @original_CourseName) OR ([CourseName] IS NULL AND @original_CourseName IS NULL))" InsertCommand="INSERT INTO [Course] ([CourseName]) VALUES (@CourseName)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [CourseID], [CourseName] FROM [Course]" UpdateCommand="UPDATE [Course] SET [CourseName] = @CourseName WHERE [CourseID] = @original_CourseID AND (([CourseName] = @original_CourseName) OR ([CourseName] IS NULL AND @original_CourseName IS NULL))">
               <DeleteParameters>
                   <asp:Parameter Name="original_CourseID" Type="Int32" />
                   <asp:Parameter Name="original_CourseName" Type="String" />
@@ -102,9 +103,12 @@ on c.courseID = cs.courseID
                   <asp:CommandField ShowEditButton="True" />
                   <asp:CommandField ShowDeleteButton="True" />
                   <asp:BoundField DataField="CourseID" HeaderText="CourseID" SortExpression="CourseID" />
-                  <asp:BoundField DataField="MeetingDays" HeaderText="MeetingDays" SortExpression="MeetingDays" />
-                  <asp:BoundField DataField="MeetingTime" HeaderText="MeetingTime" SortExpression="MeetingTime" />
-                  <asp:BoundField DataField="RoomNumber" HeaderText="RoomNumber" SortExpression="RoomNumber" />
+                  <asp:BoundField DataField="Semester" HeaderText="Semester" SortExpression="Semester" />
+                  <asp:BoundField DataField="Year" HeaderText="Year" SortExpression="Year" />
+                  <asp:BoundField DataField="Street" HeaderText="Street" SortExpression="Street" />
+                  <asp:BoundField DataField="City" HeaderText="City" SortExpression="City" />
+                  <asp:BoundField DataField="State" HeaderText="State" SortExpression="State" />
+                  
               </Columns>
               <FooterStyle BackColor="#CCCCCC" />
               <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -116,7 +120,7 @@ on c.courseID = cs.courseID
               <SortedDescendingCellStyle BackColor="#CAC9C9" />
               <SortedDescendingHeaderStyle BackColor="#383838" />
           </asp:GridView>
-          <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [CourseID], [MeetingDays], [MeetingTime], [RoomNumber] FROM [ClassSchedule]"></asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT cs.CourseID, cs.Semester, cs.Year, al.Street, al.City, al.State FROM ClassSchedule cs JOIN AcademyLocation al on cs.LocationID = al.LocationID"></asp:SqlDataSource>
           <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="StaffID" DataSourceID="SqlDataSource3" ForeColor="Black">
               <Columns>
                   <asp:BoundField DataField="StaffID" HeaderText="StaffID" ReadOnly="True" SortExpression="StaffID" />
@@ -132,8 +136,8 @@ on c.courseID = cs.courseID
               <SortedDescendingCellStyle BackColor="#CAC9C9" />
               <SortedDescendingHeaderStyle BackColor="#383838" />
           </asp:GridView>
-          <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [StaffID], [SubjectID] FROM [Staff]"></asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [StaffID], [SubjectID] FROM [Staff]"></asp:SqlDataSource>
       </form>
     </body>
-</html>
+</asp:Content>
 

@@ -10,7 +10,7 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack)
+        if (!IsPostBack)
         {
             setAcademicYear();
             setTermYearDD();
@@ -710,7 +710,7 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
                     lnkSelectAccountView.Visible = true;
                 }
 
-                dropSemesterSelection();
+                
                 gvStudentAccount.Visible = false;
                 gvStudentPurchases.Visible = false;
             }

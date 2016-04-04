@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageBucks.aspx.cs" Inherits="ManageBucks" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageBucks.aspx.cs" Inherits="ManageBucks" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" %>
 
-<!DOCTYPE html>
-
-<html>
-    <head id="Head1" runat="server">
-    <title>Manage Bucks</title>
-</head>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <head id="Head1">
+        <title>Manage Bucks</title>
+    </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <body>
          <a href ="AdminHome.aspx">Back to Admin Dashboard</a>
       <form id="Form1" name="UpdateRecords" runat="server">  
@@ -29,7 +29,7 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
-            <asp:SqlDataSource ID="sqlQuery" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" DeleteCommand="DELETE FROM [BuckStore] WHERE [ItemID] = @original_ItemID AND (([ItemName] = @original_ItemName) OR ([ItemName] IS NULL AND @original_ItemName IS NULL)) AND (([ItemPrice] = @original_ItemPrice) OR ([ItemPrice] IS NULL AND @original_ItemPrice IS NULL))" InsertCommand="INSERT INTO [BuckStore] ([ItemName], [ItemPrice]) VALUES (@ItemName, @ItemPrice)" SelectCommand="SELECT [ItemID], [ItemName], [ItemPrice] FROM [BuckStore]" UpdateCommand="UPDATE [BuckStore] SET [ItemName] = @ItemName, [ItemPrice] = @ItemPrice WHERE [ItemID] = @original_ItemID AND (([ItemName] = @original_ItemName) OR ([ItemName] IS NULL AND @original_ItemName IS NULL)) AND (([ItemPrice] = @original_ItemPrice) OR ([ItemPrice] IS NULL AND @original_ItemPrice IS NULL))" ConflictDetection="CompareAllValues" OldValuesParameterFormatString="original_{0}">
+            <asp:SqlDataSource ID="sqlQuery" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" DeleteCommand="DELETE FROM [BuckStore] WHERE [ItemID] = @original_ItemID AND (([ItemName] = @original_ItemName) OR ([ItemName] IS NULL AND @original_ItemName IS NULL)) AND (([ItemPrice] = @original_ItemPrice) OR ([ItemPrice] IS NULL AND @original_ItemPrice IS NULL))" InsertCommand="INSERT INTO [BuckStore] ([ItemName], [ItemPrice]) VALUES (@ItemName, @ItemPrice)" SelectCommand="SELECT [ItemID], [ItemName], [ItemPrice] FROM [BuckStore]" UpdateCommand="UPDATE [BuckStore] SET [ItemName] = @ItemName, [ItemPrice] = @ItemPrice WHERE [ItemID] = @original_ItemID AND (([ItemName] = @original_ItemName) OR ([ItemName] IS NULL AND @original_ItemName IS NULL)) AND (([ItemPrice] = @original_ItemPrice) OR ([ItemPrice] IS NULL AND @original_ItemPrice IS NULL))" ConflictDetection="CompareAllValues" OldValuesParameterFormatString="original_{0}">
                 <DeleteParameters>
                     <asp:Parameter Name="original_ItemID" Type="Int32" />
                     <asp:Parameter Name="original_ItemName" Type="String" />
@@ -63,7 +63,7 @@
                   <SortedDescendingHeaderStyle BackColor="#383838" />
               </asp:GridView>
           </p>
-          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" SelectCommand="SELECT [TransactionID], [ItemID], [AccountNumber], [PurchaseDate], [PurchaseQty], [TransactionAmt] FROM [BuckTansaction]"></asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT [TransactionID], [ItemID], [AccountNumber], [PurchaseDate], [PurchaseQty], [TransactionAmt] FROM [BuckTansaction]"></asp:SqlDataSource>
           <p>
               &nbsp;</p>
           <p>
@@ -76,4 +76,4 @@
           </p>
       </form>
     </body>
-</html>
+</asp:Content>
