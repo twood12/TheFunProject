@@ -203,6 +203,7 @@ function geocodePlaceId(geocoder, map, infoWindow, placeID) {
             }
         } else {
             alert('Geocoder failed due to ' + status);
+            console.log(error);
         }
     });
 }
