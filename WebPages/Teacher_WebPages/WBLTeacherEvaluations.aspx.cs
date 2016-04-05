@@ -9,9 +9,22 @@ public partial class WebPages_Teacher_WebPages_WBLTeacherEvaluations : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
+        {
             ddStudentEvaluations.DataBind();
+            ddStudentEvaluations.Items.Insert(0, " ");
+            ddStudentEvaluations.SelectedIndex = 0;
+
+            ddCourseList.DataBind();
+            ddCourseList.Items.Insert(0, " ");
+            ddCourseList.SelectedIndex = 0;
+        }
+
+        //ddCourseList.DataBind();
+        //ddStudentEvaluations.DataBind();
     }
+
+    
 
     protected void btnEvaluateStudent_Click(object sender, EventArgs e)
     {

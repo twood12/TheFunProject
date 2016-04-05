@@ -60,7 +60,7 @@ public partial class LoginPage : BasePage
 
         Session["loggedIn"] = e.Authenticated.ToString();
 
-        if(e.Authenticated)
+        if(verify)
         {
             setDestinationPage();
         }
@@ -68,7 +68,7 @@ public partial class LoginPage : BasePage
     }
     #endregion
 
-    private void setDestinationPage()
+    protected void setDestinationPage()
     {
         if ((string)Session["MemberType"] == "Student")
         {

@@ -41,7 +41,6 @@
         <asp:Login
         id="Login"
         OnAuthenticate="Login_Authenticate"  
-        DestinationPageUrl="~/WebPages/Common_WebPages/WBLDefaultTest.aspx"    
         Runat="server"  />
         <br />
         <asp:Label ID="Label5" runat="server" Text="If you don't have a Words, Beats & Life account please apply"></asp:Label>

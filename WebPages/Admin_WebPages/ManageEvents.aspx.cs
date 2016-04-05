@@ -5,14 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class ManageEvents : BasePage
+public partial class WebPages_Admin_WebPages_ManageEvents : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void btnSubmit_Click(object sender, EventArgs e)
     {
 
     }

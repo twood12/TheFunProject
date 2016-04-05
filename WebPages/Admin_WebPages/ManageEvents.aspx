@@ -1,102 +1,62 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageEvents.aspx.cs" Inherits="ManageEvents" %>
+﻿<%@ Page Title="Manage Events" Language="C#" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" AutoEventWireup="true" CodeFile="ManageEvents.aspx.cs" Inherits="WebPages_Admin_WebPages_ManageEvents" %>
 
-<!DOCTYPE html>
-<style>
-      #form1 {
-          
-           background-color: #000;
-           font-family: Courier;
-	       color: white;
-	       font-size:20px;
-            
-        }
-         </style>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
-    <title>Manage Evaluations</title>
-</head>
-<body>
-    <a href ="AdminHome.aspx" style="color: black">Back to Admin Dashboard </a>
-    <form id="form1" runat="server">
-    <div>
-    <table>
-            <tr>
-                <td><h3><asp:Label ID="Label1" runat="server" Text= "Enter Search Criteria:"></asp:Label></h3></td>
-            </tr>
-            <tr>
-                <td><asp:Label ID="Label2" runat="server" Text="Event ID:"></asp:Label> </td>
-                
-                <td>
-                    <asp:TextBox ID="txtEventID" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            
-            <tr>
-                <td></td>
-                <td>
-                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/adminCalendar") %>
 
-                </td>
-            </tr>
-        </table>
+    <%: System.Web.Optimization.Styles.Render("~/Content/css") %>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <div id="wrap">
+        <div id="external-events-wrapper">
+            <div id="external-events">
+                <h3>Create Events</h3>
+                <div id="MC" class="fc-event MC">MC</div>
+                <div id="B-Boy" class="fc-event B-Boy">B-Boy</div>
+                <div id="DJ" class="fc-event DJ">DJ</div>
+                <div id="Graffiti" class="fc-event Graffiti">Graffiti</div>
+                <div id="CommunityService" class="fc-event Community-Service">Community Service</div>
+                <div id="General" class="fc-event General">General</div>
+            </div>
+            <div class="external-event-text">
+                <label for="txtExternalEventTitle"><strong>Event Title</strong></label><input type="text" id="txtExternalEventTitle" />
+                <label for="txtExternalEventDescription"><strong>Event Description</strong></label><input type="text" id="txtExternalEventDescription" />
+                <label for="txtLocation"><strong>Event Location:</strong></label><input type="text" id="txtLocation" onfocus="geoLocate()" />
+            </div>
+        </div>
+
+        <div id="calendar"></div>
+        <div id="trashCan" class="ui-widget-header">
+            <p>Delete Event</p>
+        </div>
+        <div style='clear: both'></div>
     </div>
-        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="EventID" DataSourceID="SqlDataSource1" ForeColor="Black">
-            <Columns>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-                <asp:BoundField DataField="EventID" HeaderText="EventID" InsertVisible="False" ReadOnly="True" SortExpression="EventID" />
-                <asp:BoundField DataField="EventName" HeaderText="EventName" SortExpression="EventName" />
-                <asp:BoundField DataField="EventDate" HeaderText="EventDate" SortExpression="EventDate" />
-                <asp:BoundField DataField="EventTopic" HeaderText="EventTopic" SortExpression="EventTopic" />
-            </Columns>
-            <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
-            <RowStyle BackColor="White" />
-            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="Gray" />
-            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-            <SortedDescendingHeaderStyle BackColor="#383838" />
-        </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:cs %>" DeleteCommand="DELETE FROM [Event] WHERE [EventID] = @original_EventID AND (([EventName] = @original_EventName) OR ([EventName] IS NULL AND @original_EventName IS NULL)) AND (([EventDate] = @original_EventDate) OR ([EventDate] IS NULL AND @original_EventDate IS NULL)) AND (([EventTopic] = @original_EventTopic) OR ([EventTopic] IS NULL AND @original_EventTopic IS NULL))" InsertCommand="INSERT INTO [Event] ([EventName], [EventDate], [EventTopic]) VALUES (@EventName, @EventDate, @EventTopic)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Event]" UpdateCommand="UPDATE [Event] SET [EventName] = @EventName, [EventDate] = @EventDate, [EventTopic] = @EventTopic WHERE [EventID] = @original_EventID AND (([EventName] = @original_EventName) OR ([EventName] IS NULL AND @original_EventName IS NULL)) AND (([EventDate] = @original_EventDate) OR ([EventDate] IS NULL AND @original_EventDate IS NULL)) AND (([EventTopic] = @original_EventTopic) OR ([EventTopic] IS NULL AND @original_EventTopic IS NULL))">
-            <DeleteParameters>
-                <asp:Parameter Name="original_EventID" Type="Int32" />
-                <asp:Parameter Name="original_EventName" Type="String" />
-                <asp:Parameter Name="original_EventDate" Type="DateTime" />
-                <asp:Parameter Name="original_EventTopic" Type="String" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="EventName" Type="String" />
-                <asp:Parameter Name="EventDate" Type="DateTime" />
-                <asp:Parameter Name="EventTopic" Type="String" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="EventName" Type="String" />
-                <asp:Parameter Name="EventDate" Type="DateTime" />
-                <asp:Parameter Name="EventTopic" Type="String" />
-                <asp:Parameter Name="original_EventID" Type="Int32" />
-                <asp:Parameter Name="original_EventName" Type="String" />
-                <asp:Parameter Name="original_EventDate" Type="DateTime" />
-                <asp:Parameter Name="original_EventTopic" Type="String" />
-            </UpdateParameters>
-        </asp:SqlDataSource>
-        <asp:GridView ID="GridView2" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="EventID,MemberID" DataSourceID="SqlDataSource2" ForeColor="Black">
-            <Columns>
-                <asp:BoundField DataField="EventID" HeaderText="EventID" ReadOnly="True" SortExpression="EventID" />
-                <asp:BoundField DataField="MemberID" HeaderText="MemberID" ReadOnly="True" SortExpression="MemberID" />
-                <asp:BoundField DataField="ActuallyAttended" HeaderText="ActuallyAttended" SortExpression="ActuallyAttended" />
-            </Columns>
-            <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
-            <RowStyle BackColor="White" />
-            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="#808080" />
-            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-            <SortedDescendingHeaderStyle BackColor="#383838" />
-        </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:cs %>" SelectCommand="SELECT * FROM [EventAttendance]"></asp:SqlDataSource>
-    </form>
-</body>
-</html>
+    <div id="eventForm" title="Add New Event" style="display: none">
+        <form runat="server">
+            <fieldset>
+                <label for="txtEventTitle">Event Title:</label><input type="text" id="txtEventTitle" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventStartDate">Event Start Date:</label><input type="text" id="txtEventStartDate" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventEndDate">Event End Date:</label><input type="text" id="txtEventEndDate" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventDescription">Event Description:</label><input type="text" id="txtEventDescription" class="text-center ui-widget-content ui-corner-all" />
+                <label for="txtEventLocation">Event Location:</label><input type="text" id="txtEventLocation" class="text-center ui-widget-content ui-corner-all" />
+
+                <label for="ddlEventTopic">Event Topic:</label>
+                <select id="ddlEventTopic" class="ui-selectmenu">
+                    <option value="MC">MC</option>
+                    <option value="DJ">DJ</option>
+                    <option value="B-Boy">B-Boy</option>
+                    <option value="Graffiti">Graffiti</option>
+                    <option value="Community Service">Community Service</option>
+                    <option value="General">General</option>
+                </select>
+
+                <input type="submit" id="btnAddEvent" tabindex="-1" style="position: absolute; top: -10000px" />
+            </fieldset>
+            <asp:ScriptManager ID="scriptManager" runat="server">
+                <Scripts>
+                    <asp:ScriptReference Path="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK7q44pdNrG5IN3XFw9_rR-b8n_XTI4D4
+        &libraries=places&callback=initAutoComplete" />
+                </Scripts>
+            </asp:ScriptManager>
+        </form>
+    </div>
+</asp:Content>

@@ -10,18 +10,7 @@
             <tr>
                 <td><h3>Teacher Profile</h3></td>
             </tr>
-            <tr>
-                <td>First Name: </td>
-                <td>
-                    <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td>Last Name: </td>
-                <td>
-                    <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
-                </td>
-            </tr>
+            
             <tr>
                 <td></td>
                 <td>
@@ -60,7 +49,10 @@
                             m.MemberType
                             FROM member m
                             JOIN Staff s
-                            ON m.memberID = s.staffID">
+                            ON m.memberID = s.staffID WHERE M.MemberID = @MemberID">
+              <SelectParameters>
+                   <asp:SessionParameter Name="MemberID" SessionField="MemberID" Type="Int32" />
+              </SelectParameters>
           </asp:SqlDataSource>
 
              <asp:GridView ID="gvClassSchedule" runat="server" EmptyDataText="No Rows Available" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="TeacherID" ForeColor="Black">

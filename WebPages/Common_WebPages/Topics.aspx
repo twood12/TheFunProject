@@ -5,9 +5,7 @@
     html {background-color: black}
         #form1 {
           
-           background-color: #000;
-           font-family: Courier;
-	       color: white;
+           font-family: Courier;	       
 	       font-size:20px;
             
         }
@@ -29,13 +27,13 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOPICS
     
     </div>
-        <asp:Button ID="DJ" runat="server" Text="DJ" OnClick="DJ_Click" style="margin-left: 100px" Width="120px" Height="82px" BackColor="DarkRed" />
-        <asp:Button ID="MC" runat="server" OnClick="MC_Click" style="margin-left: 466px" Text="MC" Width="120px" Height="82px" BackColor="Crimson" />
+        <asp:Button ID="DJ" runat="server" Text="DJ" OnClick="DJ_Click" style="margin-left: 100px" Width="120px" Height="82px" BackColor="#FFD70D" />
+        <asp:Button ID="MC" runat="server" OnClick="MC_Click" style="margin-left: 466px" Text="MC" Width="120px" Height="82px" BackColor="#FFD500" />
         <p>
-            <asp:Button ID="Breaking" runat="server" OnClick="Breaking_Click" style="margin-left: 100px" Text="Breaking" Width="120px" Height="82px" BackColor="FireBrick"  />
-            <asp:Button ID="Graffti" runat="server" OnClick="Graffti_Click" style="margin-left: 466px" Text="Graffti" Width="120px" Height="82px" BackColor="IndianRed"/>
+            <asp:Button ID="Breaking" runat="server" OnClick="Breaking_Click" style="margin-left: 100px" Text="Breaking" Width="120px" Height="82px" BackColor="#FFD70D"  />
+            <asp:Button ID="Graffti" runat="server" OnClick="Graffti_Click" style="margin-left: 466px" Text="Graffti" Width="120px" Height="82px" BackColor="#FFD500"/>
         </p>
-        <asp:Button ID="Knowledge" runat="server" OnClick="Knowledge_Onclick" style="margin-left: 354px" Text="Knowledge/Misc" Width="254px" Height="74px" BackColor="LightSalmon" />
+        <asp:Button ID="Knowledge" runat="server" OnClick="Knowledge_Onclick" style="margin-left: 354px" Text="Knowledge/Misc" Width="254px" Height="74px" BackColor="#FFD70D" />
         
     </form>
 

@@ -34,6 +34,8 @@
                  <asp:BoundField DataField="CourseID" HeaderText="CourseID" ReadOnly="True" SortExpression="CourseID" />
                   <asp:BoundField DataField="CourseName" HeaderText="Course Name" ReadOnly="True" SortExpression="CourseName" />
                   <asp:BoundField DataField="Difficulty" HeaderText="Difficulty" ReadOnly="True" SortExpression="Difficulty" />
+                <asp:BoundField DataField="Semester" HeaderText="Semester" ReadOnly="True" SortExpression="Semester" />
+                <asp:BoundField DataField="Year" HeaderText="Year" ReadOnly="True" SortExpression="Year" />
                   <asp:BoundField DataField="MemberID" HeaderText="MemberID" ReadOnly="True" SortExpression="MemberID" />
                   <asp:BoundField DataField="FirstName" HeaderText="Teacher" ReadOnly="True" SortExpression="FirstName" />
                   <asp:BoundField DataField="LastName" HeaderText="Name" ReadOnly="True" SortExpression="LastName" />
@@ -41,10 +43,9 @@
                   <asp:BoundField DataField="MeetingDays" HeaderText="Meeting Days" ReadOnly="True" SortExpression="MeetingDays" />
                   <asp:BoundField DataField="MeetingTime" HeaderText="Meeting Time" ReadOnly="True" SortExpression="MeetingTime" />
                   <asp:BoundField DataField="RoomNumber" HeaderText="Room/Location" ReadOnly="True" SortExpression="RoomNumber" />
-                  <asp:BoundField DataField="StartDate" HeaderText="Start Date" ReadOnly="True" SortExpression="StartDate" />
-                  <asp:BoundField DataField="EndDate" HeaderText="End Date" ReadOnly="True" SortExpression="EndDate" />
+                  <asp:BoundField DataField="ClassStartDate" HeaderText="Start Date" ReadOnly="True" SortExpression="ClassStartDate" />
+                  <asp:BoundField DataField="ClassEndDate" HeaderText="End Date" ReadOnly="True" SortExpression="ClassEndDate" />
                   <asp:BoundField DataField="LocationID" HeaderText="LocationID" ReadOnly="True" SortExpression="LocationID" />
-                  <asp:BoundField DataField="LocationName" HeaderText="Location" ReadOnly="True" SortExpression="LocationName" />
                   <asp:BoundField DataField="Street" HeaderText="Street" ReadOnly="True" SortExpression="Street" />
                   <asp:BoundField DataField="City" HeaderText="City" ReadOnly="True" SortExpression="City" />
                   <asp:BoundField DataField="State" HeaderText="State" ReadOnly="True" SortExpression="State" />
