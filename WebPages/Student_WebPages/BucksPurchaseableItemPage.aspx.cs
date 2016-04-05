@@ -24,11 +24,11 @@ public partial class WebPages_Student_WebPages_BucksPurchaseableItemPage : Syste
 
             string sql = "Exec UpdateBuckAccount " + FormView5.SelectedValue + ", " + FormView2.SelectedValue + ", " + FormView1.SelectedValue;
             sendDBCommand(sql);
-            System.Windows.Forms.MessageBox.Show("You're teacher has been notify about your purchase. Your bucks have been removed and you will recieve your item soon", "Important Message");
+            Response.Write("You're teacher has been notify about your purchase. Your bucks have been removed and you will recieve your item soon");
         }
         else
         {
-            System.Windows.Forms.MessageBox.Show("You don't have enough Bucks to purchase this");
+            Response.Write("You don't have enough Bucks to purchase this");
         }
 
 

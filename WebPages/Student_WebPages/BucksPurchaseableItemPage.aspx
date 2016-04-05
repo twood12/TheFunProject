@@ -11,9 +11,6 @@ html {background-color: black}
 	       font-size:20px;
             
         }
-        .auto-style1 {
-            background-color: #000;
-        }
 
         .auto-style2 {
             width: 200px;

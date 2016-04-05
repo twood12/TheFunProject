@@ -13,6 +13,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+   <body>
     <form runat="server" method="post" id="frmStudentProfile">
         <table>
             <tr>
@@ -27,6 +28,7 @@
                 <Columns>
                     <asp:BoundField DataField="MemberID" HeaderText="StudentID" ReadOnly="True" SortExpression="MemberID" />
                     <asp:BoundField DataField="FirstName" HeaderText="First Name" ReadOnly="True" SortExpression="FirstName" />
+                    <asp:BoundField DataField="LastName" HeaderText="Last Name" ReadOnly="True" SortExpression="LastName" />
                     <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" SortExpression="Email" />
                     <asp:BoundField DataField="MemberType" HeaderText="Member Type" ReadOnly="True" SortExpression="Member Type" />
                     <asp:BoundField DataField="GradeLevel" HeaderText="Grade Level" ReadOnly="True" SortExpression="GradeLevel" />
@@ -60,20 +62,31 @@
                     <asp:SessionParameter Name="MemberID" SessionField="MemberID" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:GridView ID="GridView1" runat="server" EmptyDataText="No Rows Available" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="StudentID" DataSourceID="SqlDataSource4" ForeColor="Black">
+            <asp:GridView ID="GridView1" runat="server" EmptyDataText="No Rows Available" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="CourseID" DataSourceID="SqlDataSource4" ForeColor="Black">
                 <Columns>
                     <asp:TemplateField HeaderText="Select">
                         <ItemTemplate>
                             <asp:CheckBox ID="chkSelect" runat="server" />
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="StudentID" HeaderText="StudentID" ReadOnly="True" SortExpression="StudentID" />
                     <asp:BoundField DataField="CourseID" HeaderText="CourseID" ReadOnly="True" SortExpression="CourseID" />
+                    <asp:BoundField DataField="CourseName" HeaderText="CourseName" ReadOnly="True" SortExpression="CourseName" />
+                    <asp:BoundField DataField="Difficulty" HeaderText="Difficulty" ReadOnly="True" SortExpression="Difficulty" />
+                    <asp:BoundField DataField="MemberID" HeaderText="Teacher ID" ReadOnly="True" SortExpression="MemberID" />
+                    <asp:BoundField DataField="FirstName" HeaderText="First Name" ReadOnly="True" SortExpression="FirstName" />
+                    <asp:BoundField DataField="LastName" HeaderText="Last Name" ReadOnly="True" SortExpression="LastName" />
+                    <asp:BoundField DataField="SectionID" HeaderText="SectionID" ReadOnly="True" SortExpression="SectionID" />
                     <asp:BoundField DataField="MeetingDays" HeaderText="Meeting Days" ReadOnly="True" SortExpression="MeetingDays" />
-                    <asp:BoundField DataField="MeetingTime" HeaderText="MeetingTime" ReadOnly="True" SortExpression="MeetingTime" />
-                    <asp:BoundField DataField="RoomNumber" HeaderText="Room No." ReadOnly="True" SortExpression="RoomNumber" />
-                    <asp:BoundField DataField="FirstName" HeaderText="Student" ReadOnly="True" SortExpression="FirstName" />
-                    <asp:BoundField DataField="LastName" HeaderText="Name" ReadOnly="True" SortExpression="LastName" />
+                    <asp:BoundField DataField="MeetingTime" HeaderText="Meeting Time" ReadOnly="True" SortExpression="MeetingTime" />
+                    <asp:BoundField DataField="RoomNumber" HeaderText="Room Number" ReadOnly="True" SortExpression="RoomNumber" />
+                    <asp:BoundField DataField="ClassStartDate" HeaderText="Start Date" ReadOnly="True" SortExpression="ClassStartDate" />
+                    <asp:BoundField DataField="ClassEndDate" HeaderText="End Date" ReadOnly="True" SortExpression="ClassEndDate" />
+                    <asp:BoundField DataField="LocationID" HeaderText="LocationID" ReadOnly="True" SortExpression="LocationID" />
+                    <asp:BoundField DataField="LocationName" HeaderText="Location Name" ReadOnly="True" SortExpression="LocationName" />
+                    <asp:BoundField DataField="Street" HeaderText="Street" ReadOnly="True" SortExpression="Street" />
+                    <asp:BoundField DataField="City" HeaderText="City" ReadOnly="True" SortExpression="City" />
+                    <asp:BoundField DataField="State" HeaderText="State" ReadOnly="True" SortExpression="State" />
+
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -86,25 +99,7 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" OldValuesParameterFormatString="original_{0}"
-                SelectCommand="select s.StudentID,
-                    c.CourseID,
-                    sec.MeetingDays,
-                    sec.MeetingTime,
-                    sec.RoomNumber,
-                    m.FirstName,
-                    m.LastName
-                    from ClassSchedule cs
-					JOIN
-                    student s
-                    ON cs.StudentID = s.StudentID
-					Join
-					member m
-					on s.studentID = m.memberID
-					JOIN
-					section sec
-					on sec.sectionID = cs.sectionID
-					JOIN course c
-					on c.CourseID = cs.CourseID WHERE M.MemberID = @MemberID">
+                SelectCommand="select distinct c.CourseID, c.CourseName, c.Difficulty, m.MemberID, m.FirstName,m.LastName,se.SectionID, se.MeetingDays,se.MeetingTime,se.RoomNumber, cs.ClassStartDate, cs.ClassEndDate, al.LocationID, al.LocationName, al.Street, al.City, al.State FROM ClassSchedule cs JOIN member m on m.memberID = cs.TeacherID JOIN Course c on c.CourseID = cs.CourseID JOIN section se on se.SectionID = cs.SectionID JOIN AcademyLocation al on al.LocationID = cs.locationID WHERE Cs.StudentID = @MemberID">
                 <SelectParameters>
                     <asp:SessionParameter Name="MemberID" SessionField="MemberID" Type="Int32" />
                 </SelectParameters>
@@ -187,4 +182,5 @@
             <div id="map"></div>
         </div>
     </div>
+       </body> 
 </asp:Content>

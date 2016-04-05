@@ -32,6 +32,12 @@ public partial class WebPages_Admin_WebPages_ReportPage : System.Web.UI.Page
         {
 
         }
+        else if (ddReportList.SelectedIndex == 3)
+        {
+            gvClassEnrollment.DataBind();
+            gvClassEnrollment.Visible = true;
+            //btnExportToExcel.Visible = true;
+        }
     }
 
     // This method will get the ID from a table -> the Parameter must be unique to that table
@@ -80,7 +86,7 @@ public partial class WebPages_Admin_WebPages_ReportPage : System.Web.UI.Page
         HttpContext context = HttpContext.Current;
         context.Response.Clear();
         context.Response.Buffer = true;
-        context.Response.AddHeader("content-disposition", "attachment;filename=ManageBucks.xls");
+        context.Response.AddHeader("content-disposition", "attachment;filename=ManageBucks.xlsx");
         context.Response.Charset = "";
         context.Response.ContentType = "application/vnd.ms-excel";
         using (StringWriter sw = new StringWriter())
@@ -125,6 +131,10 @@ public partial class WebPages_Admin_WebPages_ReportPage : System.Web.UI.Page
         if (ddReportList.SelectedIndex == 1)
         {
             ExportGridToExcel(gvCourseEvaluationReport);
+        }
+        else if (ddReportList.SelectedIndex == 3)
+        {
+            ExportGridToExcel(gvClassEnrollment);
         }
 
 

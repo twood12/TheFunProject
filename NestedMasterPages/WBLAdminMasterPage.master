@@ -6,13 +6,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <div id="navContent"> 
+        <ul>
+            <li><a href="~/WebPages/Admin_WebPages/SearchEngine.aspx" ID="lnkSearchEngine" runat="server">Search Engine</a></li>
+             <li><a href="~/WebPages/Admin_WebPages/ReportPage.aspx" ID="lnkAdminReports" runat="server">Reports</a></li>
 
-            <asp:HyperLink ID="lnkSearchEngine" runat="server" 
-             NavigateUrl="~/WebPages/Admin_WebPages/SearchEngine.aspx" 
-             Text="Search Engine" />
-             <asp:HyperLink ID="lnkAdminReports" runat="server" 
-             NavigateUrl="~/WebPages/Admin_WebPages/ReportPage.aspx" 
-             Text="Reports" />
+        </ul>
         </div>
     
     

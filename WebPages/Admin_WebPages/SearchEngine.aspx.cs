@@ -18,6 +18,12 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
             ddAcademicYear.DataBind();
         }
     }
+
+    protected void btnManageEvents_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("ManageEvents.aspx", false);
+    }
+
     protected void btnCategory_Click(object sender, EventArgs e)
         {
             lblSelectedCategory.Visible = false;
@@ -413,6 +419,8 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
             dropCategoryOptions();
             dropSelectedCategory();
             dropSearchArea();
+            ddCategoryItems.Visible = false;
+            lblCategoryItems.Visible = false;
             ddAttendanceType.Visible = false;
             lnkSelectAccountView.Visible = false;
             ddBuckAccount.Visible = false;
@@ -1002,7 +1010,7 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
                 // Edit Course
                 else if (ddCategoryItems.SelectedIndex == 2)
                 {
-                    Session["CourseID"] = getIdForTable("CourseID", "Course", "SubjectName", ddCategoryOptions.SelectedItem.Value); 
+                    Session["CourseID"] = getIdForTable("CourseID", "Course", "CourseName", ddCategoryOptions.SelectedItem.Value); 
                     gvCoursesInSubject.DataBind();
                     gvCoursesInSubject.Visible = true;
                 }
@@ -1091,7 +1099,7 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
     // This method will get the ID from a table -> the Parameter must be unique to that table
     private string getIdForTable(string idColumn, string tableName, string parameterName, string parameterValue)
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCSS"].ToString());
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBXY"].ToString());
         con.Open();
         string sql = "Select " + idColumn + " from " + tableName + " where " + parameterName + "= @" + parameterName;
         SqlCommand select = new SqlCommand(sql, con);

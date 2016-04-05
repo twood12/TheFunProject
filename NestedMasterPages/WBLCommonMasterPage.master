@@ -6,31 +6,34 @@
 <head runat="server">
     <title>Common Master Page</title>
     <%: System.Web.Optimization.Styles.Render("~/Content/Master/css") %>
-    <asp:ContentPlaceHolder ID="head" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
         <meta name="description" content="Welcome to the Words, Beats, and Life System." />
+        
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
         <link rel="stylesheet" href="GlobalStyleSheet.css" type="text/css" />
     </asp:ContentPlaceHolder>
 </head>
 
+
 <body>
-    <div id="navContent">
-        <asp:HyperLink ID="lnkCommunity" runat="server"
-            NavigateUrl="~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx"
-            Text="Community" />
+            <img src="http://www.wblinc.org/wp-content/uploads/2015/05/logo-transparent-04-30-15.png" alt="Words Beats & Life Inc. | Teaching Convening Presenting Hip-Hop Since 2002" />
+            <div id="navContent"> 
+             <ul style="float:right;">
+                <li><a href="~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx" ID="lnkCommunity" runat="server" >Community</a></li>
 
-        <asp:HyperLink ID="lnkEmail" runat="server"
-            NavigateUrl="~/WebPages/Common_WebPages/inbox.aspx"
-            Text="Inbox" />
-    </div>
+                <li><a href="~/WebPages/Common_WebPages/inbox.aspx" ID="lnkEmail" runat="server">Inbox</a></li>
+            </ul>
+        </div>
+    
+        <div id="topContent"> 
 
-    <div id="topContent">
-    </div>
-
-    <div id="mainContent">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
+        </div>
+        
+        <div id="mainContent"> 
+            <asp:ContentPlaceHolder id="MainContent" runat="server"> 
+            </asp:ContentPlaceHolder>
+        </div>
+    
 </body>
 </html>
