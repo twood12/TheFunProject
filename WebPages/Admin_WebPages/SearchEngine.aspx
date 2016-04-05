@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SearchEngine.aspx.cs" Inherits="WebPages_Admin_WebPages_SearchEngine" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-<head>
+    <head>
     <title></title>
     <style type="text/css">
         .auto-style1 {
@@ -21,7 +21,7 @@
 </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-<body>
+    <body>
     <form id="frmSearchEngine" runat="server">
         <table>
             <tr>
@@ -78,6 +78,14 @@
                         ID="btnReports" 
                         runat="server" 
                         Text="Go to Reports" OnClick="btnReports_Click" />
+                </td>
+                <td>
+                    <asp:Button
+                        ID="btnManageEvents"
+                        runat="server"
+                        Text="Manage Events"
+                        Visible="True" 
+                        OnClick="btnManageEvents_Click"/>
                 </td>
             </tr>
            <tr>

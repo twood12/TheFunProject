@@ -17,14 +17,13 @@
 
 
 <body>
+            <img src="http://www.wblinc.org/wp-content/uploads/2015/05/logo-transparent-04-30-15.png" alt="Words Beats & Life Inc. | Teaching Convening Presenting Hip-Hop Since 2002" />
             <div id="navContent"> 
-             <asp:HyperLink ID="lnkCommunity" runat="server" 
-             NavigateUrl="~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx" 
-             Text="Community" />
+             <ul style="float:right;">
+                <li><a href="~/WebPages/Common_WebPages/CommunityBlogHomePage.aspx" ID="lnkCommunity" runat="server" >Community</a></li>
 
-            <asp:HyperLink ID="lnkEmail" runat="server" 
-             NavigateUrl="~/WebPages/Common_WebPages/inbox.aspx" 
-             Text="Inbox" />
+                <li><a href="~/WebPages/Common_WebPages/inbox.aspx" ID="lnkEmail" runat="server">Inbox</a></li>
+            </ul>
         </div>
     
         <div id="topContent"> 

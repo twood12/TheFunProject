@@ -8,15 +8,10 @@
 <style type="text/css">
     html {background-color: black}
         #form1 {
-          
-           background-color: #000;
-           font-family: Courier;
-	       color: white;
+                     
+           font-family: Courier;	       
 	       font-size:20px;
             
-        }
-        .auto-style1 {
-            background-color: #000;
         }
 
         .auto-style2 {
@@ -32,7 +27,7 @@
             </header>
     <form id="form1" runat="server">
     <div>
-        <h2>Community Blog - WE ARE HIP HOP!!</h2>
+        
     
         <br />
         <br />

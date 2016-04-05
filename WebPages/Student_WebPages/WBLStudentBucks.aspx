@@ -4,16 +4,12 @@
     <style>
 html {background-color: black}
         #form1 {
-          
-           background-color: #000;
+                     
            font-family: Courier;
-	       color: white;
 	       font-size:20px;
             
         }
-        .auto-style1 {
-            background-color: #000;
-        }
+
 
         .auto-style2 {
             width: 200px;
@@ -198,7 +194,12 @@ html {background-color: black}
         <p>
             &nbsp;</p>
         <p>
-            <asp:Button ID="ExportToExcel4" runat="server" style="margin-left: 1030px" Text="ExportToExcel" OnClick="ExportToExcel4_Click" />
+            <asp:Button ID="ExportToExcel4" 
+                runat="server" 
+                style="margin-left: 1030px" 
+                Text="ExportToExcel" 
+                OnClick="ExportToExcel4_Click" 
+                Visible="false" />
         </p>
     </form>
     

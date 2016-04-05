@@ -28,6 +28,7 @@
                 <asp:ListItem>Report List</asp:ListItem>
                 <asp:ListItem>Course Evaluation</asp:ListItem>
                 <asp:ListItem>StudentTest</asp:ListItem>
+                <asp:ListItem>Enrollment Trends</asp:ListItem>
             </asp:DropDownList>
         </div>
         </div>
@@ -118,6 +119,30 @@
                 </div>
             </div>
         </div> 
+        <div>
+            <asp:GridView 
+                ID="gvClassEnrollment" 
+                runat="server" 
+                AllowSorting="True" 
+                AutoGenerateColumns="False" 
+                DataSourceID="sqlClassEnrollment"
+                Visible="false">
+                <Columns>
+                    <asp:BoundField DataField="CourseName" HeaderText="CourseName" SortExpression="CourseName" />
+                    <asp:BoundField DataField="CourseDescription" HeaderText="CourseDescription" SortExpression="CourseDescription" />
+                    <asp:BoundField DataField="Difficulty" HeaderText="Difficulty" SortExpression="Difficulty" />
+                    <asp:BoundField DataField="Enrolled Students" HeaderText="Enrolled Students" ReadOnly="True" SortExpression="Enrolled Students" />
+                    <asp:BoundField DataField="Semester" HeaderText="Semester" SortExpression="Semester" />
+                    <asp:BoundField DataField="Year" HeaderText="Year" SortExpression="Year" />
+                </Columns>
+            </asp:GridView>
+            <asp:SqlDataSource ID="sqlClassEnrollment" runat="server" ConnectionString="<%$ ConnectionStrings:DBXY %>" SelectCommand="SELECT        Course.CourseName, Course.CourseDescription, Course.Difficulty, COUNT(Student.StudentID) AS [Enrolled Students], ClassSchedule.Semester, ClassSchedule.Year
+FROM            Course INNER JOIN
+                         ClassSchedule ON Course.CourseID = ClassSchedule.CourseID INNER JOIN
+                         Student ON ClassSchedule.StudentID = Student.StudentID
+GROUP BY Course.CourseName, Course.CourseDescription, Course.CourseObjectives, Course.Difficulty, ClassSchedule.Semester, ClassSchedule.Year
+order by semester"></asp:SqlDataSource>
+        </div>
         <div>
             <hr />
         </div>
