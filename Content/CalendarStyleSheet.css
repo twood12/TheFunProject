@@ -1,110 +1,119 @@
 ﻿body {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 14px;
-            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-        }
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+}
 
-        #wrap {
-            width: 1500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+#wrap {
+    width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        .ui-dialog {
-            overflow: visible;
-        }
+h3{
+    color: black;
+}
 
-        #external-events-wrapper {
-            float: left;
-            width: 200px;
-            padding: 0 10px;
-            border: 1px solid #ccc;
-            background: #eee;
-            text-align: left;
-        }
+label{
+    color: black;
+}
 
-        #external-events h3 {
-            font-size: 16px;
-            margin-top: 0;
-            padding-top: 1em;
-        }
+.ui-dialog {
+    overflow: visible;
+}
 
-        #external-events .fc-event {
-            margin: 10px 0;
-            cursor: pointer;
-        }
+#external-events-wrapper {
+    float: left;
+    width: 200px;
+    padding: 20px 10px;
+    border: 1px solid #ccc;
+    background: #EEEEEE;
+    text-align: left;
+}
 
-        #B-Boy .B-Boy, .fc-event{
-            background-color: purple;
-        }
+#external-events h3 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+}
 
-        #MC .fc-event, .MC{
-            background-color: magenta;
-        }
+#external-events .fc-event {
+    margin: 10px 0;
+    cursor: pointer;
+}
 
-        #DJ .fc-event, .DJ{
-            background-color: limegreen;
-        }
+#B-Boy .B-Boy, .fc-event {
+    background-color: purple;
+}
 
-        #General .fc-event, .General{
-            background-color: dodgerblue;
-        }
+#MC .fc-event, .MC {
+    background-color: magenta;
+}
 
-        #Graffiti .fc-event, .Graffiti{
-            background-color: gold;
-        }
+#DJ .fc-event, .DJ {
+    background-color: limegreen;
+}
 
-        #CommunityService .fc-event, .Community-Service{
-            background-color: lightslategrey;
-        }
+#General .fc-event, .General {
+    background-color: dodgerblue;
+}
 
-        #external-event-text {
-            float: left;
-            width: 100px;
-        }
+#Graffiti .fc-event, .Graffiti {
+    background-color: gold;
+}
 
-        #external-event-text {
-            margin: auto;
-            float: left;
-            width: inherit;
-        }
+#CommunityService .fc-event, .Community-Service {
+    background-color: lightslategrey;
+}
 
-        fieldset {
-            padding: 0;
-            border: 0;
-            margin-top: 25px;
-        }
+#external-event-text {
+    float: left;
+    width: 75px;
+}
 
-        input.text {
-            margin-bottom: 12px;
-            width: 95%;
-            padding: .4em;
-        }
+#external-event-text {
+    margin: auto;
+    float: left;
+    width: inherit;
+}
 
-        label, input {
-            display: block;
-        }
+fieldset {
+    padding: 0;
+    border: 0;
+    margin-top: 25px;
+}
 
-        #external-events p {
-            margin: 1.5em 0;
-            font-size: 11px;
-            color: #666;
-        }
+input.text {
+    margin-bottom: 12px;
+    width: 95%;
+    padding: .4em;
+}
 
-            #external-events p input {
-                margin: 0;
-                vertical-align: middle;
-            }
+label, input {
+    display: block;
+    text-align: left;
+}
 
-        #trashCan {
-            float: left;
-            width: 150px;
-            vertical-align: middle;
-            padding: inherit;
-        }
+#external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+}
 
-        #calendar {
-            float: left;
-            width: 900px;
-        }
+    #external-events p input {
+        margin: 0;
+        vertical-align: middle;
+    }
+
+#trashCan {
+    float: left;
+    width: 150px;
+    vertical-align: middle;
+    padding: inherit;
+}
+
+#calendar {
+    float: left;
+    width: 900px;
+}

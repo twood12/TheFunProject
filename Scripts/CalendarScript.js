@@ -149,11 +149,14 @@ function updateEvent(event) {
     var eventToSave = new Object();
     eventToSave.eventID = event.id;
     eventToSave.eventTitle = event.title;
+    //eventToSave.eventStartDate = event.start.format();
+    //eventToSave.eventEndDate = event.start.add(1, 'h').format();
     eventToSave.eventStartDate = event.start.format('YYYY-MM-DD h:mm:ss');
     eventToSave.eventEndDate = event.start.add(1, 'h').format('YYYY-MM-DD h:mm:ss');
     eventToSave.eventTopic = event.topic,
     eventToSave.eventPlaceID = event.placeID;
     eventToSave.eventDescription = event.description;
+    console.log(eventToSave);
 
     $.ajax({
         type: "POST",
@@ -170,10 +173,10 @@ function updateEvent(event) {
     });
 }
 
-function intButtons() {
+function intButtons() { // delete?
     $('.btn').button();
 }
-
+// adds drag/drop functionality the events
 function intDroppables() {
     $('#external-events .fc-event').each(function () {
         $(this).data('event', {
@@ -189,13 +192,14 @@ function intDroppables() {
         });
     });
 }
-function intExternalEvents() {
+function intExternalEvents() { // not used?
     var clonedEvent = $('#external-events .fc-event').clone();
     var eventDescription = $('#txtExternalEventDescription').val();
     var eventTitle = $('#txtExternalEventTitle').val();
     $(clonedEvent).attr('data-description', eventDescription);
     $(clonedEvent).attr('data-title', eventTitle);
 }
+// deletes event from the DB when it is dropped in the trashcan
 function deleteEvent(event) {
     eventToDelete = new Object();
     eventToDelete.eventID = event.id;
@@ -213,7 +217,7 @@ function deleteEvent(event) {
         }
     });
 }
-
+// called when an existing event's date/time is changed by being dropped on the calendar
 function eventDropped(date, externalEvent) {
     var event_object;
     var copiedEventObject;
@@ -228,28 +232,35 @@ function eventDropped(date, externalEvent) {
     copiedEventObject.end = endDate;
     copiedEventObject.allDay = false;
     copiedEventObject.placeID = place.place_id;
-    copiedEventObject.title = event_object.title;
+    copiedEventObject.topic = event_object.title;
+    //copiedEventObject.title = event_object.title;
     copiedEventObject.description = event_object.description;
     updateEvent(copiedEventObject);
     $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
     $('#calendar').fullCalendar('rerenderEvents');
     place = "";
 }
-
+// used to update an existing date in the calendar
 function showEventClickedPopUp(event) {
     $("#eventForm").dialog({
         autoOpen: false,
-        height: 400,
-        width: 550,
+        height: 500,
+        width: 500,
+        title: 'Update Event',
         modal: true,
         buttons: {
             "Update Event": function () {
+                // copy values from the clicked event to the new event
                 var copiedEvent = new Object();
+                var e = document.getElementById("ddlEventTopic");
+                topic = e.options[e.selectedIndex].value;
+                copiedEvent.topic = topic;
                 copiedEvent.id = event.id;
                 copiedEvent.title = $("#eventForm #txtEventTitle").val();
                 copiedEvent.start = moment(new Date($("#eventForm #txtEventStartDate").val()));
                 copiedEvent.end = moment(new Date($("#eventForm #txtEventEndDate").val()));
                 copiedEvent.description = $("#eventForm #txtEventDescription").val();
+                copiedEvent.placeID = place.place_id;
                 updateEvent(copiedEvent);
                 $('#calendar').fullCalendar('removeEvents', event.id);
                 $('#calendar').fullCalendar('refetchEvents');
@@ -264,6 +275,13 @@ function showEventClickedPopUp(event) {
         e.preventDefault();
         updateEvent(event);
     });
+    var div = document.getElementById('eventForm');
+    div.title = "Update Event";
+    //var el = document.getElementById('ddlEventTopic');
+    //el.val(event.topic);
+    $('#ddlEventTopic').val(event.topic);
+    autoComplete = new google.maps.places.Autocomplete((document.getElementById('txtEventLocation')), { types: ['geocode'] });
+    autoComplete.addListener('place_changed', savePlaceID);
     $("#eventForm #txtEventDescription").val(event.description);
     $("#eventForm #txtEventTitle").val(event.title);
     $("#eventForm #txtEventStartDate").val(event.start.format('YYYY-MM-DD h:mm:ss'));
@@ -283,11 +301,12 @@ function showDroppedEventPopUp(event) { // currently not used 3/30
     $("txtEventEndDate").val(event.end);
     $("eventForm").dialog('open');
 }
+// called when a user clicks on an empty space on the calendar
 function showPopUp(start, end) {
     $("#eventForm").dialog({
         autoOpen: false,
-        height: 400,
-        width: 450,
+        height: 500,
+        width: 550,
         modal: true,
         buttons: {
             "Add Event": function () {
@@ -296,6 +315,8 @@ function showPopUp(start, end) {
             }
         }
     });
+    autoComplete = new google.maps.places.Autocomplete((document.getElementById('txtEventLocation')), { types: ['geocode'] });
+    autoComplete.addListener('place_changed', savePlaceID);
 
     $("#eventForm #txtEventTitle").val();
     $("#eventForm").find("#btnAddEvent").click(function () {
@@ -306,6 +327,7 @@ function showPopUp(start, end) {
     $("#eventForm").dialog('open');
     $('#ddlEventTopic').selectmenu();
 }
+// resets the textboxes
 function clearTextBoxes() {
     $("#eventForm #txtEventDescription").val("");
     $("#eventForm #txtEventTitle").val("");
@@ -313,13 +335,14 @@ function clearTextBoxes() {
     $("#eventForm #txtEventEndDate").val("");
     $("#eventForm").dialog('close');
 }
+// get next availiable ID to assign it to the event in fullcalendar
 function getNewID() {
-    $.get("/CalendarService.asmx/getMaxEventID", function (data) {
+    $.get("CalendarService.asmx/getMaxEventID", function (data) {
         maxEventID = data;
     });
     return maxEventID;
 }
-
+// called when a time is clicked for the user to add an event.
 function addEventFromDialog() {
     var eventToSave = new Object();
     var event = new Object();
@@ -346,8 +369,6 @@ function addEventFromDialog() {
             debugger;
         }
     });
-}
-function setEventColor(topic) {
 }
 function updateEventSource(data) { // delete?
     var events = new Array();

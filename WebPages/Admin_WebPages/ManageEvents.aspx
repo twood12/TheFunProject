@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" AutoEventWireup="true" CodeFile="ManageEvents.aspx.cs" Inherits="WebPages_Admin_WebPages_ManageEvents" %>
+﻿<%@ Page Title="Manage Events" Language="C#" MasterPageFile="~/NestedMasterPages/WBLAdminMasterPage.master" AutoEventWireup="true" CodeFile="ManageEvents.aspx.cs" Inherits="WebPages_Admin_WebPages_ManageEvents" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <%: System.Web.Optimization.Scripts.Render("~/bundles/adminCalendar") %>
@@ -20,7 +20,7 @@
             <div class="external-event-text">
                 <label for="txtExternalEventTitle"><strong>Event Title</strong></label><input type="text" id="txtExternalEventTitle" />
                 <label for="txtExternalEventDescription"><strong>Event Description</strong></label><input type="text" id="txtExternalEventDescription" />
-                <label for="txtLocation">Event Location:</label><input type="text" id="txtLocation" onfocus="geoLocate()" />
+                <label for="txtLocation"><strong>Event Location:</strong></label><input type="text" id="txtLocation" onfocus="geoLocate()" />
             </div>
         </div>
 
@@ -29,18 +29,7 @@
             <p>Delete Event</p>
         </div>
         <div style='clear: both'></div>
-
-        <!--
-            <div id="eventWrapper">
-            <input id="txtTitle" type="text" value="Title" /> <br />
-            <textarea id="txtDescription">Event Description</textarea> <br />
-            <input type="button" id="btnUpdateEvent" value="Update Event" class="btn" />
-            <input type="button" id="btnCreateEvent" value="Create Event" class="btn" />
-        </div>
-
-        -->
     </div>
-
     <div id="eventForm" title="Add New Event" style="display: none">
         <form runat="server">
             <fieldset>
