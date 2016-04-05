@@ -27,6 +27,7 @@ function displayCalendar() {
                 },
                 editable: true,
                 droppable: true,
+                unselectAuto: true,
                 draggable: true,
                 lazyFetching: false,
                 defaultTimedEventDuration: '01:00:00',
@@ -94,18 +95,19 @@ function displayCalendar() {
                 },
                 eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
                     if ($(this).data("qtip")) $(this).qtip('destroy');
-                    if (!confirm("Are you sure you want to change " + event.title + "'s time to "
-                        + event.end.format('YYYY-MM-DD h:mm:ss'))) {
+                    if (!confirm("Are you sure you want to change " + event.title + "'s end time to "
+                        + event.end.format('MM-DD h:mm'))) {
                         revertFunc();
                     }
                     else {
                         updateEvent(event);
                     }
+                    if ($(this).data("qtip")) $(this).qtip('destroy');
                 },
                 eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
                     if ($(this).data("qtip")) $(this).qtip('destroy');
                     if (!confirm("Are you sure you want to change " + event.title + "'s date to "
-                        + event.start.format('YYYY-MM-DD h:mm:ss') + " - " + event.end.format('YYYY-MM-DD h:mm:ss'))) {
+                        + event.start.format('MM-DD h:mm') + " - " + event.end.format('MM-DD h:mm'))) {
                         revertFunc();
                     }
                     else {
@@ -123,7 +125,9 @@ function displayCalendar() {
                 eventClick: function (event) {
                     showEventClickedPopUp(event);
                 },
-                eventDestroy: function (event, element, view) { },
+                eventDestroy: function (event, element, view) {
+                    element.qtip('destroy');
+                },
                 eventDragStop: function (event, jsEvent) {
                     var trash = jQuery('#trashCan');
                     var ofs = trash.offset();
@@ -244,8 +248,8 @@ function eventDropped(date, externalEvent) {
 function showEventClickedPopUp(event) {
     $("#eventForm").dialog({
         autoOpen: false,
-        height: 500,
-        width: 500,
+        height: 400,
+        width: 200,
         title: 'Update Event',
         modal: true,
         buttons: {

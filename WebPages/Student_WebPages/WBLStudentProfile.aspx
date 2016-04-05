@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedMasterPages/WBLStudentMasterPage.master" AutoEventWireup="true" CodeFile="WBLStudentProfile.aspx.cs" Inherits="NestedMasterPages_WBLStudentProfile" %>
+﻿<%@ Page Title="Student Profile" Language="C#" MasterPageFile="~/NestedMasterPages/WBLStudentMasterPage.master" AutoEventWireup="true" CodeFile="WBLStudentProfile.aspx.cs" Inherits="NestedMasterPages_WBLStudentProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <%: System.Web.Optimization.Styles.Render("~/Content/css") %>
@@ -15,7 +15,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
    <body>
     <form runat="server" method="post" id="frmStudentProfile">
-
         <table>
             <tr>
                 <td>
@@ -25,7 +24,6 @@
         </table>
         <hr />
         <div>
-
             <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="MemberID" DataSourceID="SqlDataSource3" ForeColor="Black">
                 <Columns>
                     <asp:BoundField DataField="MemberID" HeaderText="StudentID" ReadOnly="True" SortExpression="MemberID" />

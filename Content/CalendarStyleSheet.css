@@ -21,6 +21,11 @@ label{
 
 .ui-dialog {
     overflow: visible;
+    float: left;
+}
+
+.ui-selectmenu{
+    float: left;
 }
 
 #external-events-wrapper {
