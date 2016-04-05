@@ -1,4 +1,7 @@
-﻿body {
+﻿html{
+    min-height: 100%;
+}
+body {
     color: white;
     background-color: #00372B;
     margin-top: 40px;

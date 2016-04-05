@@ -29,22 +29,24 @@ function displayCalendar() {
                 droppable: true,
                 unselectAuto: true,
                 draggable: true,
-                lazyFetching: false,
-                defaultTimedEventDuration: '01:00:00',
+                lazyFetching: true,
+                //defaultTimedEventDuration: '01:00:00',
                 forceEventDuration: true,
                 eventTextColor: 'White',
                 events:
                 $.map(data.d, function (item, i) {
                     console.log(item);
-                    var eventEndDate = new Object();
+                    //var eventEndDate = new Object();
                     var event = new Object();
-                    event.id = item.eventID,
-                    event.start = new Date(item.eventStartDate),
-                    event.end = new Date(item.eventEndDate),
-                    event.title = item.eventTitle,
-                    event.description = item.eventDescription,
-                    event.placeID = item.eventPlaceID,
-                    event.topic = item.eventTopic,
+                    event.id = item.eventID;
+                    event.start = moment(item.eventStartDate);
+                    event.end = moment(item.eventEndDate);
+                    //event.start = new Date(item.eventStartDate);
+                    //event.end = new Date(item.eventEndDate);
+                    event.title = item.eventTitle;
+                    event.description = item.eventDescription;
+                    event.placeID = item.eventPlaceID;
+                    event.topic = item.eventTopic;
                     event.allDay = false;
                     console.log(event);
                     return event;
@@ -118,9 +120,12 @@ function displayCalendar() {
                 eventDurationEditable: true, // change an events duration by dragging!
                 disableResizing: true,
                 startEditable: true,
-                eventAfterAllRender: function (view) { },
+                eventAfterAllRender: function (view) {
+                    //$("#calendar").fullCalendar('refetchEvents');
+                },
                 drop: function (date) {
                     eventDropped(date, this);
+                    if ($(this).data("qtip")) $(this).qtip('destroy');
                 },
                 eventClick: function (event) {
                     showEventClickedPopUp(event);
@@ -139,7 +144,14 @@ function displayCalendar() {
                     if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 && jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
                         deleteEvent(event);
                     }
+
+                    $("#calendar").fullCalendar('unselect');
                 },
+                //viewDestroy: function(view, element){
+                //    $(element).each(function () {
+                //        if ((this).data("qtip")) this.qtip('destroy');
+                //    })
+                //},
                 dragRevertDuration: 0,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     debugger;
@@ -156,7 +168,8 @@ function updateEvent(event) {
     //eventToSave.eventStartDate = event.start.format();
     //eventToSave.eventEndDate = event.start.add(1, 'h').format();
     eventToSave.eventStartDate = event.start.format('YYYY-MM-DD h:mm:ss');
-    eventToSave.eventEndDate = event.start.add(1, 'h').format('YYYY-MM-DD h:mm:ss');
+    eventToSave.eventEndDate = event.end.format('YYYY-MM-DD h:mm:ss');
+    //eventToSave.eventEndDate = event.start.add(1, 'h').format('YYYY-MM-DD h:mm:ss');
     eventToSave.eventTopic = event.topic,
     eventToSave.eventPlaceID = event.placeID;
     eventToSave.eventDescription = event.description;
@@ -191,7 +204,10 @@ function intDroppables() {
         $(this).draggable({
             zIndex: 999,
             revert: "invalid",
-            help: "clone",
+            //help: "clone",
+            drop: function(){
+                $("#calendar").fullCalendar('unselect');
+            },
             revertDuration: 0
         });
     });
@@ -233,10 +249,11 @@ function eventDropped(date, externalEvent) {
     event_object.title = $('#txtExternalEventTitle').val();
     copiedEventObject = $.extend({}, event_object);
     copiedEventObject.start = date;
+    copiedEventObject.id = getNewID();
     copiedEventObject.end = endDate;
     copiedEventObject.allDay = false;
     copiedEventObject.placeID = place.place_id;
-    copiedEventObject.topic = event_object.title;
+    copiedEventObject.topic = event_object.topic;
     //copiedEventObject.title = event_object.title;
     copiedEventObject.description = event_object.description;
     updateEvent(copiedEventObject);
@@ -249,7 +266,7 @@ function showEventClickedPopUp(event) {
     $("#eventForm").dialog({
         autoOpen: false,
         height: 400,
-        width: 200,
+        width: 270,
         title: 'Update Event',
         modal: true,
         buttons: {
@@ -341,8 +358,8 @@ function clearTextBoxes() {
 }
 // get next availiable ID to assign it to the event in fullcalendar
 function getNewID() {
-    $.get("CalendarService.asmx/getMaxEventID", function (data) {
-        maxEventID = data;
+    $.get("/CalendarService.asmx/getMaxEventID", function (data) {
+        maxEventID = data.d;
     });
     return maxEventID;
 }
