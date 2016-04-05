@@ -27,6 +27,7 @@ function displayCalendar() {
                 },
                 editable: true,
                 droppable: true,
+                unselectAuto: true,
                 draggable: true,
                 lazyFetching: false,
                 defaultTimedEventDuration: '01:00:00',
@@ -117,7 +118,7 @@ function displayCalendar() {
                 eventDurationEditable: true, // change an events duration by dragging!
                 disableResizing: true,
                 startEditable: true,
-                eventAfterAllRender: function (view) {},
+                eventAfterAllRender: function (view) { },
                 drop: function (date) {
                     eventDropped(date, this);
                 },

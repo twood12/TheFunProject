@@ -7,14 +7,14 @@
     font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 }
 
-a:visited{
+a:visited {
     color: red;
 }
 
-a:hover{
+a:hover {
     color: green;
 }
 
-a:link{
+a:link {
     color: blue;
 }
