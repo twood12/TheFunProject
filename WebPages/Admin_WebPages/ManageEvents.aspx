@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <%: System.Web.Optimization.Scripts.Render("~/bundles/adminCalendar") %>
-
     <%: System.Web.Optimization.Styles.Render("~/Content/css") %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">

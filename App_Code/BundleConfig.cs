@@ -43,7 +43,6 @@ public class BundleConfig
             "~/Content/GlobalStyleSheet.css"
             ));
 
-
         bundles.Add(new StyleBundle("~/Content/css").Include(
             "~/Content/fullcalendar.css",
             "~/Content/themes/base/button.css",
@@ -78,5 +77,4 @@ public class BundleConfig
                 DebugPath = "~/Scripts/respond.js",
             });
     }
-
 }
