@@ -32,7 +32,7 @@ html {background-color: black}
     <h2>Bucks Home Page</h2>
     </div>
         <div style="margin-left: 601px">
-            <asp:GridView ID="GridView1" runat="server" Visible="false" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="ItemID" DataSourceID="SqlDataSource1" ForeColor="Black" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1">
+            <asp:GridView ID="GridView1" runat="server" Visible="False" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="ItemID" DataSourceID="SqlDataSource1" ForeColor="Black" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1">
                 <Columns>
                     <asp:BoundField DataField="ItemName" HeaderText="ItemName" SortExpression="ItemName" />
                     <asp:BoundField DataField="ItemPrice" HeaderText="ItemPrice" SortExpression="ItemPrice" />
@@ -48,7 +48,7 @@ html {background-color: black}
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
-            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="ItemID" DataSourceID="SqlDataSource1" ForeColor="Black" OnRowCommand="GridView2_RowCommand" OnSelectedIndexChanged="GridView2_SelectedIndexChanged">
+            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="ItemID" DataSourceID="SqlDataSource1" ForeColor="Black" OnRowCommand="GridView2_RowCommand" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" AllowSorting="True">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
                     <asp:BoundField DataField="ItemName" HeaderText="ItemName" SortExpression="ItemName" />
@@ -199,7 +199,7 @@ html {background-color: black}
                 style="margin-left: 1030px" 
                 Text="ExportToExcel" 
                 OnClick="ExportToExcel4_Click" 
-                Visible="false" />
+                Visible="true" />
         </p>
     </form>
     

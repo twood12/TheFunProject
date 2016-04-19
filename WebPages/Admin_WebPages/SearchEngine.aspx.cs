@@ -18,11 +18,12 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
             ddAcademicYear.DataBind();
         }
     }
-
+    
     protected void btnManageEvents_Click(object sender, EventArgs e)
     {
         Response.Redirect("ManageEvents.aspx", false);
     }
+
 
     protected void btnCategory_Click(object sender, EventArgs e)
         {
@@ -345,12 +346,20 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
                 }
                 else if (ddCategoryItems.SelectedIndex == 2)
                 {
-                    string[] teacherClassOptons = { "Drop a Class", "Add to Class" };
-                    btnCategoryOptionSelect.Text = "Edit";
-                    ddCategoryOptions.DataSource = teacherClassOptons;
-                    ddCategoryOptions.DataBind();
-                    lblCategoryItemErr.Visible = false;
-                    addCategoryOptions();
+                    try
+                    {
+                        string[] teacherClassOptons = { "Drop a Class", "Add to Class" };
+                        btnCategoryOptionSelect.Text = "Edit";
+                        ddCategoryOptions.DataSource = teacherClassOptons;
+                        ddCategoryOptions.DataBind();
+                        lblCategoryItemErr.Visible = false;
+                        addCategoryOptions();
+                    }
+                    catch (SqlException)
+                    {
+
+                    }
+                    
                 }
                 else
                 {
@@ -418,6 +427,7 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
             dropAllMessages();
             dropCategoryOptions();
             dropSelectedCategory();
+            dropCategoryItems();
             dropSearchArea();
             ddCategoryItems.Visible = false;
             lblCategoryItems.Visible = false;
@@ -442,6 +452,7 @@ public partial class WebPages_Admin_WebPages_SearchEngine : BasePage
         protected void ddSelectedCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             dropAllMessages();
+            dropCategoryOptions();
             ddAttendanceType.Visible = false;
             txtSearchArea.Visible = false;
             txtSearchArea2.Visible = false;

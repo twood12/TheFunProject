@@ -5,9 +5,9 @@
     html {background-color: black}
         #form1 {
           
-           background-color: #000;
+           
            font-family: Courier;
-	       color: white;
+	       
 	       font-size:20px;
             
         }
@@ -56,7 +56,7 @@
             &nbsp;</p>
              Rules:<p>
         <p>
-            MC topics only
+            DJ topics only
              </p>
         
         <p>

@@ -22,7 +22,7 @@ public partial class UserRegistration : BasePage
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
-        cmd.CommandText = "Insert into Member(Email, PasswordHash) values('" + txtEmail.Text + "', '" + passwordHash + "')";
+        cmd.CommandText = "Insert into Member(FirstName, LastName, Email, PasswordHash, MemberType) values('" + txtFirstName.Text + "', '" + txtLastName.Text + "', '" + txtEmail.Text + "', '" + passwordHash + "', 'Applicant')";
         sc.Open();
         cmd.ExecuteNonQuery();
         sc.Close();
@@ -31,6 +31,12 @@ public partial class UserRegistration : BasePage
         {
             SysUser.createUser(new Student(txtEmail.Text, txtPassword.Text));
         }
+
+        Session["emailAddress1"] = "";
+
+        Session["emailAddress1"] = txtEmail.Text;
+
+        Response.Redirect("ParentWaiver.aspx");
 
     }
 }

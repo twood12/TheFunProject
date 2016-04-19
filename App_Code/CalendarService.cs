@@ -29,7 +29,7 @@ public class CalendarService : System.Web.Services.WebService
         SqlConnection sc = new SqlConnection(cs);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = sc;
-        cmd.CommandText = "getAllEvents";
+        cmd.CommandText = "spgetAllEvents";
         cmd.CommandType = System.Data.CommandType.StoredProcedure;
         sc.Open();
         reader = cmd.ExecuteReader();
@@ -73,7 +73,7 @@ public class CalendarService : System.Web.Services.WebService
         if (reader.HasRows)
         {
             sc.Close();
-            SqlCommand cmdUpdate = new SqlCommand("updateEvent", sc);
+            SqlCommand cmdUpdate = new SqlCommand("spupdateEvent", sc);
             cmdUpdate.CommandType = System.Data.CommandType.StoredProcedure;
             cmdUpdate.Parameters.AddWithValue("@EventID", eventData.eventID);
             cmdUpdate.Parameters.AddWithValue("@EventName", eventData.eventTitle);
@@ -89,7 +89,7 @@ public class CalendarService : System.Web.Services.WebService
         else
         {
             sc.Close();
-            SqlCommand cmdInsert = new SqlCommand("insertEvent", sc);
+            SqlCommand cmdInsert = new SqlCommand("spinsertEvent", sc);
             cmdInsert.CommandType = System.Data.CommandType.StoredProcedure;
             cmdInsert.Parameters.AddWithValue("@EventName", eventData.eventTitle);
             cmdInsert.Parameters.AddWithValue("@EventStartDate", eventData.eventStartDate);

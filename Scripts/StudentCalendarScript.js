@@ -32,15 +32,17 @@ function displayCalendar() {
                 $.map(data.d, function (item, i) {
                     console.log(item);
                     console.log(item);
-                    var eventEndDate = new Object();
+                    //var eventEndDate = new Object();
                     var event = new Object();
-                    event.id = item.eventID,
-                    event.start = new Date(item.eventStartDate),
-                    event.end = new Date(item.eventEndDate),
-                    event.title = item.eventTitle,
-                    event.description = item.eventDescription,
-                    event.topic = item.eventTopic,
-                    event.placeID = item.eventPlaceID,
+                    event.id = item.eventID;
+                    event.start = moment(item.eventStartDate);
+                    event.end = moment(item.eventEndDate);
+                    //event.start = new Date(item.eventStartDate),
+                    //event.end = new Date(item.eventEndDate),
+                    event.title = item.eventTitle;
+                    event.description = item.eventDescription;
+                    event.topic = item.eventTopic;
+                    event.placeID = item.eventPlaceID;
                     event.allDay = false;
                     console.log(event);
                     return event;

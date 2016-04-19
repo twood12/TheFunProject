@@ -9,6 +9,8 @@
         <ul>
             <li><a href="~/WebPages/Admin_WebPages/SearchEngine.aspx" ID="lnkSearchEngine" runat="server">Search Engine</a></li>
              <li><a href="~/WebPages/Admin_WebPages/ReportPage.aspx" ID="lnkAdminReports" runat="server">Reports</a></li>
+            <li><a href="~/WebPages/Admin_WebPages/ManageCommunity.aspx" ID="lnkManageCommunity" runat="server">Manage Community</a></li>
+            <li><a href="~/WebPages/Admin_WebPages/ManageNewUsers.aspx" ID="lnkManageNewUsers" runat="server">Manage New Users</a></li>
 
         </ul>
         </div>

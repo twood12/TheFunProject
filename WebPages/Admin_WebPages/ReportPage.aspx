@@ -152,7 +152,7 @@ order by semester"></asp:SqlDataSource>
                     runat="server" 
                     Text="Export Report to Excel: " 
                     Align="right"
-                    Visible="false" >
+                    Visible="true" >
                 </asp:Label>
             </div>
             <div>
@@ -160,7 +160,7 @@ order by semester"></asp:SqlDataSource>
                  ID="btnExportToExcel" 
                  runat="server" 
                  Text="Export"
-                 Visible="false"
+                 Visible="true"
                  OnClick="btnExportToExcel_Click" />
             </div>
     </form>
